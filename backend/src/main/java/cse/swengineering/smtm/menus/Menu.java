@@ -20,6 +20,10 @@ public class Menu {
     public Menu() {
     }
 
+    public Menu(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -50,5 +54,12 @@ public class Menu {
 
     public void setCal(Integer cal) {
         this.cal = cal;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

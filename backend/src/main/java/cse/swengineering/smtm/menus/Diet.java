@@ -1,18 +1,19 @@
 package cse.swengineering.smtm.menus;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Diet {
 
-    private String day; // 요일
+    private int day; // 요일
     private float avgOfPreference;
-    private Set menus;
+    private Set<Menu> menus = new HashSet<>();
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(int day) {
         this.day = day;
     }
 
@@ -24,11 +25,19 @@ public class Diet {
         this.avgOfPreference = avgOfPreference;
     }
 
-    public Set getMenus() {
+    public Set<Menu> getMenus() {
         return menus;
     }
 
-    public void setMenus(Set menus) {
+    public void setMenus(Set<Menu> menus) {
         this.menus = menus;
+    }
+
+    @Override
+    public String toString() {
+        return "Diet{" +
+                "day=" + day +
+                ", menus=" + menus +
+                '}';
     }
 }
