@@ -14,6 +14,7 @@ public class User {
     private String userId;
     private String password;
     private boolean isKorean;
+//    private float[] preferences = new float[7]; 왜 안되냐
 
     public User() {
     }
