@@ -3,6 +3,7 @@ package cse.swengineering.smtm.menus;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Diet {
@@ -10,7 +11,7 @@ public class Diet {
     private int day; // 요일
     private LocalDate date;
     private float avgOfPreference;
-    private Set<Menu> menus = new HashSet<>();
+    private Set<Menu> menus = new LinkedHashSet<>();
     private int calories;
 
     public int getDay() {

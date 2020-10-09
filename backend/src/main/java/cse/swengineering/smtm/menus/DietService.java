@@ -60,20 +60,25 @@ public class DietService {
 
         // <"diet_info">에 시작 날짜와 끝 날짜가 있다
         String rawData = builder.toString();
-        int start = rawData.indexOf("<td>");
-        int end = rawData.indexOf("(");
-        int firstDay = Integer.parseInt(rawData.substring(start+4, end)); // 식단표의 첫날 계산
+        // 무의미한 공백 제거
+        rawData = rawData.replace("\t", "");
         // 시작 날짜와 끝 날짜 얻기
-        start = rawData.indexOf("<p>202");
-        String stringDate = rawData.substring(start + 3, start + 13);
-//        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(split[0]);
+        int dateIndex = rawData.indexOf("<p>202");
+        String stringDate = rawData.substring(dateIndex + 3, dateIndex + 13);
 
         // <br>태그 기준으로 한 번 잘라서 다듬고
         String[] splitByTag = rawData.split("<br />");
+//        for(String str : splitByTag)
+//            System.out.println(str);
+
         // 다시 합친 뒤
-        String data = convertObjectArrayToString(splitByTag, ",");
+        String data = convertObjectArrayToString(splitByTag, ".");
+//        System.out.println(data);
         // 날짜별로 다 쪼개기
         String[] splitByDay = data.split(RE_DAY);
+//        for(String str : splitByDay)
+//            System.out.println(str);
+        List<String> strList = new ArrayList<>();
 
         // 날짜마다
         for(int i=1; i<=7; i++){
@@ -82,14 +87,29 @@ public class DietService {
                 stringDate = addDay(stringDate);
             diet.setDate(LocalDate.parse(stringDate));
             // 메뉴별로 다 쪼개서
-            String[] splitByMenu = splitByDay[i].split(",");
+            String[] splitByMenu = splitByDay[i].split("\\.");
+
             for (String menuStr : splitByMenu){
-                // 메뉴 이름만 저장하기
-                if(menuStr.matches(RE_KOREAN))
-                    diet.getMenus().add(new Menu(menuStr));
+                if(menuStr.contains("메인A") || menuStr.contains("메인 C") || menuStr.contains("메인C")) { // 메인A or 메인C
+//                    diet.getMenus().add(new Menu(menuStr.substring(menuStr.indexOf("메인"), menuStr.indexOf("kcal]") + "kcal]".length())));
+                    String mainAndCalories = menuStr.substring(menuStr.indexOf("메인"), menuStr.indexOf("kcal]") + "kcal]".length());
+                    mainAndCalories = mainAndCalories.replace(" ", "");
+                    System.out.println(mainAndCalories);
+                    String replace = mainAndCalories.replace("[", " ");
+                    replace = replace.replace("]", "");
+                    String[] split = replace.split(" ");
+                    String main = split[0];
+                    String cal = split[1];
+                    strList.add(main);
+                    strList.add(cal);
+                }
+                else if(menuStr.matches(RE_INCLUDE_KOREAN))
+                    strList.add(menuStr);
+//                    diet.getMenus().add(new Menu(menuStr));
             }
-            dietList.add(diet);
+//            dietList.add(diet);
         }
+        strList.forEach(System.out::println);
     }
 
     // string array to string

@@ -29,7 +29,9 @@ public class SmtmApplication {
 
     public static void main(String[] args) throws IOException, ParseException {
          SpringApplication.run(SmtmApplication.class);
-
+//        System.out.println(str.contains("A"));
+//        System.out.println(str.indexOf("메인"));
+//        System.out.println(str.indexOf("kcal]") + "kcal]".length());
     }
 
 }
