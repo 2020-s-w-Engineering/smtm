@@ -1,13 +1,17 @@
 package cse.swengineering.smtm.menus;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Diet {
 
     private int day; // 요일
+    private LocalDate date;
     private float avgOfPreference;
     private Set<Menu> menus = new HashSet<>();
+    private int calories;
 
     public int getDay() {
         return day;
@@ -33,10 +37,26 @@ public class Diet {
         this.menus = menus;
     }
 
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Diet{" +
-                "day=" + day +
+                "date=" + date +
                 ", menus=" + menus +
                 '}';
     }

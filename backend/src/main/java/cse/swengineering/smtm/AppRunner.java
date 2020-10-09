@@ -34,7 +34,7 @@ public class AppRunner implements ApplicationRunner {
         List<Diet> dietList = dietService.getDietList();
         System.out.println(dietList.size() + "일치의 식단 정보를 저장하고 있습니다");
         for(Diet diet : dietList){
-            System.out.println("=====  " + diet.getDay() + "일 식단 =====");
+            System.out.println("=====  " + diet.getDate() + " 식단 =====");
             Arrays.stream(diet.getMenus().toArray(new Menu[0])).forEach(System.out::println);
         }
     }

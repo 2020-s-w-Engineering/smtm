@@ -15,8 +15,6 @@ public class Menu {
 
     private byte[] img;
 
-    private Integer cal;
-
     public Menu() {
     }
 
@@ -46,14 +44,6 @@ public class Menu {
 
     public void setImg(byte[] img) {
         this.img = img;
-    }
-
-    public Integer getCal() {
-        return cal;
-    }
-
-    public void setCal(Integer cal) {
-        this.cal = cal;
     }
 
     @Override

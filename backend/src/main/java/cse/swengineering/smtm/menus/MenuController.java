@@ -40,6 +40,4 @@ public class MenuController {
 //        return repository.save(new User(userId, password, isKorean));
 //    }
 
-
-
 }
