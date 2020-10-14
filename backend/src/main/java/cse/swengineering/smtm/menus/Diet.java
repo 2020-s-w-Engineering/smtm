@@ -1,8 +1,6 @@
 package cse.swengineering.smtm.menus;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -11,8 +9,9 @@ public class Diet {
     private int day; // 요일
     private LocalDate date;
     private float avgOfPreference;
-    private Set<Menu> menus = new LinkedHashSet<>();
-    private int calories;
+    private Set<Menu> mainA = new LinkedHashSet<>();
+    private Set<Menu> mainC = new LinkedHashSet<>();
+    private String calories;
 
     public int getDay() {
         return day;
@@ -30,19 +29,27 @@ public class Diet {
         this.avgOfPreference = avgOfPreference;
     }
 
-    public Set<Menu> getMenus() {
-        return menus;
+    public Set<Menu> getMainA() {
+        return mainA;
     }
 
-    public void setMenus(Set<Menu> menus) {
-        this.menus = menus;
+    public void setMainA(Set<Menu> mainA) {
+        this.mainA = mainA;
     }
 
-    public int getCalories() {
+    public Set<Menu> getMainC() {
+        return mainC;
+    }
+
+    public void setMainC(Set<Menu> mainC) {
+        this.mainC = mainC;
+    }
+
+    public String getCalories() {
         return calories;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(String calories) {
         this.calories = calories;
     }
 
@@ -58,7 +65,9 @@ public class Diet {
     public String toString() {
         return "Diet{" +
                 "date=" + date +
-                ", menus=" + menus +
+                ", mainA=" + mainA +
+                ", mainB=" + mainC +
+                ", calories=" + calories +
                 '}';
     }
 }
