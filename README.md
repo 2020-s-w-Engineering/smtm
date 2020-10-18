@@ -1,17 +1,16 @@
-# smtm
-Chungnam National University, 2020 S/W Engineering
+![Hacktoberfest2020](/hacktoberfest2020.png)
 
-20.10.17. 공지사항
--
-1. 같은 프로젝트 폴더 안에서 따로 작업할 수 있도록
-프로젝트 구조를 변경하였습니다.
-<br>FRONT-END 개발 위치: `smtm/src/main/react-frontend`
-<br>BACK-END 개발 위치: `smtm/src/main/java`
+## Hacktoberfest 2020
 
-2. spring boot와 react를 연동하였습니다.
-연동된 프로젝트를 실행하고 배포하기 위해서는 다음과 같은
-준비가 필요합니다.
-- maven 3.6.3(최신버전) 설치 및 환경변수 설정
-- java jdk 1.8 설치 및 환경변수 설정
-<br><br>연동된 프로젝트를 실행하는 방법: `...smtm/target> java -jar smtm-0.0.1-SNAPSHOT.jar`
-<br><br>개발하실 때는 spring boot와 react를 따로 실행시켜서 개발하셔도 됩니다.
+안녕하세요! 저희 팀은 충남대학교 식단 조회 서비스를 만들고 있습니다.
+<br> 저희 서비스에 기여해주시는 방법은 다음과 같이 두 가지 방법이 있습니다.
+
+- [preference.md](/preference.md) 파일에 충남대에서 제공하는 메뉴 중 3 가지를 골라 그에 대한 선호도(1~5점) 표기
+<br>양식: - {장소(기숙사/1학/2학/3학)} {메뉴이름} {선호도}
+<br>예시: - 기숙사 수육국밥 5
+- [smtm/images](/images) 폴더에 충남대에서 제공하는 메뉴 중 1 가지에 대해 직접 찍은 이미지 업로드
+<br>양식: {장소_메뉴1}.png(확장자 상관없음)
+<br>예시: 기숙사_수육국밥.jpg
+<br><br> ! 양식을 지켜주세요.
+<br> ! 기존에 작성된 내용과 중복되지 않도록 유의해주세요.
+<br> ! 기존에 작성된 내용이 수정되거나 삭제되지 않도록 유의해주세요.
