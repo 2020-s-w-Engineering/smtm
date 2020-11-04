@@ -8,8 +8,15 @@ import cse.swengineering.smtm.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 @Component
 public class AppRunner implements ApplicationRunner {
@@ -20,6 +27,9 @@ public class AppRunner implements ApplicationRunner {
     @Autowired
     MenuService menuService;
 
+    @Autowired
+    ResourceLoader resourceLoader;
+
     public AppRunner(UserRepository userRepository, MenuRepository menuRepository) {
         this.userRepository = userRepository;
         this.menuRepository = menuRepository;
@@ -27,7 +37,18 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        menuService.init();
+        Resource resource = resourceLoader.getResource("classpath:기숙사_수육국밥.jpg");
+        BufferedImage bImage = ImageIO.read(resource.getFile());
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "jpg", bos );
+        byte [] data = bos.toByteArray();
+        Menu menu = new Menu();
+        menu.setKorName("기숙사_수육국밥");
+        menu.setEngName("kukBAB");
+        menu.setImg(data);
+        menuRepository.save(menu);
+
+//        menuService.init();
 //        Menu menu1 = new Menu("된장찌개", "a");
 //        Menu menu2 = new Menu("김치찌개", "b");
 //        Menu menu3 = new Menu("초밥", "c");

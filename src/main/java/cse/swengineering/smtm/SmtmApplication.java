@@ -9,7 +9,7 @@ public class SmtmApplication {
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(SmtmApplication.class);
-        app.setWebApplicationType(WebApplicationType.NONE);
+        app.setWebApplicationType(WebApplicationType.SERVLET);
         app.run(args);
     }
 
