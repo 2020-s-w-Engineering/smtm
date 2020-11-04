@@ -19,6 +19,8 @@ class UserComponent extends React.Component {
     render() {
         return (
             <div>
+                <button onClick={UserService.createUser}>createUser</button>
+                {this.componentDidMount}
                 <h1 className = "text-center" > Users </h1>
                 <table className = "table table-striped" >
                     <thead>

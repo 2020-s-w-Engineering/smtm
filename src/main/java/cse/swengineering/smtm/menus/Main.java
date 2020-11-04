@@ -7,7 +7,8 @@ public class Main {
 
     private String type;
     private String calories;
-    private Set<Menu> menus = new HashSet<>();
+    private Set<Menu> menusA = new HashSet<>();
+    private Set<Menu> menusC = new HashSet<>();
 
     public String getType() {
         return type;
@@ -25,11 +26,19 @@ public class Main {
         this.calories = calories;
     }
 
-    public Set<Menu> getMenus() {
-        return menus;
+    public Set<Menu> getMenusA() {
+        return menusA;
     }
 
-    public void setMenus(Set<Menu> menus) {
-        this.menus = menus;
+    public void setMenusA(Set<Menu> menusA) {
+        this.menusA = menusA;
+    }
+
+    public Set<Menu> getMenusC() {
+        return menusC;
+    }
+
+    public void setMenusC(Set<Menu> menusC) {
+        this.menusC = menusC;
     }
 }

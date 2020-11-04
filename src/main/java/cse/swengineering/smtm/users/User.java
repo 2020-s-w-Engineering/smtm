@@ -1,19 +1,26 @@
 package cse.swengineering.smtm.users;
 
+import cse.swengineering.smtm.menus.Menu;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity(name = "users")
 public class User {
 
     @Id
     @GeneratedValue
-    private Long id; // db에서 식별할 id
+    private Long id;
 
     private String userId;
     private String password;
     private boolean isKorean; // rest api로 날라갈 때는 korean으로 날라간다
+    @ElementCollection
+    private Map<Menu, Integer> preference = new HashMap<>();
 
     public User() {
     }
@@ -22,6 +29,14 @@ public class User {
         this.userId = userId;
         this.password = password;
         this.isKorean = isKorean;
+    }
+
+    public Map<Menu, Integer> getPreference() {
+        return preference;
+    }
+
+    public void setPreference(Map<Menu, Integer> preference) {
+        this.preference = preference;
     }
 
     public Long getId() {

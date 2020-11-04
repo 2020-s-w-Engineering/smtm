@@ -1,11 +1,10 @@
 package cse.swengineering.smtm.menus;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
@@ -16,13 +15,16 @@ import java.util.stream.Collectors;
 
 // todo 너무 보기 드러움, 한글이 있는 것만 짤라서 영어이름만 있는 메뉴는 가져오지 않음
 
-//@Service
-public class DietService {
-    private List<Diet> dietList = new ArrayList<>();
+@Service
+public class MenuService {
 
-    public DietService() throws IOException {
-        getDietInformation();
+    private ResourceLoader resourceLoader;
+
+    public MenuService(ResourceLoader resourceLoader) throws IOException {
+        this.resourceLoader = resourceLoader;
     }
+
+    private List<Diet> dietList = new ArrayList<>();
 
     public List<Diet> getDietList() {
         return dietList;
@@ -32,7 +34,34 @@ public class DietService {
         this.dietList = dietList;
     }
 
-    public void getDietInformation() throws IOException {
+    public void init() throws IOException {
+        final String LOCAL_DATE_REGEX = "^\\d{4}-\\d{2}-\\d{2}$";
+
+        Resource resource = resourceLoader.getResource("classpath:data.txt");
+        File file = resource.getFile();
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        List<String> splitByDate = new ArrayList<>();
+        line = bufferedReader.readLine();
+        while(true) {
+            if(line.matches(LOCAL_DATE_REGEX)){
+                String concat = line;
+                line = bufferedReader.readLine();
+                while(line != null && !line.matches(LOCAL_DATE_REGEX)){
+                    concat = concat + line;
+                    line = bufferedReader.readLine();
+                }
+                System.out.println(concat);
+                splitByDate.add(concat);
+            }
+            break;
+        }
+        splitByDate.forEach(System.out::println);
+    }
+
+/*    public void getDietInformation() throws IOException {
         final String RE_INCLUDE_KOREAN = ".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*";
         final String RE_INCLUDE_ENGLISH = ".*[a-zA-Z]+.*";
         final String RE_KOREAN = "^[가-힣\\s]*$";
@@ -209,5 +238,5 @@ public class DietService {
         //Incrementing the date by 1 day
         c.add(Calendar.DAY_OF_MONTH, 1);
         return sdf.format(c.getTime());
-    }
+    }*/
 }

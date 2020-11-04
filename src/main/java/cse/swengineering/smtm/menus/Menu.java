@@ -1,8 +1,10 @@
 package cse.swengineering.smtm.menus;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Arrays;
 
 @Entity
 public class Menu {
@@ -11,15 +13,21 @@ public class Menu {
     @GeneratedValue
     private Long id;
 
-    private String name;
+    @Basic(optional = false)
+    private String korName;
+    @Basic(optional = false)
+    private String engName;
+
+    private String nutrition;
 
     private byte[] img;
 
     public Menu() {
     }
 
-    public Menu(String name) {
-        this.name = name;
+    public Menu(String korName, String engName) {
+        this.korName = korName;
+        this.engName = engName;
     }
 
     public Long getId() {
@@ -30,12 +38,20 @@ public class Menu {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getKorName() {
+        return korName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setKorName(String korName) {
+        this.korName = korName;
+    }
+
+    public String getEngName() {
+        return engName;
+    }
+
+    public void setEngName(String engName) {
+        this.engName = engName;
     }
 
     public byte[] getImg() {
@@ -49,7 +65,9 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", korName='" + korName + '\'' +
+                ", engName='" + engName + '\'' +
                 '}';
     }
 }

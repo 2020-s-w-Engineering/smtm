@@ -1,15 +1,17 @@
 package cse.swengineering.smtm.menus;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class MenuController {
 
-    @Autowired
-    private MenuRepository repository;
+    private final MenuRepository menuRepository;
 
-//    @GetMapping("/menus/week")
+    public MenuController(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
+    }
+
+    //    @GetMapping("/menus/week")
 //    public List<User> users(){
 //        return repository.findAll();
 //    }

@@ -8,8 +8,9 @@ public class Diet {
     private int day; // 요일
     private LocalDate date;
     private float avgOfPreference;
-    private List<Main> mainsKOR = new ArrayList<>();
-    private List<Main> mainsENG = new ArrayList<>();
+    private Map<String, Main> breakfastMains = new HashMap<>();
+    private Map<String, Main> lunchMains = new HashMap<>();
+    private Map<String, Main> dinnerMains = new HashMap<>();
 
     public int getDay() {
         return day;
@@ -27,20 +28,28 @@ public class Diet {
         this.avgOfPreference = avgOfPreference;
     }
 
-    public List<Main> getMainsKOR() {
-        return mainsKOR;
+    public Map<String, Main> getBreakfastMains() {
+        return breakfastMains;
     }
 
-    public void setMainsKOR(List<Main> mainsKOR) {
-        this.mainsKOR = mainsKOR;
+    public void setBreakfastMains(Map<String, Main> breakfastMains) {
+        this.breakfastMains = breakfastMains;
     }
 
-    public List<Main> getMainsENG() {
-        return mainsENG;
+    public Map<String, Main> getLunchMains() {
+        return lunchMains;
     }
 
-    public void setMainsENG(List<Main> mainsENG) {
-        this.mainsENG = mainsENG;
+    public void setLunchMains(Map<String, Main> lunchMains) {
+        this.lunchMains = lunchMains;
+    }
+
+    public Map<String, Main> getDinnerMains() {
+        return dinnerMains;
+    }
+
+    public void setDinnerMains(Map<String, Main> dinnerMains) {
+        this.dinnerMains = dinnerMains;
     }
 
     public LocalDate getDate() {
@@ -55,11 +64,10 @@ public class Diet {
     public String toString() {
         return "Diet{" +
                 "date=" + date +
-                ", mains=" + mainsKOR +
                 '}';
     }
 
-    public void printKOR() {
+    /*public void printKOR() {
         System.out.println("******** " + getDate() + " 식단 ********");
         for (Main main : mainsKOR) {
             if (main.getType().equals("A"))
@@ -81,5 +89,5 @@ public class Diet {
             System.out.println("======== " + main.getCalories() + "kcal ========");
             Arrays.stream(main.getMenus().toArray()).forEach(System.out::println);
         }
-    }
+    }*/
 }
