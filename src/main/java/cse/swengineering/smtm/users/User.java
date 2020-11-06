@@ -32,6 +32,10 @@ public class User {
         this.isKorean = isKorean;
     }
 
+    public User(String userId, String password) {
+        this(userId, password, false);
+    }
+
     public Map<Menu, Integer> getPreference() {
         return preference;
     }
@@ -77,7 +81,8 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userId, user.userId) &&
+        return isKorean == user.isKorean &&
+                Objects.equals(userId, user.userId) &&
                 Objects.equals(password, user.password);
     }
 }
