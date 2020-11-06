@@ -5,20 +5,11 @@ import java.util.*;
 
 public class Diet {
 
-    private int day; // 요일
     private LocalDate date;
     private float avgOfPreference;
     private Map<String, Main> breakfastMains = new HashMap<>();
     private Map<String, Main> lunchMains = new HashMap<>();
     private Map<String, Main> dinnerMains = new HashMap<>();
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
 
     public float getAvgOfPreference() {
         return avgOfPreference;

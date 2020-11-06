@@ -21,29 +21,6 @@ public class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Test
-    public void getUsers() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
 
-//    @Test
-//    public void getUser() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.get("/users/1"))
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//                .andExpect(content().string("{\"id\":1,\"userId\":\"tjdqhr\",\"password\":\"123\",\"korean\":true}"));
-//    }
-
-    @Test
-    public void addUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/users")
-            .param("userId", "hello123")
-            .param("password", "1234")
-            .param("isKorean", "true"))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
 
 }

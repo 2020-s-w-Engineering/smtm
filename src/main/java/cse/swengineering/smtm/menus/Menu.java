@@ -7,16 +7,9 @@ import java.util.Arrays;
 public class Menu {
 
     @Id
-    @GeneratedValue
-    private Long id;
-
-    @Basic(optional = false)
     private String korName;
     @Basic(optional = false)
     private String engName;
-
-    private String nutrition;
-
     @Lob
     private byte[] img;
 
@@ -26,14 +19,6 @@ public class Menu {
     public Menu(String korName, String engName) {
         this.korName = korName;
         this.engName = engName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getKorName() {
@@ -63,7 +48,6 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{" +
-                "id=" + id +
                 ", korName='" + korName + '\'' +
                 ", engName='" + engName + '\'' +
                 '}';

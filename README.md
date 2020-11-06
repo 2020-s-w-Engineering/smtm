@@ -1,24 +1,31 @@
 # smtm
-Chungnam National University, 2020 S/W Engineering
+Chungnam National University, 2020 S/W Engin
 
-20.10.17. 공지사항
--
-1. 같은 프로젝트 폴더 안에서 따로 작업할 수 있도록
-프로젝트 구조를 변경하였습니다.
-<br>FRONT-END 개발 위치: `smtm/src/main/react-frontend`
-<br>BACK-END 개발 위치: `smtm/src/main/java`
+### User REST API
 
-2. spring boot와 react를 연동하였습니다.
-연동된 프로젝트를 실행하고 배포하기 위해서는 다음과 같은
-준비가 필요합니다.
-- maven 3.6.3(최신버전) 설치 및 환경변수 설정
-- java jdk 1.8 설치 및 환경변수 설정
-<br><br>연동된 프로젝트를 실행하는 방법: `...smtm/target> java -jar smtm-0.0.1-SNAPSHOT.jar`
-<br><br>개발하실 때는 spring boot와 react를 따로 실행시켜서 개발하셔도 됩니다.
+- 회원 인증
+<br>요청 메소드: `POST`
+<br>요청 URL: `/login`
+<br>요청 매개변수
+<br>`userId:"사용자 아이디"`
+<br>`password:"사용자 비밀번호"`
+<br>응답: `true` 또는 `false` (문자열)
 
+- 회원 가입 처리
+<br>요청 메소드: `POST`
+<br>요청 URL: `/register`
+<br>요청 매개변수
+<br>`userId:"사용자 아이디"`
+<br>`password:"사용자 비밀번호"`
+<br>`korean:"true 또는 false"`
+<br>응답: `true` 또는 `false` (문자열)
 
-Q. back은 REST API만 제공하나?
-<br> 예를 들어 회원가입 요청이 POST로 왔는데
-<br> form에 어떤 정보가 채워지지 않은 경우
-<br> 스프링만 쓸 때는 내가 직접 에러코드 심어서 redirect했는데
-<br> react와 협업할 경우는 어떻게 해야하지?
+- 회원 정보 변경
+<br>요청 메소드: `POST`
+<br>요청 URL: `/update`
+<br>요청 매개변수
+<br>`id: "사용자 데이터베이스 아이디"`
+<br>`userId:"사용자 아이디"`
+<br>`password:"사용자 비밀번호"`
+<br>`korean:"true"`
+<br>응답: `true` 또는 `false` (문자열)

@@ -10,27 +10,28 @@ import java.util.Optional;
 @org.springframework.stereotype.Controller
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public List<User> users(){
-        return userRepository.findAll();
+    // 로그인 처리
+    @PostMapping("/login")
+    public String processLogin(User user) {
+        return userService.userAuth(user) ? "true" : "false";
     }
 
-    @PostMapping("/users")
-    public User process(@RequestParam String userId,
-                        @RequestParam String password,
-                        @RequestParam boolean isKorean) {
-        return userRepository.save(new User(userId, password, isKorean));
+    // 회원가입
+    @PostMapping("/register")
+    public String processRegister(User user) {
+        return userService.updateUserInfo(user) ? "true" : "false";
     }
 
-    @GetMapping("/users/{id}")
-    public Optional<User> employees(@PathVariable Long id) {
-        return userRepository.findById(id);
+    // 회원정보변경
+    @PostMapping("/update")
+    public String processUpdateInfo(User user) {
+        return userService.updateUserInfo(user) ? "true" : "false";
     }
 
 }

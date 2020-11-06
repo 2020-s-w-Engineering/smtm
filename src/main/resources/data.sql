@@ -1,0 +1,13 @@
+INSERT into MENU values ('김치', 'Kimchi', 'FFFFFF');
+INSERT into MENU values ('우유', 'Milk', 'FFFFFF');
+INSERT into MENU values ('쇠고기불고기', 'Bulgogi', 'FFFFFF');
+INSERT into MENU values ('제육볶음', 'Stir-fried Pork', 'FFFFFF');
+INSERT into MENU values ('어묵국', 'Fish Cake Soup', 'FFFFFF');
+INSERT into MENU values ('계란후라이', 'Fried Egg', 'FFFFFF');
+INSERT into MENU values ('사골우거지국', 'Cabbage And Shank Bone Soup', 'FFFFFF');
+INSERT into MENU values ('참나물생무침', 'Seasoned Chamnamul', 'FFFFFF');
+INSERT into MENU values ('연근조림', 'Lotus Root In Soy Sauce', 'FFFFFF');
+INSERT into MENU values ('씨리얼', 'Cereal', 'FFFFFF');
+INSERT into MENU values ('식빵과 쨈', 'Bread And Jam', 'FFFFFF');
+INSERT into MENU values ('브라우니', 'Brownie', 'FFFFFF');
+INSERT into MENU values ('매운콩나물국', 'Bena Sprout soup', 'FFFFFF');

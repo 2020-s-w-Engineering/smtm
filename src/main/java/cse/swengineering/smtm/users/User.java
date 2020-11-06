@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Entity(name = "users")
 public class User {
@@ -69,5 +70,14 @@ public class User {
 
     public void setKorean(boolean korean) {
         isKorean = korean;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userId, user.userId) &&
+                Objects.equals(password, user.password);
     }
 }

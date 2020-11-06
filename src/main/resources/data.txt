@@ -1,15 +1,15 @@
 2020-11-04
 아침
 메인A[781kcal]
-쌀밥[쌀:국내산]
-사골우거지국[우육:호주산]
-고등어무조림[고등어:국내산]
+쌀밥
+사골우거지국
+고등어무조림
 참나물생무침
 연근조림
-포기김치[배추:국내산,고추분:중국산]
+포기김치
 우유
-메인C[802kcal]
-식빵&쨈
+메인C
+식빵과 쨈
 호두브라우니
 씨리얼
 새싹샐러드
@@ -21,25 +21,17 @@ Cabbage and Shank Bone Soup [우육:호주산]
 Braised Mackerel [고등어:국내산]
 seasoned Chamnamul
 lotus root in soy sauce
-kimchi[배추:국내산,고추분:중국산]
-milk
 메인C[802kcal]
-bread&jam
-brownie
-cereal
 cabage salad
-fried egg
-milk
 점심
 메인A[806kcal]
-쌀밥[쌀:국내산]
+쌀밥
 매운콩나물국
-쇠고기불고기[우육:호주산]
+쇠고기불고기
 도토리묵무침
 미역줄기볶음
-포기김치[배추:국내산,고추분:중국산]
+포기김치
 메인A[806kcal]
-rice[쌀:국내산]
 bena sprout soup
 Bulgogi[우육:호주산]
 Acorn Jelly in sauce

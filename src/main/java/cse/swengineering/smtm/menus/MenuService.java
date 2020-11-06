@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 @Service
 public class MenuService {
 
-    private ResourceLoader resourceLoader;
+    private ResourceLoader resourceLoader; // 쓰지말것
 
     public MenuService(ResourceLoader resourceLoader) throws IOException {
         this.resourceLoader = resourceLoader;
     }
 
-    private List<Diet> dietList = new ArrayList<>();
+    private List<Diet> dietList = new ArrayList<>(); // 쓰지말것
 
     public List<Diet> getDietList() {
         return dietList;
