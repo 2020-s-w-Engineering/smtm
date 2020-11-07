@@ -7,7 +7,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@org.springframework.stereotype.Controller
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;

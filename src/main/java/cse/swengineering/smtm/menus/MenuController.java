@@ -8,27 +8,37 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import java.time.LocalDate;
 import java.util.*;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/menus")
 public class MenuController {
 
-    private final MenuRepository menuRepository;
+    private final MenuService menuService;
 
-    public MenuController(MenuRepository menuRepository) {
-        this.menuRepository = menuRepository;
+    public MenuController(MenuService menuService) {
+        this.menuService = menuService;
     }
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @GetMapping("/{date}")
+    public Diet getDiet(@PathVariable LocalDate date){
+        Diet diet = menuService.getDiet(date);
+        return diet;
+    }
+
+    @GetMapping("/all")
+    public List<Diet> getDiets(){
+        return null;
+    }
 
     // 쿠키 테스트
     @GetMapping("/write/cookie")
@@ -38,11 +48,11 @@ public class MenuController {
         diet1.setDate(LocalDate.now());
         diet1.setAvgOfPreference(4.2f);
         Main main = new Main();
-        main.setType("A");
+//        main.setType("A");
         main.setCalories("958kcal");
         HashSet<Menu> mainA = new HashSet<>();
         mainA.add(new Menu("김치", "kimchi"));
-        main.setMenusA(mainA);
+//        main.setMenusA(mainA);
         HashMap<String, Main> whatTheFuck = new HashMap<>();
         diet1.setBreakfastMains(whatTheFuck);
         diet1.setLunchMains(whatTheFuck);
@@ -77,27 +87,18 @@ public class MenuController {
         return dietList;
     }
 
-    @GetMapping("/menus/{date}")
-    public Diet getDiet(@PathVariable LocalDate date){
-        return null;
-    }
-
-    @GetMapping("/menus")
-    public List<Diet> getDiets(){
-        return null;
-    }
-
     @GetMapping("/menus/images/{id}")
     public ResponseEntity<byte[]> getMenuImage(@PathVariable Long id) throws IllegalAccessException {
-        Optional<Menu> byId = menuRepository.findById(id);
-        Menu menu = null;
-        if(byId.isPresent()) {
-             menu = byId.get();
-        }
-        else {
-            throw new IllegalAccessException();
-        }
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(menu.getImg());
+//        Optional<Menu> byId = menuRepository.findById(id);
+//        Menu menu = null;
+//        if(byId.isPresent()) {
+//             menu = byId.get();
+//        }
+//        else {
+//            throw new IllegalAccessException();
+//        }
+//        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(menu.getImg());
+        return null;
     }
 
 }

@@ -58,27 +58,31 @@ public class Diet {
                 '}';
     }
 
-    /*public void printKOR() {
-        System.out.println("******** " + getDate() + " 식단 ********");
-        for (Main main : mainsKOR) {
-            if (main.getType().equals("A"))
-                System.out.println("======== Main A ========");
-            else
-                System.out.println("======== Main C ========");
-            System.out.println("======== " + main.getCalories() + "kcal ========");
-            Arrays.stream(main.getMenus().toArray()).forEach(System.out::println);
-        }
-    }
+    // debug용
+    public void print() {
+        System.out.println("*********" + this.date + "*********");
+        System.out.println("아침 메뉴");
+        Main mainA = this.getBreakfastMains().get("A");
+//        System.out.println(mainA.getType() + "[" + mainA.getCalories() + "]");
+        mainA.getMenus().forEach(System.out::println);
+        Main mainC = this.getBreakfastMains().get("C");
+//        System.out.println(mainC.getType() + "[" + mainC.getCalories() + "]");
+        mainC.getMenus().forEach(System.out::println);
 
-    public void printENG() {
-        System.out.println("******** " + getDate() + " 식단 ********");
-        for (Main main : mainsENG) {
-            if (main.getType().equals("A"))
-                System.out.println("======== Main A ========");
-            else
-                System.out.println("======== Main C ========");
-            System.out.println("======== " + main.getCalories() + "kcal ========");
-            Arrays.stream(main.getMenus().toArray()).forEach(System.out::println);
-        }
-    }*/
+        System.out.println("점심 메뉴");
+        mainA = this.getLunchMains().get("A");
+//        System.out.println(mainA.getType() + "[" + mainA.getCalories() + "]");
+        mainA.getMenus().forEach(System.out::println);
+        mainC = this.getLunchMains().get("C");
+//        System.out.println(mainC.getType() + "[" + mainC.getCalories() + "]");
+        mainC.getMenus().forEach(System.out::println);
+
+        System.out.println("저녁 메뉴");
+        mainA = this.getDinnerMains().get("A");
+//        System.out.println(mainA.getType() + "[" + mainA.getCalories() + "]");
+        mainA.getMenus().forEach(System.out::println);
+        mainC = this.getDinnerMains().get("C");
+//        System.out.println(mainC.getType() + "[" + mainC.getCalories() + "]");
+        mainC.getMenus().forEach(System.out::println);
+    }
 }

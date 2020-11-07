@@ -5,18 +5,17 @@ import java.util.Set;
 
 public class Main {
 
-    private String type;
+//    private String type;
     private String calories;
-    private Set<Menu> menusA = new HashSet<>();
-    private Set<Menu> menusC = new HashSet<>();
+    private Set<Menu> menus = new HashSet<>();
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     public String getCalories() {
         return calories;
@@ -26,19 +25,11 @@ public class Main {
         this.calories = calories;
     }
 
-    public Set<Menu> getMenusA() {
-        return menusA;
+    public Set<Menu> getMenus() {
+        return menus;
     }
 
-    public void setMenusA(Set<Menu> menusA) {
-        this.menusA = menusA;
-    }
-
-    public Set<Menu> getMenusC() {
-        return menusC;
-    }
-
-    public void setMenusC(Set<Menu> menusC) {
-        this.menusC = menusC;
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
     }
 }

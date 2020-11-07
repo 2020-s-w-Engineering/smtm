@@ -35,7 +35,7 @@ public class UserControllerTest {
         User user = new User("donghun", "1031");
         userRepository.save(user);
 
-        mockMvc.perform(post("/login")
+        mockMvc.perform(post("/users/login")
                         .param("userId", user.getUserId())
                         .param("password", user.getPassword()))
                 .andExpect(status().isOk())
@@ -45,7 +45,7 @@ public class UserControllerTest {
 
     @Test
     public void loginFailure() throws Exception {
-        mockMvc.perform(post("/login")
+        mockMvc.perform(post("/users/login")
                 .param("userId", "wrongId")
                 .param("password", "wrongPassword"))
                 .andExpect(status().isOk())
@@ -57,7 +57,7 @@ public class UserControllerTest {
     public void registerSuccess() throws Exception {
         User user = new User("donghun", "1031");
 
-        mockMvc.perform(post("/register")
+        mockMvc.perform(post("/users/register")
         .param("userId", user.getUserId())
         .param("password", user.getPassword())
         .param("korean", Boolean.toString(user.isKorean())))
@@ -71,7 +71,7 @@ public class UserControllerTest {
         userRepository.save(user);
         User duplicatedUser = new User("donghun", "2222");
 
-        mockMvc.perform(post("/register")
+        mockMvc.perform(post("/users/register")
                 .param("userId", duplicatedUser.getUserId())
                 .param("password", duplicatedUser.getPassword())
                 .param("korean", Boolean.toString(duplicatedUser.isKorean())))
@@ -87,7 +87,7 @@ public class UserControllerTest {
         assertThat(user).isSameAs(savedUser);
         User change = new User("donghun", "2222", false);
 
-        mockMvc.perform(post("/update")
+        mockMvc.perform(post("/users/update")
                 .param("id", Long.toString(savedUser.getId()))
                 .param("userId", savedUser.getUserId())
                 .param("password", change.getPassword())

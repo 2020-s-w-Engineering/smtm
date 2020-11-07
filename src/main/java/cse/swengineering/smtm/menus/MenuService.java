@@ -1,64 +1,151 @@
 package cse.swengineering.smtm.menus;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
+import cse.swengineering.smtm.SmtmApplication;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
-
-// todo 너무 보기 드러움, 한글이 있는 것만 짤라서 영어이름만 있는 메뉴는 가져오지 않음
 
 @Service
 public class MenuService {
 
-    private ResourceLoader resourceLoader; // 쓰지말것
+    private final MenuRepository menuRepository;
+    private List<Diet> dietList = new ArrayList<>();
+    private List<Menu> menuList = new ArrayList<>();
 
-    public MenuService(ResourceLoader resourceLoader) throws IOException {
-        this.resourceLoader = resourceLoader;
+    public MenuService(MenuRepository menuRepository) throws IOException, URISyntaxException {
+        this.menuRepository = menuRepository;
     }
-
-    private List<Diet> dietList = new ArrayList<>(); // 쓰지말것
 
     public List<Diet> getDietList() {
         return dietList;
     }
-
     public void setDietList(List<Diet> dietList) {
         this.dietList = dietList;
     }
 
-    public void init() throws IOException {
-        final String LOCAL_DATE_REGEX = "^\\d{4}-\\d{2}-\\d{2}$";
+    public Diet getDiet(LocalDate date){
+        for(Diet diet : dietList){
+            if(diet.getDate().equals(date))
+                return diet;
+        }
+        return null;
+    }
 
-        Resource resource = resourceLoader.getResource("classpath:data.txt");
-        File file = resource.getFile();
+    public void init() throws IOException, URISyntaxException {
+        menuList = menuRepository.findAll();
+
+        final String LOCAL_DATE_REGEX = "^\\d{4}-\\d{2}-\\d{2}$";
+        File file = new File(SmtmApplication.class.getClass().getResource("/data2.txt").toURI());
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        StringBuilder stringBuilder = new StringBuilder();
         String line;
         List<String> splitByDate = new ArrayList<>();
+
+        // 텍스트 파일에서 모든 데이터 읽고 날짜별로 구분하여 splitByDate에 저장
         line = bufferedReader.readLine();
-        while(true) {
-            if(line.matches(LOCAL_DATE_REGEX)){
+        while (true) {
+            if (line == null)
+                break;
+            else {
                 String concat = line;
                 line = bufferedReader.readLine();
-                while(line != null && !line.matches(LOCAL_DATE_REGEX)){
-                    concat = concat + line;
+                while (line != null && !line.matches(LOCAL_DATE_REGEX)) {
+                    concat = concat + "," + line;
                     line = bufferedReader.readLine();
                 }
-                System.out.println(concat);
                 splitByDate.add(concat);
             }
-            break;
         }
-        splitByDate.forEach(System.out::println);
+
+        for(String str : splitByDate){
+            Diet diet = new Diet();
+            diet.setDate(LocalDate.parse(str.substring(0, 10)));
+            dietList.add(diet);
+        }
+
+        // splitByDate를 순회하며 하나하나를 Diet으로 변환
+        List<Main> mains = new ArrayList<>();
+        for (String str : splitByDate) {
+            int index = 2;
+            String[] split = str.split(",");
+            boolean flag = false;
+            for (int i = 0; i < 3; i++) {
+                if(index >= split.length) {
+                    break;
+                }
+
+                Main mainA = new Main();
+                mainA.setCalories(split[index]);
+//                mainA.setType("A");
+                while (++index < split.length && !split[index].contains("메인")) { // index 검사와 동시에 증가
+                    mainA.getMenus().add(getMenu(split[index]));
+                }
+                mains.add(mainA);
+
+                if(index >= split.length) {
+                    Main mainC = new Main();
+//                    mainC.setType("C");
+                    ++index;
+                    mains.add(mainC);
+                    break;
+                }
+
+                Main mainC = new Main();
+//                mainC.setType("C");
+                if (split[index].equals("메인C")) {
+                    mainC.setCalories(split[++index]);
+                    while (++index < split.length && !split[index].contains("메인")) {
+                        mainC.getMenus().add(getMenu(split[index]));
+                    }
+                    ++index;
+                    mains.add(mainC);
+                }
+                else {
+                    ++index;
+                    mains.add(mainC);
+                }
+
+                if(index >= split.length) {
+                    break;
+                }
+            }
+        }
+
+        int index = 0;
+        for(Diet diet : dietList){
+            Map<String, Main> main = new HashMap<>();
+            main.put("A", mains.get(index++));
+            main.put("C", mains.get(index++));
+            diet.setBreakfastMains(main);
+            main = new HashMap<>();
+            main.put("A", mains.get(index++));
+            main.put("C", mains.get(index++));
+            diet.setLunchMains(main);
+            main = new HashMap<>();
+            main.put("A", mains.get(index++));
+            main.put("C", mains.get(index++));
+            diet.setDinnerMains(main);
+        }
+
+        // debug
+//        for(Diet diet : dietList){
+//            diet.print();
+//        }
+
+    }
+
+    private Menu getMenu(String korName) {
+        for(Menu menu : menuList){
+            if(menu.getKorName().equals(korName))
+                return menu;
+        }
+        return null;
     }
 
 /*    public void getDietInformation() throws IOException {

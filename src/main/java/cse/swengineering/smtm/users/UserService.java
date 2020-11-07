@@ -15,8 +15,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // repository method
-
     public boolean userAuth(User user) {
         List<User> users = userRepository.findAll();
         for(User dbUser : users){

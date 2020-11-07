@@ -1,5 +1,6 @@
 package cse.swengineering.smtm;
 
+import cse.swengineering.smtm.menus.Main;
 import cse.swengineering.smtm.menus.Menu;
 import cse.swengineering.smtm.menus.MenuRepository;
 import cse.swengineering.smtm.menus.MenuService;
@@ -15,8 +16,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class AppRunner implements ApplicationRunner {
@@ -35,8 +40,21 @@ public class AppRunner implements ApplicationRunner {
         this.menuRepository = menuRepository;
     }
 
+    private List<Menu> menuList = new ArrayList<>();
+
+    private Menu getMenu(String korName) {
+        for(Menu menu : menuList){
+            if(menu.getKorName().equals(korName))
+                return menu;
+        }
+        return null;
+    }
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        menuService.init();
+
         Resource resource = resourceLoader.getResource("classpath:기숙사_수육국밥.jpg");
         BufferedImage bImage = ImageIO.read(resource.getFile());
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
