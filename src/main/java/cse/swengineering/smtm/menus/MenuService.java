@@ -22,11 +22,8 @@ public class MenuService {
         this.menuRepository = menuRepository;
     }
 
-    public List<Diet> getDietList() {
+    private List<Diet> getDietList() {
         return dietList;
-    }
-    public void setDietList(List<Diet> dietList) {
-        this.dietList = dietList;
     }
 
     public Diet getDiet(LocalDate date){
@@ -35,6 +32,10 @@ public class MenuService {
                 return diet;
         }
         return null;
+    }
+
+    public List<Diet> getDiets() {
+        return getDietList();
     }
 
     public void init() throws IOException, URISyntaxException {

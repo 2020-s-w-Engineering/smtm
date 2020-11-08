@@ -30,7 +30,16 @@ public class MenuControllerTest {
 
     @Test
     public void getDiet() throws Exception {
+        // 어떤 것도 테스트하고 있지 않음
         mockMvc.perform(MockMvcRequestBuilders.get("/menus/2020-11-04"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getDiets() throws Exception {
+        // 어떤 것도 테스트하고 있지 않음
+        mockMvc.perform(MockMvcRequestBuilders.get("/menus/all"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

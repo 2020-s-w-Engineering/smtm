@@ -35,9 +35,11 @@ public class MenuController {
         return diet;
     }
 
-    @GetMapping("/all")
-    public List<Diet> getDiets(){
-        return null;
+    // 모든날의 식단 정보를 가져올 필요 없을 것 같은데?
+    // 캘린더에 표시할 때는 날짜별 선호도 평균만 있으면 되니까
+    @GetMapping("/calendar")
+    public List<Diet> getCalendar(){
+        return menuService.getDiets();
     }
 
     // 쿠키 테스트

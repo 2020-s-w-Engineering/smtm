@@ -33,5 +33,12 @@ public class UserController {
     public String processUpdateInfo(User user) {
         return userService.updateUserInfo(user) ? "true" : "false";
     }
+    
+    // 선호도 기입
+    @PostMapping("/preference")
+    // 문서에는 getPreference라고 되어 있는데 그게 잘못된거겠지
+    public String setPreference() {
+        return null;
+    }
 
 }
