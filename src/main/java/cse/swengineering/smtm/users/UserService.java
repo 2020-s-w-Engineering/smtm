@@ -1,6 +1,7 @@
 package cse.swengineering.smtm.users;
 
 import cse.swengineering.smtm.menus.Diet;
+import cse.swengineering.smtm.menus.Menu;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class UserService {
         return true;
     }
 
-    public boolean setPreference(){
+    public boolean setPreference(Menu menu, int preference){
         return false;
     }
 
