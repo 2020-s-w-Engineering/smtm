@@ -1,11 +1,9 @@
 package cse.swengineering.smtm.users;
 
 import cse.swengineering.smtm.menus.Menu;
+import org.springframework.lang.NonNull;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -17,11 +15,13 @@ public class User {
     @GeneratedValue
     private Long id;
 
+    @Basic(optional = false)
     private String userId;
+    @Basic(optional = false)
     private String password;
     private boolean isKorean; // rest api로 날라갈 때는 korean으로 날라간다
-    @ElementCollection
-    private Map<Menu, Integer> preference = new HashMap<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Map<String, Integer> preference = new HashMap<>();
 
     public User() {
     }
@@ -36,11 +36,11 @@ public class User {
         this(userId, password, false);
     }
 
-    public Map<Menu, Integer> getPreference() {
+    public Map<String, Integer> getPreference() {
         return preference;
     }
 
-    public void setPreference(Map<Menu, Integer> preference) {
+    public void setPreference(Map<String, Integer> preference) {
         this.preference = preference;
     }
 

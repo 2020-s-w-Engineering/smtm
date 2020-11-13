@@ -2,6 +2,7 @@ package cse.swengineering.smtm.menus;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Entity
 public class Menu {

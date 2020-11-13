@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
+import UserComponent from './components/UserComponent';
 
 function App() {
   return (

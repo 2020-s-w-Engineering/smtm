@@ -2,6 +2,8 @@ package cse.swengineering.smtm.users;
 
 import cse.swengineering.smtm.menus.Diet;
 import cse.swengineering.smtm.menus.Menu;
+import cse.swengineering.smtm.menus.MenuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    MenuRepository menuRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -39,8 +44,10 @@ public class UserService {
         return true;
     }
 
-    public boolean setPreference(Menu menu, int preference){
-        return false;
+    public boolean setPreference(User user, Menu menu, int preference){
+        user.getPreference().put(menu.getKorName(), preference);
+        userRepository.save(user);
+        return true;
     }
 
     public float calcPreference(Diet diet) {

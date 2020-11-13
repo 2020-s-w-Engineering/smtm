@@ -1,5 +1,7 @@
 package cse.swengineering.smtm.users;
 
+import cse.swengineering.smtm.menus.Menu;
+import cse.swengineering.smtm.menus.MenuRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class UserControllerTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    MenuRepository menuRepository;
+
     @Test
     public void loginSuccess() throws Exception {
         User user = new User("donghun", "1031");
@@ -37,8 +42,10 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/users/login")
                         .param("userId", user.getUserId())
-                        .param("password", user.getPassword()))
+                        .param("password", user.getPassword())
+                        .param("korean", Boolean.toString(user.isKorean())))
                 .andExpect(status().isOk())
+                .andExpect(request().sessionAttribute("user", user))
                 .andDo(print())
                 .andExpect(content().string("true"));
     }
@@ -55,8 +62,7 @@ public class UserControllerTest {
 
     @Test
     public void registerSuccess() throws Exception {
-        User user = new User("donghun", "1031");
-
+        User user = new User("testId", "password");
         mockMvc.perform(post("/users/register")
         .param("userId", user.getUserId())
         .param("password", user.getPassword())
@@ -99,6 +105,26 @@ public class UserControllerTest {
         Optional<User> byId = userRepository.findById(savedUser.getId());
         savedUser = byId.get();
         assertThat(savedUser).isEqualTo(change);
+    }
+
+    @Test
+    public void setPreference() throws Exception {
+        User user = new User("donghun", "1031", true);
+        userRepository.save(user);
+        Optional<Menu> byId = menuRepository.findById("김치");
+        Menu menu = byId.get();
+
+        mockMvc.perform(post("/users/preference")
+                .param("korName", menu.getKorName())
+                .param("preference", "5")
+                .sessionAttr("user", user))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().string("true"));
+
+        Optional<User> userById = userRepository.findById(user.getId());
+        User savedUser = userById.get();
+        assertThat(savedUser.getPreference().get("김치")).isEqualTo(5);
     }
 
 

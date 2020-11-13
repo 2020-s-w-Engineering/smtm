@@ -30,6 +30,14 @@ Chungnam National University, 2020 S/W Engineering
 <br>`korean:"true"`
 <br>응답: `true` 또는 `false` (문자열)
 
+- 선호도 기입
+<br>요청 메소드: `POST`
+<br>요청 URL: `/users/preference`
+<br>요청 매개변수
+<br>`korName: "메뉴 한글 이름"`
+<br>`preference:"선호도(1~5)"`
+<br>응답: `true` 또는 `false` (문자열)
+
 ### User REST API
 
 - 하루 식단 정보

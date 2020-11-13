@@ -32,14 +32,15 @@ class Register extends React.Component {
         console.log(this.state.username);
         console.log(this.state.password);
         console.log(this.state.language);
+
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
-        api.post('/register', {
+        api.post('/register', null, { params: {
             userId : this.state.username,
             password : this.state.password,
             isKorean : this.state.language
-        }).then(function (response) {
+        }}).then(function (response) {
             console.log(response);
         }).catch(function (error) {
             console.log(error);

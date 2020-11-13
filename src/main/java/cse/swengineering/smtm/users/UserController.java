@@ -2,12 +2,16 @@ package cse.swengineering.smtm.users;
 
 import cse.swengineering.smtm.menus.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
-import cse.swengineering.smtm.users.UserService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -23,17 +27,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    // test 용도
-    @GetMapping
-    public List<User> users(){
-        List<User> all = userRepository.findAll();
-        return all;
-    }
-
     // 로그인 처리
     @PostMapping("/login")
-    public String processLogin(User user) {
-        return userService.userAuth(user) ? "true" : "false";
+    public String processLogin(User user, HttpSession session) {
+        if(userService.userAuth(user)){
+            session.setAttribute("user", user);
+            return "true";
+        }
+        return "false";
     }
 
     // 회원가입
@@ -52,12 +53,12 @@ public class UserController {
     @PostMapping("/preference")
     // 문서에는 getPreference라고 되어 있는데 그게 잘못된거겠지
     // 유저 정보는 세션에 있는거 쓰지뭐
-    public String setPreference(Menu menu,
+    public String setPreference(@RequestParam("korName") Menu menu,
                                 @RequestParam int preference,
                                 HttpSession session){
-//        User user = (User) session.getAttribute("user");
-//        userService.setPreference(user, menu, preference);
-        return null;
+        System.out.println(menu);
+        User user = (User) session.getAttribute("user");
+        return userService.setPreference(user, menu, preference) ? "true" : "false";
     }
 
 }
