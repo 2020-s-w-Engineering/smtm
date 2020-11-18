@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -37,14 +38,13 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity processLogin(User user,
                                        @CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieExist,
-                                       HttpSession session) throws JsonProcessingException {
+                                       HttpSession session) throws JsonProcessingException, UnsupportedEncodingException {
         User savedUser = userService.userAuth(user);
         if(savedUser != null){
             session.setAttribute("user", savedUser); // 세션에 유저 정보 설정
             if(cookieExist.equals("empty")) {
                 Map<LocalDate, Float> preference = calcPreference(savedUser); // 쿠키에 선호도 정보 저장
                 String cookieValue = objectMapper.writeValueAsString(preference);
-                System.out.println(cookieValue);
                 cookieValue = cookieValue.replaceAll("\"", "+");
                 cookieValue = cookieValue.replaceAll(",", "_");
                 ResponseCookie cookie = ResponseCookie.from("preference", cookieValue)
@@ -76,11 +76,22 @@ public class UserController {
     public String processUpdateInfo(User user, HttpSession session) {
         return userService.updateUserInfo(user) ? "true" : "false";
     }
+
+    // 사용자의 선호도 정보
+    @GetMapping("/preference")
+    public String getPreference(@CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieValue){
+        if(cookieValue.equals("empty")){
+            return "false";
+        }
+        else {
+            cookieValue = cookieValue.replaceAll("\\+", "\"");
+            cookieValue = cookieValue.replaceAll("_", ",");
+            return cookieValue;
+        }
+    }
     
     // 선호도 기입
     @PostMapping("/preference")
-    // 문서에는 getPreference라고 되어 있는데 그게 잘못된거겠지
-    // 유저 정보는 세션에 있는거 쓰지뭐
     public String setPreference(@RequestParam("korName") Menu menu,
                                 @RequestParam int preference,
                                 HttpSession session){

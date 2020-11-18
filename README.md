@@ -38,7 +38,19 @@ Chungnam National University, 2020 S/W Engineering
 <br>`preference:"선호도(1~5)"`
 <br>응답: `true` 또는 `false` (문자열)
 
-### User REST API
+- 한 달 식단에 대한 사용자의 평균 선호도 요청
+<br>요청 메소드: `GET`
+<br>요청 URL: `/users/preference`
+<br>응답:
+```json
+{
+    "2020-11-06": 4.3,
+    "2020-11-05": 4.42,
+    "2020-11-04": 4.5
+}
+```
+
+### Menu REST API
 
 - 하루 식단 정보
 <br>요청 메소드: `GET`

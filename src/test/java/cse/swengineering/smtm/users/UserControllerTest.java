@@ -1,5 +1,6 @@
 package cse.swengineering.smtm.users;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cse.swengineering.smtm.menus.Menu;
 import cse.swengineering.smtm.menus.MenuRepository;
 import org.junit.Test;
@@ -11,9 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import javax.servlet.http.Cookie;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -34,6 +37,9 @@ public class UserControllerTest {
 
     @Autowired
     MenuRepository menuRepository;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Test
     public void loginSuccess() throws Exception {
@@ -105,6 +111,20 @@ public class UserControllerTest {
         Optional<User> byId = userRepository.findById(savedUser.getId());
         savedUser = byId.get();
         assertThat(savedUser).isEqualTo(change);
+    }
+
+    @Test
+    public void getPreference() throws Exception {
+        String cookieValue = "{+2020-11-06+:4.3_+2020-11-05+:4.42_+2020-11-04+:4.5}";
+        Cookie cookie = new Cookie("preference", cookieValue);
+
+        mockMvc.perform(get("/users/preference")
+                .cookie(cookie))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.2020-11-06").value("4.3"))
+                .andExpect(jsonPath("$.2020-11-05").value("4.42"))
+                .andExpect(jsonPath("$.2020-11-04").value("4.5"));
     }
 
     @Test
