@@ -42,53 +42,6 @@ public class MenuController {
         return menuService.getDiets();
     }
 
-    // 쿠키 테스트
-    @GetMapping("/write/cookie")
-    public ResponseEntity writeCookie() throws JsonProcessingException {
-        List<Diet> dietList = new ArrayList<>();
-        Diet diet1 = new Diet();
-        diet1.setDate(LocalDate.now());
-        diet1.setAvgOfPreference(4.2f);
-        Main main = new Main();
-//        main.setType("A");
-        main.setCalories("958kcal");
-        HashSet<Menu> mainA = new HashSet<>();
-        mainA.add(new Menu("김치", "kimchi"));
-//        main.setMenusA(mainA);
-        HashMap<String, Main> whatTheFuck = new HashMap<>();
-        diet1.setBreakfastMains(whatTheFuck);
-        diet1.setLunchMains(whatTheFuck);
-        diet1.setDinnerMains(whatTheFuck);
-        Diet diet2 = new Diet();
-        diet2.setDate(LocalDate.parse("2020-10-31"));
-        diet2.setAvgOfPreference(4.42f);
-        Diet diet3 = new Diet();
-        diet3.setDate(LocalDate.parse("2020-07-01"));
-        diet3.setAvgOfPreference(5.0f);
-        dietList.add(diet1);
-        dietList.add(diet2);
-        dietList.add(diet3);
-        String diets = objectMapper.writeValueAsString(dietList);
-        diets = diets.replaceAll("\"", "+");
-        diets = diets.replaceAll(",", "_");
-        System.out.println(diets);
-        ResponseCookie cookie = ResponseCookie.from("dietList", diets)
-                                                .path("/")
-                                                .build();
-        return ResponseEntity.ok()
-                .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .build();
-    }
-
-    // 쿠키 테스트
-    @ResponseBody
-    @GetMapping("/read/cookie")
-    public String readCookie(@CookieValue(value = "dietList", defaultValue = "unknown") String dietList) {
-        dietList = dietList.replaceAll("\\+", "\"");
-        dietList = dietList.replaceAll("_", ",");
-        return dietList;
-    }
-
     @GetMapping("/menus/images/{id}")
     public ResponseEntity<byte[]> getMenuImage(@PathVariable Long id) throws IllegalAccessException {
 //        Optional<Menu> byId = menuRepository.findById(id);

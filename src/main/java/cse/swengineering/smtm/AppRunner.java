@@ -66,28 +66,12 @@ public class AppRunner implements ApplicationRunner {
         menu.setImg(data);
         menuRepository.save(menu);
 
-//        menuService.init();
-//        Menu menu1 = new Menu("된장찌개", "a");
-//        Menu menu2 = new Menu("김치찌개", "b");
-//        Menu menu3 = new Menu("초밥", "c");
-//        menuRepository.save(menu1);
-//        menuRepository.save(menu2);
-//        menuRepository.save(menu3);
-//        User sengbok = new User("sengbok", "123", true);
-//        sengbok.getPreference().put(menu1, 1);
-//        sengbok.getPreference().put(menu2, 2);
-//        sengbok.getPreference().put(menu3, 3);
-//        User yeonju = new User("yeonju", "456", true);
-//        yeonju.getPreference().put(menu1, 3);
-//        yeonju.getPreference().put(menu2, 2);
-//        yeonju.getPreference().put(menu3, 1);
-//        User yejin = new User("yejin", "789", false);
-//        userRepository.save(sengbok);
-//        userRepository.save(yeonju);
-//        userRepository.save(yejin);
-
-//        List<Diet> dietList = dietService.getDietList();
-//        System.out.println(dietList.size() + "일치의 식단 정보를 저장하고 있습니다");
-//        dietList.forEach(Diet::printKOR);
+        User donghun = new User("donghun", "1031", true);
+        donghun.getPreference().put("김치", 1);
+        donghun.getPreference().put("우유", 2);
+        donghun.getPreference().put("제육볶음", 3);
+        donghun.getPreference().put("계란후라이", 4);
+        donghun.getPreference().put("씨리얼", 5);
+        userRepository.save(donghun);
     }
 }

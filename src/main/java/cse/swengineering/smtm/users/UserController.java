@@ -1,17 +1,20 @@
 package cse.swengineering.smtm.users;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import cse.swengineering.smtm.menus.Diet;
+import cse.swengineering.smtm.menus.Main;
 import cse.swengineering.smtm.menus.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -23,18 +26,43 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // 로그인 처리
+    // 로그인
     @PostMapping("/login")
-    public String processLogin(User user, HttpSession session) {
-        if(userService.userAuth(user)){
-            session.setAttribute("user", user);
-            return "true";
+    public ResponseEntity processLogin(User user,
+                                       @CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieExist,
+                                       HttpSession session) throws JsonProcessingException {
+        User savedUser = userService.userAuth(user);
+        if(savedUser != null){
+            session.setAttribute("user", savedUser); // 세션에 유저 정보 설정
+            if(cookieExist.equals("empty")) {
+                Map<LocalDate, Float> preference = calcPreference(savedUser); // 쿠키에 선호도 정보 저장
+                String cookieValue = objectMapper.writeValueAsString(preference);
+                System.out.println(cookieValue);
+                cookieValue = cookieValue.replaceAll("\"", "+");
+                cookieValue = cookieValue.replaceAll(",", "_");
+                ResponseCookie cookie = ResponseCookie.from("preference", cookieValue)
+                        .path("/")
+                        .build();
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                        .build();
+            }
+            else {
+                return ResponseEntity.ok().build();
+            }
         }
-        return "false";
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    private Map<LocalDate, Float> calcPreference(User user) {
+        return userService.calcPreference(user);
     }
 
     // 회원가입

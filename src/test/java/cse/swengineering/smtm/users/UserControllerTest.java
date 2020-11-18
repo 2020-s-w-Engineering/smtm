@@ -46,8 +46,8 @@ public class UserControllerTest {
                         .param("korean", Boolean.toString(user.isKorean())))
                 .andExpect(status().isOk())
                 .andExpect(request().sessionAttribute("user", user))
-                .andDo(print())
-                .andExpect(content().string("true"));
+                .andExpect(cookie().exists("preference"))
+                .andDo(print());
     }
 
     @Test

@@ -53,6 +53,23 @@ public class Diet {
         this.date = date;
     }
 
+    public Set<Menu> getAllMenus() {
+        Set<Menu> allMenus = new HashSet<Menu>();
+        Main breakfastMainA = this.getBreakfastMains().get("A");
+        Main breakfastMainC = this.getBreakfastMains().get("C");
+        Main lunchMainA = this.getLunchMains().get("A");
+        Main lunchMainC = this.getLunchMains().get("C");
+        Main dinnerMainA = this.getDinnerMains().get("A");
+        Main dinnerMainC = this.getDinnerMains().get("C");
+        allMenus.addAll(breakfastMainA.getMenus());
+        allMenus.addAll(breakfastMainC.getMenus());
+        allMenus.addAll(lunchMainA.getMenus());
+        allMenus.addAll(lunchMainC.getMenus());
+        allMenus.addAll(dinnerMainA.getMenus());
+        allMenus.addAll(dinnerMainC.getMenus());
+        return allMenus;
+    }
+
     @Override
     public String toString() {
         return "Diet{" +

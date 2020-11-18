@@ -3,11 +3,12 @@ package cse.swengineering.smtm.users;
 import cse.swengineering.smtm.menus.Diet;
 import cse.swengineering.smtm.menus.Menu;
 import cse.swengineering.smtm.menus.MenuRepository;
+import cse.swengineering.smtm.menus.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Component
 public class UserService {
@@ -15,19 +16,19 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    MenuRepository menuRepository;
+    MenuService menuService;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public boolean userAuth(User user) {
+    public User userAuth(User user) {
         List<User> users = userRepository.findAll();
         for(User dbUser : users){
             if(dbUser.equals(user))
-                return true;
+                return dbUser;
         }
-        return false;
+        return null;
     }
 
     public boolean updateUserInfo(User user){
@@ -50,9 +51,26 @@ public class UserService {
         return true;
     }
 
-    public float calcPreference(Diet diet) {
-        // todo 식단의 모든 메뉴에 대한 선호도를 계산하여 평균값 리턴
-        return 0.0f;
+    public Map<LocalDate, Float> calcPreference(User user) {
+        Map<LocalDate, Float> ret = new HashMap<>();
+        List<Diet> diets = menuService.getDiets();
+        for(Diet diet : diets){
+            int sum = 0;
+            int num = 0;
+            float avg = 0.0f;
+            Set<Menu> menus = diet.getAllMenus();
+            Map<String, Integer> preference = user.getPreference();
+            Menu[] menuArr = menus.toArray(new Menu[0]);
+            for(Menu menu : menuArr){
+                if(preference.containsKey(menu.getKorName())) { // 선호도 표기한 메뉴인 경우
+                    sum = sum + preference.get(menu.getKorName());
+                    num++;
+                }
+            }
+            avg = (float)sum / num;
+            ret.put(diet.getDate(), avg);
+        }
+        return ret;
     }
 
 }
