@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link, Redirect} from 'react-router-dom';
 
 class LogIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username : "",
-            password : ""
+            password : "",
+            isLoggedIn : false
         };
     }
 
@@ -23,6 +25,7 @@ class LogIn extends React.Component {
     logInClick(e) {
         // Register
         e.preventDefault();
+        /*
         console.log(this.state.username);
         console.log(this.state.password);
         console.log(this.state.language);
@@ -31,13 +34,25 @@ class LogIn extends React.Component {
             username : this.state.username,
             password : this.state.password
         }).then(function (response) {
-            console.log(response);
+            if(response.status==200){
+                this.props.onSubmit(
+                    true
+                );
+            }
+            else console.log(response);
         }).catch(function (error) {
             console.log(error);
-        });
+        });*/
+        this.setState({isLoggedIn:true})
+        this.props.onSubmit(
+            true
+        );
     }
 
     render() {
+        if(this.state.isLoggedIn===true){
+            return <Redirect to='/'></Redirect>
+        }
         return(
             <div>
                 <h1>Log In</h1>
@@ -50,7 +65,7 @@ class LogIn extends React.Component {
                         <h5>Password</h5>
                         <input type='password' name='password' value={this.state.password} placeholder='password' required onChange={this.infoChange.bind(this)} />
                     </div>
-                    <input type='submit' value='Log In' />
+                    <input type='submit' value='Log In'/>
                 </form>
             </div>
         );
