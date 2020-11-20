@@ -28,7 +28,6 @@ class LogIn extends React.Component {
         e.preventDefault();
         console.log(this.state.username);
         console.log(this.state.password);
-
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
@@ -47,7 +46,6 @@ class LogIn extends React.Component {
         }).catch(function (error) {
             console.log(error);
         });
-
     }
 
     render() {

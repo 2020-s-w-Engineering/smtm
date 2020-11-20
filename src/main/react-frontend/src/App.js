@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Calendar from './components/Calendar'
 import UserComponent from './components/UserComponent';
 import MyPage from './components/MyPage';
+import ClickDate from './components/ClickDate'
 
 import Home from './components/Home'
 
@@ -54,6 +55,10 @@ class App extends React.Component{
 
               <Route path="/myPage">
                 <MyPage/>
+              </Route>
+
+              <Route path="/clickDate">
+                <ClickDate/>
               </Route>
             </Switch>
           </BrowserRouter>
