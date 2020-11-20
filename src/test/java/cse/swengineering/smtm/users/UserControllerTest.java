@@ -53,6 +53,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(request().sessionAttribute("user", user))
                 .andExpect(cookie().exists("preference"))
+                .andExpect(content().string(String.valueOf(user.isKorean())))
                 .andDo(print());
     }
 
@@ -61,9 +62,8 @@ public class UserControllerTest {
         mockMvc.perform(post("/users/login")
                 .param("userId", "wrongId")
                 .param("password", "wrongPassword"))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("false"));
+                .andExpect(status().isUnauthorized())
+                .andDo(print());
     }
 
     @Test
@@ -131,11 +131,11 @@ public class UserControllerTest {
     public void setPreference() throws Exception {
         User user = new User("donghun", "1031", true);
         userRepository.save(user);
-        Optional<Menu> byId = menuRepository.findById("김치");
+        Optional<Menu> byId = menuRepository.findById(1L);
         Menu menu = byId.get();
 
         mockMvc.perform(post("/users/preference")
-                .param("korName", menu.getKorName())
+                .param("id", menu.getId().toString())
                 .param("preference", "5")
                 .sessionAttr("user", user))
                 .andExpect(status().isOk())
@@ -144,7 +144,7 @@ public class UserControllerTest {
 
         Optional<User> userById = userRepository.findById(user.getId());
         User savedUser = userById.get();
-        assertThat(savedUser.getPreference().get("김치")).isEqualTo(5);
+        assertThat(savedUser.getPreference().get(1L)).isEqualTo(5);
     }
 
 

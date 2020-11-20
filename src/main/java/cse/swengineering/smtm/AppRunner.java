@@ -55,23 +55,24 @@ public class AppRunner implements ApplicationRunner {
 
         menuService.init();
 
-        Resource resource = resourceLoader.getResource("classpath:기숙사_수육국밥.jpg");
+        Resource resource = resourceLoader.getResource("classpath:/images/수육국밥.jpg");
         BufferedImage bImage = ImageIO.read(resource.getFile());
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(bImage, "jpg", bos );
         byte [] data = bos.toByteArray();
         Menu menu = new Menu();
-        menu.setKorName("기숙사_수육국밥");
+        menu.setKorName("수육국밥");
         menu.setEngName("kukBAB");
         menu.setImg(data);
+        menu.setId(22L);
         menuRepository.save(menu);
 
         User donghun = new User("donghun", "1031", true);
-        donghun.getPreference().put("김치", 1);
-        donghun.getPreference().put("우유", 2);
-        donghun.getPreference().put("제육볶음", 3);
-        donghun.getPreference().put("계란후라이", 4);
-        donghun.getPreference().put("씨리얼", 5);
+        donghun.getPreference().put(1L, 1);
+        donghun.getPreference().put(2L, 2);
+        donghun.getPreference().put(3L, 3);
+        donghun.getPreference().put(4L, 4);
+        donghun.getPreference().put(5L, 5);
         userRepository.save(donghun);
     }
 }

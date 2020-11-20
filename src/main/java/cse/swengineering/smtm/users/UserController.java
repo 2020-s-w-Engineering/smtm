@@ -2,8 +2,6 @@ package cse.swengineering.smtm.users;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import cse.swengineering.smtm.menus.Diet;
-import cse.swengineering.smtm.menus.Main;
 import cse.swengineering.smtm.menus.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -36,11 +34,12 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity processLogin(User user,
+    public ResponseEntity<String> processLogin(User user,
                                        @CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieExist,
                                        HttpSession session) throws JsonProcessingException, UnsupportedEncodingException {
         User savedUser = userService.userAuth(user);
         if(savedUser != null){
+            ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
             session.setAttribute("user", savedUser); // 세션에 유저 정보 설정
             if(cookieExist.equals("empty")) {
                 Map<LocalDate, Float> preference = calcPreference(savedUser); // 쿠키에 선호도 정보 저장
@@ -50,13 +49,9 @@ public class UserController {
                 ResponseCookie cookie = ResponseCookie.from("preference", cookieValue)
                         .path("/")
                         .build();
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                        .build();
+                builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
             }
-            else {
-                return ResponseEntity.ok().build();
-            }
+            return builder.body(String.valueOf(user.isKorean()));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
@@ -92,7 +87,7 @@ public class UserController {
     
     // 선호도 기입
     @PostMapping("/preference")
-    public String setPreference(@RequestParam("korName") Menu menu,
+    public String setPreference(@RequestParam("id") Menu menu,
                                 @RequestParam int preference,
                                 HttpSession session){
         System.out.println(menu);

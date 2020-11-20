@@ -46,7 +46,7 @@ public class UserService {
     }
 
     public boolean setPreference(User user, Menu menu, int preference){
-        user.getPreference().put(menu.getKorName(), preference);
+        user.getPreference().put(menu.getId(), preference);
         userRepository.save(user);
         return true;
     }
@@ -59,11 +59,11 @@ public class UserService {
             int num = 0;
             float avg = 0.0f;
             Set<Menu> menus = diet.getAllMenus();
-            Map<String, Integer> preference = user.getPreference();
+            Map<Long, Integer> preference = user.getPreference();
             Menu[] menuArr = menus.toArray(new Menu[0]);
             for(Menu menu : menuArr){
-                if(preference.containsKey(menu.getKorName())) { // 선호도 표기한 메뉴인 경우
-                    sum = sum + preference.get(menu.getKorName());
+                if(preference.containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우
+                    sum = sum + preference.get(menu.getId());
                     num++;
                 }
             }

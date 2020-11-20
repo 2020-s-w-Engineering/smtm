@@ -1,29 +1,33 @@
 package cse.swengineering.smtm.menus;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
-@RestController
 @RequestMapping("/menus")
+@RestController
 public class MenuController {
 
     private final MenuService menuService;
 
-    public MenuController(MenuService menuService) {
+    private final MenuRepository menuRepository;
+
+    public MenuController(MenuService menuService, MenuRepository menuRepository) {
         this.menuService = menuService;
+        this.menuRepository = menuRepository;
     }
 
     @Autowired
@@ -42,18 +46,23 @@ public class MenuController {
         return menuService.getDiets();
     }
 
-    @GetMapping("/menus/images/{id}")
-    public ResponseEntity<byte[]> getMenuImage(@PathVariable Long id) throws IllegalAccessException {
-//        Optional<Menu> byId = menuRepository.findById(id);
-//        Menu menu = null;
-//        if(byId.isPresent()) {
-//             menu = byId.get();
-//        }
-//        else {
-//            throw new IllegalAccessException();
-//        }
-//        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(menu.getImg());
-        return null;
+    @GetMapping("/images")
+    public ResponseEntity<byte[]> getMenuImage(@RequestParam Menu id) {
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(id.getImg());
+    }
+
+    @PostMapping("/images")
+    public String uploadMenuImage(@RequestParam MultipartFile file) {
+        String filename=file.getOriginalFilename();
+        try{
+            byte [] bytes=file.getBytes();
+            BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(
+                    new FileOutputStream("./src/main/resources/images"+"/"+filename));
+            bufferedOutputStream.write(bytes);
+            bufferedOutputStream.flush();
+            bufferedOutputStream.close();
+        }catch(Exception e){System.out.println(e);}
+        return "true";
     }
 
 }

@@ -9,7 +9,7 @@ Chungnam National University, 2020 S/W Engineering
 <br>요청 매개변수
 <br>`userId:"사용자 아이디"`
 <br>`password:"사용자 비밀번호"`
-<br>응답: `true` 또는 `false` (문자열)
+<br>응답: `true` 또는 `false` (사용자가 한국인인지 여부)
 
 - 회원 가입 처리
 <br>요청 메소드: `POST`
@@ -18,25 +18,22 @@ Chungnam National University, 2020 S/W Engineering
 <br>`userId:"사용자 아이디"`
 <br>`password:"사용자 비밀번호"`
 <br>`korean:"true 또는 false"`
-<br>응답: `true` 또는 `false` (문자열)
+<br>응답: `true` 또는 `false` (단순 문자열)
 
 - 회원 정보 변경
 <br>요청 메소드: `POST`
 <br>요청 URL: `/users/update`
 <br>요청 매개변수
-<br>`id: "사용자 데이터베이스 아이디"`
-<br>`userId:"사용자 아이디"`
-<br>`password:"사용자 비밀번호"`
 <br>`korean:"true"`
-<br>응답: `true` 또는 `false` (문자열)
+<br>응답: `true` 또는 `false` (단순 문자열)
 
 - 선호도 기입
 <br>요청 메소드: `POST`
 <br>요청 URL: `/users/preference`
 <br>요청 매개변수
-<br>`korName: "메뉴 한글 이름"`
+<br>`korName:"메뉴 한글 이름"`
 <br>`preference:"선호도(1~5)"`
-<br>응답: `true` 또는 `false` (문자열)
+<br>응답: `true` 또는 `false` (단순 문자열)
 
 - 한 달 식단에 대한 사용자의 평균 선호도 요청
 <br>요청 메소드: `GET`
@@ -156,8 +153,18 @@ Chungnam National University, 2020 S/W Engineering
     }
 }
 ```
+- 메뉴 이미지 요청
+<br>요청 메소드: `GET`
+<br>요청 URL: `/menus/images`
+<br>요청 매개변수
+<br>`id:{메뉴아이디}`
+<br>응답 헤더
+<br>`Content-Type:"image/jpeg"`
+<br>`Content-Length:"{이미지의 크기}"`
 
-
-프론트에서 응답을 응답헤더, 응답상태 이런것까지 받을 수 있나?
-그냥 문자열이 아니라 HttpEntity로 응답헤더, 응답상태 이런것까지
-담아 보내면 그걸 다 받을 수 있나
+- 메뉴 이미지 업로드
+<br>요청 메소드: `POST`
+<br>요청 URL: `/menus/images`
+<br>요청 헤더
+<br>`Content-Type:"multipart/form-data"`
+<br>응답: `true` 또는 `false` (단순 문자열)
