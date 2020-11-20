@@ -1,49 +1,66 @@
 import React from 'react';
+import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import './App.css'
+import './components/css/componentCss.css';
 import Login from './components/Login';
 import Register from './components/Register';
+import Calendar from './components/Calendar'
 import UserComponent from './components/UserComponent';
+import MyPage from './components/MyPage';
 
-function App() {
-  return (
-    <Register />
-  );
+import Home from './components/Home'
+
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      isLoggedIn : false,
+      userId : ""
+    }
+  }
+  render(){
+    return (
+      <div className="app">
+        <h1>{this.state.isLoggedIn}</h1>
+        <h2>_______ mobile</h2>
+        <div id='screen'>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/">
+                <Home isLoggedIn={this.state.isLoggedIn}/>
+              </Route>
+
+              <Route path="/Login">
+                <Login isLoggedIn={this.state.isLoggedIn} onSubmit={
+                  function(_isLoggedIn){
+                    this.setState({
+                      isLoggedIn:_isLoggedIn
+                    })
+                }.bind(this)}/>
+              </Route>
+  
+              <Route path="/Register">
+                <Register isLoggedIn={this.state.isLoggedIn} onSubmit={
+                    function(_isLoggedIn){
+                      this.setState({
+                        isLoggedIn:_isLoggedIn
+                      })
+                  }.bind(this)}/>
+              </Route>
+  
+              <Route path="/menu">
+                <Calendar></Calendar>
+              </Route>
+
+              <Route path="/myPage">
+                <MyPage/>
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
-
-// import React, {useState, useEffect} from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//     const [message, setMessage] = useState("");
-//     useEffect(() => {
-//         fetch('/users')
-//             .then(response => response.text())
-//             .then(message => {
-//                 setMessage(message);
-//             });
-//     }, [])
-//     return (
-//         < div
-//     className = "App" >
-//         < header
-//     className = "App-header" >
-//         < img
-//     src = {logo}
-//     className = "App-logo"
-//     alt = "logo" / >
-//         < h1
-//     className = "App-title" > {message} < /h1>
-//         < /header>
-//         < p
-//     className = "App-intro" >
-//         To
-//     get
-//     started, edit < code > src / App.js < /code> and save to reload.
-//     < /p>
-//     < /div>
-// )
-// }
-
-// export default App;

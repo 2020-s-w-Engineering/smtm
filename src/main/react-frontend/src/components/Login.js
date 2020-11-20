@@ -1,11 +1,14 @@
 import React from 'react';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class LogIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username : "",
-            password : ""
+            password : "",
+            isLoggedIn : false
         };
     }
 
@@ -21,23 +24,36 @@ class LogIn extends React.Component {
     }
 
     logInClick(e) {
-        // Register
+        // login
         e.preventDefault();
         console.log(this.state.username);
         console.log(this.state.password);
-        console.log(this.state.language);
-        const axios = require('axios').default;
-        axios.post('/register', {
-            username : this.state.username,
+
+        const api = axios.create({
+            baseURL: 'http://localhost:8080/users'
+        })
+        var login_this = this;
+        api.post('/login', null, { params: {
+            userId : this.state.username,
             password : this.state.password
-        }).then(function (response) {
+        }}).then(function (response) {
             console.log(response);
+            if (response.status === 200) {
+                login_this.setState({isLoggedIn:true})
+                login_this.props.onSubmit(
+                    true
+                );
+            }
         }).catch(function (error) {
             console.log(error);
         });
+
     }
 
     render() {
+        if(this.state.isLoggedIn === true){
+            return <Redirect to='/'></Redirect>
+        }
         return(
             <div>
                 <h1>Log In</h1>
@@ -50,7 +66,7 @@ class LogIn extends React.Component {
                         <h5>Password</h5>
                         <input type='password' name='password' value={this.state.password} placeholder='password' required onChange={this.infoChange.bind(this)} />
                     </div>
-                    <input type='submit' value='Log In' />
+                    <input type='submit' value='Log In'/>
                 </form>
             </div>
         );
