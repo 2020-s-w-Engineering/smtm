@@ -25,32 +25,37 @@ class App extends React.Component{
         <h2>_______ mobile</h2>
         <div id='screen'>
           <BrowserRouter>
-          <Switch>
+            <Switch>
               <Route exact path="/">
-              <Home isLoggedIn={this.state.isLoggedIn}/>
+                <Home isLoggedIn={this.state.isLoggedIn}/>
               </Route>
 
               <Route path="/Login">
-              <Login isLoggedIn={this.state.isLoggedIn} onSubmit={
-                function(_isLoggedIn){
-                  this.setState({
-                    isLoggedIn:_isLoggedIn
-                  })
-              }.bind(this)}/>
+                <Login isLoggedIn={this.state.isLoggedIn} onSubmit={
+                  function(_isLoggedIn){
+                    this.setState({
+                      isLoggedIn:_isLoggedIn
+                    })
+                }.bind(this)}/>
               </Route>
   
               <Route path="/Register">
-              <Register/>
+                <Register isLoggedIn={this.state.isLoggedIn} onSubmit={
+                    function(_isLoggedIn){
+                      this.setState({
+                        isLoggedIn:_isLoggedIn
+                      })
+                  }.bind(this)}/>
               </Route>
   
               <Route path="/menu">
-              <Calendar></Calendar>
+                <Calendar></Calendar>
               </Route>
 
               <Route path="/myPage">
-              <MyPage/>
+                <MyPage/>
               </Route>
-          </Switch>
+            </Switch>
           </BrowserRouter>
         </div>
       </div>

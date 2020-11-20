@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class Register extends React.Component {
     constructor(props) {
@@ -7,7 +8,8 @@ class Register extends React.Component {
         this.state = {
             username : "",
             password : "",
-            language : ""
+            language : "",
+            isLoggedIn : false,
         }
     }
 
@@ -36,18 +38,28 @@ class Register extends React.Component {
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
+        var register_this = this;
         api.post('/register', null, { params: {
             userId : this.state.username,
             password : this.state.password,
             isKorean : this.state.language
         }}).then(function (response) {
             console.log(response);
+            if (response.status === 200) {
+                register_this.setState({isLoggedIn:true})
+                register_this.props.onSubmit(
+                    true
+                );
+            }
         }).catch(function (error) {
             console.log(error);
         });
     }
 
     render() {
+        if(this.state.isLoggedIn === true){
+            return <Redirect to='/'></Redirect>
+        }
         return(
             <div>
                 <h1>Register</h1>

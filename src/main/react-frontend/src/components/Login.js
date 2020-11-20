@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, Redirect} from 'react-router-dom';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -23,34 +24,34 @@ class LogIn extends React.Component {
     }
 
     logInClick(e) {
-        // Register
+        // login
         e.preventDefault();
-        /*
         console.log(this.state.username);
         console.log(this.state.password);
-        console.log(this.state.language);
-        const axios = require('axios').default;
-        axios.post('/register', {
-            username : this.state.username,
+
+        const api = axios.create({
+            baseURL: 'http://localhost:8080/users'
+        })
+        var login_this = this;
+        api.post('/login', null, { params: {
+            userId : this.state.username,
             password : this.state.password
-        }).then(function (response) {
-            if(response.status==200){
-                this.props.onSubmit(
+        }}).then(function (response) {
+            console.log(response);
+            if (response.status === 200) {
+                login_this.setState({isLoggedIn:true})
+                login_this.props.onSubmit(
                     true
                 );
             }
-            else console.log(response);
         }).catch(function (error) {
             console.log(error);
-        });*/
-        this.setState({isLoggedIn:true})
-        this.props.onSubmit(
-            true
-        );
+        });
+
     }
 
     render() {
-        if(this.state.isLoggedIn===true){
+        if(this.state.isLoggedIn === true){
             return <Redirect to='/'></Redirect>
         }
         return(
