@@ -7,15 +7,21 @@ class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn : this.props.isLoggedIn,
+            userInfo : this.props.userInfo,
             button1:this.props.button1,
             button2:this.props.button2
         };
     }
 
-    getButton(){
+    static getDerivedStateFromProps(nextProps, nextState) {
+        if(nextProps.userInfo != null){
+        return {userInfo : nextProps.userInfo};
+        }
+    }
+    
+    getButton() {
         var _buttonComponent=null;
-        if(this.state.isLoggedIn===false){
+        if(this.state.userInfo === null){
             _buttonComponent=<BeforeLogIn></BeforeLogIn>
         }
         else _buttonComponent=<AfterLogIn></AfterLogIn>
@@ -23,6 +29,9 @@ class Home extends React.Component{
     }
 
     render(){
+        console.log("Home render");
+        console.log('Home');
+        console.log(this.state.userInfo);
         return (
         <div id='home'>
             <h1>SMTM</h1>
@@ -64,7 +73,5 @@ class AfterLogIn extends React.Component{
          );
      }
  }
- 
-
 
 export default Home;

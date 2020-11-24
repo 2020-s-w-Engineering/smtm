@@ -24,8 +24,6 @@ class Register extends React.Component {
         } else if (name === 'language') {
             this.setState({language : value})
         }
-
-
     }
 
     registerClick(e) {
@@ -48,7 +46,7 @@ class Register extends React.Component {
             if (response.status === 200) {
                 register_this.setState({isLoggedIn:true})
                 register_this.props.onSubmit(
-                    true
+                    false, null
                 );
             }
         }).catch(function (error) {
@@ -57,6 +55,7 @@ class Register extends React.Component {
     }
 
     render() {
+        console.log("Register render");
         if(this.state.isLoggedIn === true){
             return <Redirect to='/'></Redirect>
         }

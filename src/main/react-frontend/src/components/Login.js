@@ -28,6 +28,7 @@ class LogIn extends React.Component {
         e.preventDefault();
         console.log(this.state.username);
         console.log(this.state.password);
+
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
@@ -40,15 +41,17 @@ class LogIn extends React.Component {
             if (response.status === 200) {
                 login_this.setState({isLoggedIn:true})
                 login_this.props.onSubmit(
-                    true
+                    true, response.config.params
                 );
             }
         }).catch(function (error) {
             console.log(error);
         });
+
     }
 
     render() {
+        console.log("Login render");
         if(this.state.isLoggedIn === true){
             return <Redirect to='/'></Redirect>
         }
