@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -35,29 +34,21 @@ public class UserController {
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<String> processLogin(User user,
-                                       @CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieExist,
-                                       HttpSession session) throws JsonProcessingException, UnsupportedEncodingException {
+                                               @CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieExist,
+                                               HttpSession session) throws JsonProcessingException {
         User savedUser = userService.userAuth(user);
         if(savedUser != null){
             ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
             session.setAttribute("user", savedUser); // 세션에 유저 정보 설정
             if(cookieExist.equals("empty")) {
-                Map<LocalDate, Float> preference = calcPreference(savedUser); // 쿠키에 선호도 정보 저장
-                String cookieValue = objectMapper.writeValueAsString(preference);
-                cookieValue = cookieValue.replaceAll("\"", "+");
-                cookieValue = cookieValue.replaceAll(",", "_");
-                ResponseCookie cookie = ResponseCookie.from("preference", cookieValue)
-                        .path("/")
-                        .build();
+                Map<LocalDate, Float> preference = userService.calcPreference(savedUser); // 쿠키에 선호도 정보 저장
+                String cookieValue = jsonToCookie(objectMapper.writeValueAsString(preference));
+                ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
                 builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
             }
-            return builder.body(String.valueOf(user.isKorean()));
+            return builder.body(String.valueOf(savedUser.isKorean()));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-
-    private Map<LocalDate, Float> calcPreference(User user) {
-        return userService.calcPreference(user);
     }
 
     // 회원가입
@@ -69,20 +60,17 @@ public class UserController {
     // 회원정보변경
     @PostMapping("/update")
     public String processUpdateInfo(User user, HttpSession session) {
-        return userService.updateUserInfo(user) ? "true" : "false";
+        if(userService.updateUserInfo(user)){
+            session.setAttribute("user", user);
+            return "true";
+        }
+        return "false";
     }
 
     // 사용자의 선호도 정보
     @GetMapping("/preference")
     public String getPreference(@CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieValue){
-        if(cookieValue.equals("empty")){
-            return "false";
-        }
-        else {
-            cookieValue = cookieValue.replaceAll("\\+", "\"");
-            cookieValue = cookieValue.replaceAll("_", ",");
-            return cookieValue;
-        }
+        return cookieValue.equals("empty") ? "false" : cookieToJson(cookieValue);
     }
     
     // 선호도 기입
@@ -90,9 +78,21 @@ public class UserController {
     public String setPreference(@RequestParam("id") Menu menu,
                                 @RequestParam int preference,
                                 HttpSession session){
-        System.out.println(menu);
         User user = (User) session.getAttribute("user");
         return userService.setPreference(user, menu, preference) ? "true" : "false";
+    }
+
+    /*
+    private methods
+     */
+    private String cookieToJson(String cookie) {
+        cookie = cookie.replaceAll("\\+", "\"");
+        return cookie.replaceAll("_", ",");
+    }
+
+    private String jsonToCookie(String json) {
+        json = json.replaceAll("\"", "+");
+        return json.replaceAll(",", "_");
     }
 
 }
