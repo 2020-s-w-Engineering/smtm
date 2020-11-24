@@ -41,7 +41,7 @@ class LogIn extends React.Component {
             if (response.status === 200) {
                 login_this.setState({isLoggedIn:true})
                 login_this.props.onSubmit(
-                    true, response.config.params
+                    true, [response.config.params, response.data]
                 );
             }
         }).catch(function (error) {

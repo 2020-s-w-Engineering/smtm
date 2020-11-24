@@ -8,6 +8,8 @@ import Calendar from './components/Calendar'
 import MyPage from './components/MyPage';
 import Home from './components/Home';
 import ClickDate from './components/ClickDate';
+import Menu from './components/Menu'; // Test 성복
+
 
 class App extends React.Component{
   constructor(props){
@@ -46,6 +48,10 @@ class App extends React.Component{
                 </>
               ) : (
                 <>
+                <Route path='/menu'>
+                  <Menu/>
+                </Route>
+                
                 <Route exact path="/">
                   <Home userInfo={this.state.userInfo}/>
                 </Route>
