@@ -1,8 +1,5 @@
 package cse.swengineering.smtm.users;
 
-import cse.swengineering.smtm.menus.Menu;
-import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,8 +78,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return isKorean == user.isKorean &&
-                Objects.equals(userId, user.userId) &&
+        return Objects.equals(userId, user.userId) &&
                 Objects.equals(password, user.password);
     }
 }
