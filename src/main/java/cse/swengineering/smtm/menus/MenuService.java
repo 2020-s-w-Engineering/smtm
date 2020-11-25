@@ -1,6 +1,10 @@
 package cse.swengineering.smtm.menus;
 
 import cse.swengineering.smtm.SmtmApplication;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -18,6 +22,9 @@ public class MenuService {
     private List<Diet> dietList = new ArrayList<>();
     private List<Menu> menuList = new ArrayList<>();
 
+    @Autowired
+    ResourceLoader resourceLoader;
+    
     public MenuService(MenuRepository menuRepository) {
         this.menuRepository = menuRepository;
     }
@@ -42,7 +49,9 @@ public class MenuService {
         menuList = menuRepository.findAll();
 
         final String LOCAL_DATE_REGEX = "^\\d{4}-\\d{2}-\\d{2}$";
-        File file = new File(SmtmApplication.class.getClass().getResource("/data2.txt").toURI());
+//        File file = new File(SmtmApplication.class.getClass().getResource("/data2.txt").toURI());
+        Resource resource = resourceLoader.getResource("classpath:/data2.txt");
+        File file = resource.getFile();
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line;
