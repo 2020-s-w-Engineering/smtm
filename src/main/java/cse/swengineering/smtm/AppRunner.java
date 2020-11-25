@@ -1,6 +1,5 @@
 package cse.swengineering.smtm;
 
-import cse.swengineering.smtm.menus.Main;
 import cse.swengineering.smtm.menus.Menu;
 import cse.swengineering.smtm.menus.MenuRepository;
 import cse.swengineering.smtm.menus.MenuService;
@@ -12,14 +11,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,12 +62,12 @@ public class AppRunner implements ApplicationRunner {
         menu.setId(22L);
         menuRepository.save(menu);
 
-        User donghun = new User("donghun", "1031", true);
-        donghun.getPreference().put(1L, 1);
-        donghun.getPreference().put(2L, 2);
-        donghun.getPreference().put(3L, 3);
-        donghun.getPreference().put(4L, 4);
-        donghun.getPreference().put(5L, 5);
+        User donghun = new User("qwer", "1234", true);
+        donghun.getPreferenceMap().put(1L, 1);
+        donghun.getPreferenceMap().put(2L, 2);
+        donghun.getPreferenceMap().put(3L, 3);
+        donghun.getPreferenceMap().put(4L, 4);
+        donghun.getPreferenceMap().put(5L, 5);
         userRepository.save(donghun);
     }
 }

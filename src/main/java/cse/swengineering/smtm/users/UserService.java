@@ -2,13 +2,15 @@ package cse.swengineering.smtm.users;
 
 import cse.swengineering.smtm.menus.Diet;
 import cse.swengineering.smtm.menus.Menu;
-import cse.swengineering.smtm.menus.MenuRepository;
 import cse.swengineering.smtm.menus.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Component
 public class UserService {
@@ -46,7 +48,7 @@ public class UserService {
     }
 
     public boolean setPreference(User user, Menu menu, int preference){
-        user.getPreference().put(menu.getId(), preference);
+        user.getPreferenceMap().put(menu.getId(), preference);
         userRepository.save(user);
         return true;
     }
@@ -57,9 +59,8 @@ public class UserService {
         for(Diet diet : diets){
             int sum = 0;
             int num = 0;
-            float avg = 0.0f;
             Set<Menu> menus = diet.getAllMenus();
-            Map<Long, Integer> preference = user.getPreference();
+            Map<Long, Integer> preference = user.getPreferenceMap();
             Menu[] menuArr = menus.toArray(new Menu[0]);
             for(Menu menu : menuArr){
                 if(preference.containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우
@@ -67,7 +68,7 @@ public class UserService {
                     num++;
                 }
             }
-            avg = (float)sum / num;
+            float avg = (float)sum / num;
             ret.put(diet.getDate(), avg);
         }
         return ret;

@@ -18,7 +18,7 @@ public class MenuService {
     private List<Diet> dietList = new ArrayList<>();
     private List<Menu> menuList = new ArrayList<>();
 
-    public MenuService(MenuRepository menuRepository) throws IOException, URISyntaxException {
+    public MenuService(MenuRepository menuRepository) {
         this.menuRepository = menuRepository;
     }
 

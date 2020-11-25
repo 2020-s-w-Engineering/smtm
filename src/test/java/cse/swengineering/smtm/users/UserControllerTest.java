@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import javax.servlet.http.Cookie;
 import java.util.Optional;
@@ -43,13 +42,12 @@ public class UserControllerTest {
 
     @Test
     public void loginSuccess() throws Exception {
-        User user = new User("donghun", "1031");
+        User user = new User("donghun", "1031", true);
         userRepository.save(user);
 
         mockMvc.perform(post("/users/login")
                         .param("userId", user.getUserId())
-                        .param("password", user.getPassword())
-                        .param("korean", Boolean.toString(user.isKorean())))
+                        .param("password", user.getPassword()))
                 .andExpect(status().isOk())
                 .andExpect(request().sessionAttribute("user", user))
                 .andExpect(cookie().exists("preference"))
@@ -104,6 +102,7 @@ public class UserControllerTest {
                 .param("userId", savedUser.getUserId())
                 .param("password", change.getPassword())
                 .param("korean", Boolean.toString(change.isKorean())))
+                .andExpect(request().sessionAttribute("user", change))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().string("true"));
@@ -144,7 +143,7 @@ public class UserControllerTest {
 
         Optional<User> userById = userRepository.findById(user.getId());
         User savedUser = userById.get();
-        assertThat(savedUser.getPreference().get(1L)).isEqualTo(5);
+        assertThat(savedUser.getPreferenceMap().get(1L)).isEqualTo(5);
     }
 
 

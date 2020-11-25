@@ -17,6 +17,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
+@SessionAttributes("user")
 public class UserController {
 
     private final UserService userService;
@@ -34,19 +35,17 @@ public class UserController {
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<String> processLogin(User user,
-                                               @CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieExist,
-                                               HttpSession session) throws JsonProcessingException {
-        User savedUser = userService.userAuth(user);
-        if(savedUser != null){
+                                               @CookieValue(value = "preference", required = false) String cookieExist) throws JsonProcessingException {
+        user = userService.userAuth(user);
+        if(user != null){
             ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
-            session.setAttribute("user", savedUser); // 세션에 유저 정보 설정
-            if(cookieExist.equals("empty")) {
-                Map<LocalDate, Float> preference = userService.calcPreference(savedUser); // 쿠키에 선호도 정보 저장
+            if(cookieExist == null) {
+                Map<LocalDate, Float> preference = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
                 String cookieValue = jsonToCookie(objectMapper.writeValueAsString(preference));
                 ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
                 builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
             }
-            return builder.body(String.valueOf(savedUser.isKorean()));
+            return builder.body(String.valueOf(user.isKorean()));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
@@ -59,12 +58,8 @@ public class UserController {
 
     // 회원정보변경
     @PostMapping("/update")
-    public String processUpdateInfo(User user, HttpSession session) {
-        if(userService.updateUserInfo(user)){
-            session.setAttribute("user", user);
-            return "true";
-        }
-        return "false";
+    public String processUpdateInfo(User user) {
+        return userService.updateUserInfo(user) ? "true" : "false";
     }
 
     // 사용자의 선호도 정보
@@ -75,10 +70,9 @@ public class UserController {
     
     // 선호도 기입
     @PostMapping("/preference")
-    public String setPreference(@RequestParam("id") Menu menu,
-                                @RequestParam int preference,
-                                HttpSession session){
-        User user = (User) session.getAttribute("user");
+    public String setPreference(User user,
+                                @RequestParam("id") Menu menu,
+                                @RequestParam int preference){
         return userService.setPreference(user, menu, preference) ? "true" : "false";
     }
 

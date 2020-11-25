@@ -18,7 +18,7 @@ public class User {
     private String password;
     private boolean isKorean; // rest api로 날라갈 때는 korean으로 날라간다
     @ElementCollection(fetch = FetchType.EAGER)
-    private Map<Long, Integer> preference = new HashMap<>();
+    private Map<Long, Integer> preferenceMap = new HashMap<>();
 
     public User() {
     }
@@ -33,12 +33,12 @@ public class User {
         this(userId, password, false);
     }
 
-    public Map<Long, Integer> getPreference() {
-        return preference;
+    public Map<Long, Integer> getPreferenceMap() {
+        return preferenceMap;
     }
 
-    public void setPreference(Map<Long, Integer> preference) {
-        this.preference = preference;
+    public void setPreferenceMap(Map<Long, Integer> preference) {
+        this.preferenceMap = preference;
     }
 
     public Long getId() {

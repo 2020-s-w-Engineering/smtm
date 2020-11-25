@@ -40,7 +40,7 @@ class Register extends React.Component {
         api.post('/register', null, { params: {
             userId : this.state.username,
             password : this.state.password,
-            isKorean : this.state.language
+            korean : this.state.language
         }}).then(function (response) {
             console.log(response);
             if (response.status === 200) {
