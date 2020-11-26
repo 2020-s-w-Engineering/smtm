@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -50,10 +50,19 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
+    @GetMapping("/logout")
+    public void processLogout(SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
+    }
+
     // 회원가입
     @PostMapping("/register")
-    public String processRegister(User user) {
-        return userService.updateUserInfo(user) ? "true" : "false";
+    public String processRegister(User user, SessionStatus sessionStatus) {
+        if(userService.updateUserInfo(user)){
+            sessionStatus.setComplete();
+            return "true";
+        }
+        return "false";
     }
 
     // 회원정보변경
@@ -64,8 +73,8 @@ public class UserController {
 
     // 사용자의 선호도 정보
     @GetMapping("/preference")
-    public String getPreference(@CookieValue(value = "preference", required = false, defaultValue = "empty") String cookieValue){
-        return cookieValue.equals("empty") ? "false" : cookieToJson(cookieValue);
+    public String getPreference(@CookieValue(value = "preference", required = false) String cookieValue){
+        return cookieValue == null ? "false" : cookieToJson(cookieValue);
     }
     
     // 선호도 기입
