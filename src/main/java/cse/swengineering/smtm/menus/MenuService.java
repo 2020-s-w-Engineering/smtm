@@ -1,6 +1,10 @@
 package cse.swengineering.smtm.menus;
 
 import cse.swengineering.smtm.SmtmApplication;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5a8a1c7f605c9002b52e548a1468ed9111e5a330
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
