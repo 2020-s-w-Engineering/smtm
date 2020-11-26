@@ -62,16 +62,19 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "781kcal",
             "menus": [
                 {
+                    "id": 9,
                     "korName": "연근조림",
                     "engName": "Lotus Root In Soy Sauce",
                     "img": "////"
                 },
                 {
+                    "id": 1,
                     "korName": "김치",
                     "engName": "Kimchi",
                     "img": "////"
                 },
                 {
+                    "id": 21,
                     "korName": "쌀밥",
                     "engName": "Rice",
                     "img": "////"
@@ -82,18 +85,21 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "709kcal",
             "menus": [
                 {
-                    "korName": "식빵과 쨈",
-                    "engName": "Bread And Jam",
-                    "img": "////"
-                },
-                {
+                    "id": 10,
                     "korName": "씨리얼",
                     "engName": "Cereal",
                     "img": "////"
                 },
                 {
+                    "id": 12,
                     "korName": "브라우니",
                     "engName": "Brownie",
+                    "img": "////"
+                },
+                {
+                    "id": 11,
+                    "korName": "식빵과 쨈",
+                    "engName": "Bread And Jam",
                     "img": "////"
                 }
             ]
@@ -104,18 +110,21 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "806kcal",
             "menus": [
                 {
+                    "id": 1,
                     "korName": "김치",
                     "engName": "Kimchi",
                     "img": "////"
                 },
                 {
-                    "korName": "쌀밥",
-                    "engName": "Rice",
+                    "id": 17,
+                    "korName": "미역줄기볶음",
+                    "engName": "Sauteed Seaweed",
                     "img": "////"
                 },
                 {
-                    "korName": "미역줄기볶음",
-                    "engName": "Sauteed Seaweed",
+                    "id": 21,
+                    "korName": "쌀밥",
+                    "engName": "Rice",
                     "img": "////"
                 }
             ]
@@ -130,18 +139,21 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "806kcal",
             "menus": [
                 {
-                    "korName": "김치",
-                    "engName": "Kimchi",
-                    "img": "////"
-                },
-                {
+                    "id": 19,
                     "korName": "연두부찜",
                     "engName": "Steamed Soft Bean Curd",
                     "img": "////"
                 },
                 {
+                    "id": 18,
                     "korName": "기장밥",
                     "engName": "Millet Rice",
+                    "img": "////"
+                },
+                {
+                    "id": 1,
+                    "korName": "김치",
+                    "engName": "Kimchi",
                     "img": "////"
                 }
             ]
@@ -150,7 +162,63 @@ Chungnam National University, 2020 S/W Engineering
             "calories": null,
             "menus": []
         }
-    }
+    },
+    "allMenus": [
+        {
+            "id": 10,
+            "korName": "씨리얼",
+            "engName": "Cereal",
+            "img": "////"
+        },
+        {
+            "id": 19,
+            "korName": "연두부찜",
+            "engName": "Steamed Soft Bean Curd",
+            "img": "////"
+        },
+        {
+            "id": 18,
+            "korName": "기장밥",
+            "engName": "Millet Rice",
+            "img": "////"
+        },
+        {
+            "id": 9,
+            "korName": "연근조림",
+            "engName": "Lotus Root In Soy Sauce",
+            "img": "////"
+        },
+        {
+            "id": 1,
+            "korName": "김치",
+            "engName": "Kimchi",
+            "img": "////"
+        },
+        {
+            "id": 12,
+            "korName": "브라우니",
+            "engName": "Brownie",
+            "img": "////"
+        },
+        {
+            "id": 17,
+            "korName": "미역줄기볶음",
+            "engName": "Sauteed Seaweed",
+            "img": "////"
+        },
+        {
+            "id": 21,
+            "korName": "쌀밥",
+            "engName": "Rice",
+            "img": "////"
+        },
+        {
+            "id": 11,
+            "korName": "식빵과 쨈",
+            "engName": "Bread And Jam",
+            "img": "////"
+        }
+    ]
 }
 ```
 - 메뉴 이미지 요청
