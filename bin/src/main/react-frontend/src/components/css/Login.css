@@ -1,0 +1,75 @@
+#homeline{
+    padding: 20%;
+    margin-left: -10%;
+
+}
+
+#homeLog{
+    text-align: center;
+    padding-top: 3%;
+}
+
+#homeUsername {
+    padding:0%;
+    margin-top: -20%;
+    margin-left: 10%;
+}
+
+#homePassword {
+    padding:0%;
+    margin-top: 10%;
+    margin-left: 10%;
+}
+
+#Language {
+    margin-left: 10%;
+}
+
+#button1 {
+	width:220px;
+	  height: 40px;
+	  color:rgb(3, 3, 3);
+	  background: hsl(252, 41%, 84%);
+	  font-size: 20px;
+	  border:none;
+	  border-radius: 30px;
+	  box-shadow: 0 4px 16px #ffffff;
+	  transition:0.2s;
+	  position: absolute;
+	  left:center;
+	  top:center;
+      transform: translate(110%,-145%);
+      text-align: center;
+      margin-top: 22%;
+      margin-left: -20%;
+  }
+#button1:hover{
+	  background: hsl(252, 41%, 84%);
+	  cursor: pointer;
+	  box-shadow: 0 2px 4px rgba(188, 122, 238, 0.6);
+  }
+
+
+  #button2 {
+	width:220px;
+	  height: 40px;
+	  color:rgb(3, 3, 3);
+	  background: hsl(252, 41%, 84%);
+	  font-size: 20px;
+	  border:none;
+	  border-radius: 30px;
+	  box-shadow: 0 4px 16px #ffffff;
+	  transition:0.2s;
+	  position: absolute;
+	  left:center;
+	  top:center;
+      transform: translate(110%,-145%);
+      text-align: center;
+      margin-top: 22%;
+      margin-left: -20%;
+  }
+#button2:hover{
+	  background: hsl(252, 41%, 84%);
+	  cursor: pointer;
+	  box-shadow: 0 2px 4px rgba(188, 122, 238, 0.6);
+  }

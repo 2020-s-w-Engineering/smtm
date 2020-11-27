@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './css/MyPage.css'
 class MyPage extends React.Component {
     constructor(props) {
         super(props);
@@ -15,32 +15,26 @@ class MyPage extends React.Component {
         }
     }
 
-    /* ModifyClick(e) {
-        // Register
-        e.preventDefault();
-        console.log(this.state.language);
-        const axios = require('axios').default;            
-    } */
-
     render() {
         console.log(this.state.userInfo);
         return(
-            <div> 
-              <div className ="box">             
-              </div>             
-                    <div>
-                        <center>
-                        <h3>My Page</h3>
-                            <img src="user.png" witdh = "100px" height="100px"></img>
-                        <h4> {this.state.userInfo[0].userId}님</h4>
-                        </center>
+            <div>              
+                    <div id = "home">
+                        <h2>My Page</h2> 
                     </div>
-                    
-                    <center>
-                        <div>Language : {this.state.isKorean}</div>
-                        <div><button>수정</button></div>
-                        <div><h2><button>Logout</button></h2></div>
-                    </center>          
+                    <div id = "user">
+                    <img src="user.png" witdh = "100px" height="100px"></img>
+                        <h4> {this.state.userInfo[0].userId}님</h4>
+                    </div>
+                   
+                        <div id = "Language">Language : {this.state.isKorean}</div>
+                        <div id = "button1">수정</div>
+                        
+                        <center>
+                        <div id = "button2">Logout</div>
+                        </center>
+                        
+                             
             </div>
         );
     }
