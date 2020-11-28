@@ -1,7 +1,6 @@
 package cse.swengineering.smtm.menus;
 
 import cse.swengineering.smtm.SmtmApplication;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -24,7 +23,7 @@ public class MenuService {
 
     @Autowired
     ResourceLoader resourceLoader;
-    
+
     public MenuService(MenuRepository menuRepository) {
         this.menuRepository = menuRepository;
     }

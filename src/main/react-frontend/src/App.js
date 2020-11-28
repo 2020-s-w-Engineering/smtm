@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css'
+import './components/css/Login.css';
 import './components/css/componentCss.css';
+import './components/css/MyPage.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Calendar from './components/Calendar'

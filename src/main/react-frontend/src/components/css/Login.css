@@ -1,0 +1,105 @@
+#homeline{
+	text-align: center;
+	margin-top: 25%;
+	margin-left: -40%;
+	font-weight: 100%;
+
+}
+
+#homeLog{
+    text-align: center;
+    padding-top: 3%;
+}
+
+#homePw{
+	text-align: center;
+    padding-top: 3%;
+}
+
+#homeUsername {
+    margin-top: 10%;
+	margin-left: 13%;
+}
+
+#homePassword {
+    margin-top: 10%;
+    margin-left: 13%;
+}
+
+#text{
+	margin-top: 9%;
+	margin-left: -23%;
+	font-size: medium;
+}
+
+#Language {
+    margin-top: 10%;
+    margin-left: 13%;
+}
+
+.button1 {
+	width:220px;
+	  height: 40px;
+	  color:rgb(255, 255, 255);
+	  background: hsl(204, 59%, 58%);
+	  font-size: 25px;
+	  font-weight: bold;
+	  border: 2px solid hsl(204, 80%, 44%);
+	  border-radius: 30px;
+	  box-shadow: 0 4px 16px #ffffff;
+	  text-align: center;
+	  margin-top: 15%;
+    
+  }
+.button1:hover{
+	background: hsla(204, 41%, 50%, 0.863);
+	cursor: pointer;
+	box-shadow: 0 2px 4px rgba(176, 175, 177, 0.6);
+  }
+
+
+.button2 {
+	width:220px;
+	  height: 40px;
+	  color:rgb(255, 255, 255);
+	  background: hsl(204, 59%, 58%);
+	  font-size: 25px;
+	  font-weight: bold;
+	  border: 2px solid hsl(204, 80%, 44%);
+	  border-radius: 30px;
+	  box-shadow: 0 4px 16px #ffffff;
+	  text-align: center;
+	  margin-top: 40%;
+ 
+  }
+.button2:hover{
+	  background: hsla(204, 41%, 50%, 0.863);
+	  cursor: pointer;
+	  box-shadow: 0 2px 4px rgba(176, 175, 177, 0.6);
+  }
+
+  input[type='radio'] {
+    -webkit-appearance:none;
+    width:16px;
+    height:16px;
+    border:2px solid hsla(204, 41%, 50%, 0.863);
+     border-radius:50%;
+    outline:none;
+    background:#ffffff;
+  }
+ 
+  input[type='radio']:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 17% auto;  
+    border-radius:50%;  
+  }
+  input[type='radio']:checked:before {
+  	background:#3c77e6;
+  }
+
+.underline {
+	text-decoration: underline blue;
+	}
