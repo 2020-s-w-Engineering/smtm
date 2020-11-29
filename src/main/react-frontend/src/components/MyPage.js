@@ -19,7 +19,7 @@ class MyPage extends React.Component {
         console.log(this.state.userInfo);
         return(
             <div>              
-                    <div id = "home">
+                    <div id = "home1">
                         <h2>My Page</h2> 
                     </div>
                     <div id = "user">

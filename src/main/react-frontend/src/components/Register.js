@@ -63,23 +63,30 @@ class Register extends React.Component {
         }
         return(
             <div>
-                <div id="homeline">
+                <div id="homeline2">
                 <h1>Register</h1>
                 </div>
                 
                 <form onSubmit={this.registerClick.bind(this)}>
                     <div id="homeUsername">
                     <h5>Username</h5>
-                    <p class = "underline">
-                    <input type='text' name='username' value={this.state.username} placeholder='username' required onChange={this.infoChange.bind(this)} />
+                    <p id = "underline">
+                    <input type='text' name='username' value={this.state.username} required onChange={this.infoChange.bind(this)} />
                     </p>  
-                       
-                        
+                    <center>
+                    <div id="topline2"></div>
+                    </center>
+                      
                     </div>
                     <div id="homePassword">
                         <h5>Password</h5>
-                        <input type='password' name='password' value={this.state.password} placeholder='password' required onChange={this.infoChange.bind(this)} />
+                        <input type='password' name='password' value={this.state.password}  required onChange={this.infoChange.bind(this)} />
                     </div>
+
+                    <center>
+                    <div id="underline2"></div>
+                    </center>
+
                     <div id="Language">
                         
                         <div id = "text">

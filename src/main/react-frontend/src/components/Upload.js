@@ -8,13 +8,6 @@ class Upload extends React.Component {
         };
     }
 
-    ModifyClick(e) {
-        // Register
-        e.preventDefault();
-        console.log(this.state.language);
-        const axios = require('axios').default;            
-    }
-
     render() {
         return(
             <div>

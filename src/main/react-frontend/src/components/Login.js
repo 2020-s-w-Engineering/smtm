@@ -57,20 +57,34 @@ class LogIn extends React.Component {
             return <Redirect to='/'></Redirect>
         }
         return(
-            <div>
-                <div id="homeline">
+            <div>         
+                <div id="homeline1">
                 <h1>Log In</h1>
                 </div>
-                
+           
                 <form onSubmit={this.logInClick.bind(this)}>
                 <div id="homeUsername">
                         <h5>Username</h5>
-                        <input type='text' name='username' value={this.state.username} placeholder='username' required onChange={this.infoChange.bind(this)} />
+                        <div id="boxstyle">
+                        <input type="text" name='username' value={this.state.username} required onChange={this.infoChange.bind(this)} />
+                        </div>  
                     </div>
-                    <div id="homePassword">
 
+                    <center>
+                    <div id="topline1"></div>
+                    </center>
+
+                    <div id="homePassword">
                         <h5>Password</h5>
-                        <input type='password' name='password' value={this.state.password} placeholder='password' required onChange={this.infoChange.bind(this)} />
+                        <div id="boxstyle">
+                        <input type='password' name='password' value={this.state.password} required onChange={this.infoChange.bind(this)} />
+                        </div>
+                    <center>
+                    <div id="underline1"></div>
+                    </center>
+                        
+                      
+                        
                     </div>
                     <center>
                     <button type='submit' class="button2">Log In</button>
