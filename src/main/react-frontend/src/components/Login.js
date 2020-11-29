@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import './css/Login.css';
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -57,17 +58,25 @@ class LogIn extends React.Component {
         }
         return(
             <div>
+                <div id="homeline">
                 <h1>Log In</h1>
+                </div>
+                
                 <form onSubmit={this.logInClick.bind(this)}>
-                    <div>
+                <div id="homeUsername">
                         <h5>Username</h5>
                         <input type='text' name='username' value={this.state.username} placeholder='username' required onChange={this.infoChange.bind(this)} />
                     </div>
-                    <div>
+                    <div id="homePassword">
+
                         <h5>Password</h5>
                         <input type='password' name='password' value={this.state.password} placeholder='password' required onChange={this.infoChange.bind(this)} />
                     </div>
-                    <input type='submit' value='Log In'/>
+                    <center>
+                    <button type='submit' class="button2">Log In</button>
+                    </center>
+                    
+                   
                 </form>
             </div>
         );

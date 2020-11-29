@@ -63,7 +63,7 @@ class AfterLogIn extends React.Component{
          return (
          <div id="userInButton" align="right" >
              <div class="button" id='menu'>
-             <Link style={{ textDecoration: 'none' }} to='/menu'><h2>Menu</h2></Link>
+             <Link style={{ textDecoration: 'none' }} to='/calendar'><h2>Menu</h2></Link>
              </div>
  
              <div class="button" id='myPage'>

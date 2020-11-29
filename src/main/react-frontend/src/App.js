@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import './App.css'
+import './components/css/Login.css';
 import './components/css/componentCss.css';
+import './components/css/MyPage.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import Calendar from './components/Calendar'
@@ -16,7 +18,7 @@ class App extends React.Component{
     super(props);
     this.state={
       isLoggedIn : false,
-      userInfo: null,
+      userInfo: null
     }
   }
   
@@ -34,7 +36,7 @@ class App extends React.Component{
                   <Home userInfo={this.state.userInfo} />
                 </Route>
 
-                <Route path="/menu">
+                <Route path="/calendar">
                   <Calendar></Calendar>
                 </Route>
 
