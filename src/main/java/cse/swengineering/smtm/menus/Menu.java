@@ -1,5 +1,7 @@
 package cse.swengineering.smtm.menus;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +20,7 @@ public class Menu {
     private String engName;
 
     @Transient
+    @JsonIgnore
     private List<byte[]> img = new ArrayList<>();
 
     @Transient

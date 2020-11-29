@@ -51,18 +51,6 @@ public class AppRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         menuService.init();
-
-        Resource resource = resourceLoader.getResource("classpath:/images/수육국밥.jpg");
-        BufferedImage bImage = ImageIO.read(resource.getFile());
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, "jpg", bos);
-        byte [] data = bos.toByteArray();
-        Optional<Menu> byId = menuRepository.findById(41L);
-        Menu menu = byId.get();
-        menu.getImg().add(data);
-        Set<Menu> menus = menuService.getDietList().get(0).getBreakfastMains().get("A").getMenus();
-        menus.add(menu);
-
         User donghun = new User("qwer", "1234", true);
         donghun.getPreferenceMap().put(1L, 1);
         donghun.getPreferenceMap().put(2L, 2);
@@ -70,5 +58,6 @@ public class AppRunner implements ApplicationRunner {
         donghun.getPreferenceMap().put(4L, 4);
         donghun.getPreferenceMap().put(5L, 5);
         userRepository.save(donghun);
+
     }
 }

@@ -1,5 +1,6 @@
 package cse.swengineering.smtm.menus;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -53,6 +54,7 @@ public class Diet {
         this.date = date;
     }
 
+    @JsonIgnore
     public Set<Menu> getAllMenus() {
         Set<Menu> allMenus = new HashSet<Menu>();
         Main breakfastMainA = this.getBreakfastMains().get("A");
