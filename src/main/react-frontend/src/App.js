@@ -11,6 +11,7 @@ import MyPage from './components/MyPage';
 import Home from './components/Home';
 import ClickDate from './components/ClickDate';
 import Menu from './components/Menu'; // Test 성복
+import MenuUpload from './components/MenuUpload';
 
 
 class App extends React.Component{
@@ -36,9 +37,7 @@ class App extends React.Component{
                   <Home userInfo={this.state.userInfo} />
                 </Route>
 
-                <Route path="/calendar">
-                  <Calendar></Calendar>
-                </Route>
+                <Route path='/calendar' component={Calendar} />
 
                 <Route path="/myPage">
                   <MyPage userInfo={this.state.userInfo} />
@@ -53,6 +52,14 @@ class App extends React.Component{
                 <Route path='/menu'>
                   <Menu/>
                 </Route>
+
+                <Route path='/menuupload'>
+                  <MenuUpload/>
+                </Route>
+
+                <Route path='/calendar' component={Calendar} />
+                <Route path='/clickDate' component={ClickDate}/>
+                {/*캘린더 테스트용, 로그인 귀찮아서*/}
                 
                 <Route exact path="/">
                   <Home userInfo={this.state.userInfo}/>
