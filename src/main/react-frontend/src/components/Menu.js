@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import default_photo from '../images/default_photo.png';
 
 class Menu extends React.Component {
     constructor(props){
@@ -27,16 +28,34 @@ class Menu extends React.Component {
         })
     }
 
-    render() {
+    menuImg() {
         if (this.state.imgData !== "") {
             var base64img = 'data:image/png;base64,' +  this.state.imgData; //base64 encoding 형식의 문자열로 바꿈
             console.log(base64img);
             console.log(typeof base64img);
+            return <img src={base64img} alt="" />
+        } else {
+            return <img src={default_photo} alt="" />
         }
+    }
+
+    render() {
         return(
             <>
-            <button onClick={this.menuClick.bind(this)}>Menu</button>
-            <img src={base64img} alt=""/>
+            <h1>Menu Image</h1>
+            <div>
+                1. <input type="radio" name='score1' value="score1"></input> 
+                2. <input type="radio" name='score2' value="score2"></input> 
+                3. <input type="radio" name="score3" value="score 3"></input> 
+                4. <input type="radio" name="score4" value="score 4"></input>
+                5. <input type="radio" name="score5" value="score 5"></input>
+                <button>선호도 저장</button>
+            </div>
+            <div>
+                <button onClick={this.menuClick.bind(this)}>이미지 테스트용</button>
+                {this.menuImg()}
+            </div>
+            <button>사진 업로드</button>
             </>
         );
     }

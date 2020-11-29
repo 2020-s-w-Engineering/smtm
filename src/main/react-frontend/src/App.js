@@ -11,6 +11,7 @@ import MyPage from './components/MyPage';
 import Home from './components/Home';
 import ClickDate from './components/ClickDate';
 import Menu from './components/Menu'; // Test 성복
+import MenuUpload from './components/MenuUpload';
 
 
 class App extends React.Component{
@@ -52,6 +53,10 @@ class App extends React.Component{
                 <>
                 <Route path='/menu'>
                   <Menu/>
+                </Route>
+
+                <Route path='/menuupload'>
+                  <MenuUpload/>
                 </Route>
                 
                 <Route exact path="/">
