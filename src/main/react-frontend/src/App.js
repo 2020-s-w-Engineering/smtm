@@ -36,7 +36,7 @@ class App extends React.Component{
                   <Home userInfo={this.state.userInfo} />
                 </Route>
 
-                <Route path="/menu">
+                <Route path="/calendar">
                   <Calendar></Calendar>
                 </Route>
 
