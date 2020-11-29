@@ -1,19 +1,13 @@
 package cse.swengineering.smtm.menus;
 
-import cse.swengineering.smtm.SmtmApplication;
-<<<<<<< HEAD
-=======
-
->>>>>>> 5a8a1c7f605c9002b52e548a1468ed9111e5a330
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.*;
@@ -32,7 +26,7 @@ public class MenuService {
         this.menuRepository = menuRepository;
     }
 
-    private List<Diet> getDietList() {
+    public List<Diet> getDietList() {
         return dietList;
     }
 
@@ -146,11 +140,34 @@ public class MenuService {
             diet.setDinnerMains(main);
         }
 
+//        setImage();
         // debug
 //        for(Diet diet : dietList){
 //            diet.print();
 //        }
 
+    }
+
+    private void setImage() throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:/images");
+        File imageDir = resource.getFile();
+        File[] files = imageDir.listFiles();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        for(File file : files) {
+            BufferedImage bImage = ImageIO.read(file);
+            ImageIO.write(bImage, "jpg", bos);
+            byte [] data = bos.toByteArray();
+            String menuName = file.getName().substring(0, file.getName().indexOf("."));
+            for(Diet diet : dietList){
+                Set<Menu> allMenus = diet.getAllMenus();
+                for(Menu menu : allMenus){
+                    if(menu.getKorName().contains(menuName)) {
+                        menu.getImg().add(data);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private Menu getMenu(String korName) {

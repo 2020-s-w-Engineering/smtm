@@ -60,11 +60,13 @@ public class UserService {
             int sum = 0;
             int num = 0;
             Set<Menu> menus = diet.getAllMenus();
-            Map<Long, Integer> preference = user.getPreferenceMap();
+            Map<Long, Integer> preferenceMap = user.getPreferenceMap();
             Menu[] menuArr = menus.toArray(new Menu[0]);
             for(Menu menu : menuArr){
-                if(preference.containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우
-                    sum = sum + preference.get(menu.getId());
+                if(preferenceMap.containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우
+                    int preference = preferenceMap.get(menu.getId());
+                    menu.setPreference(preference);
+                    sum = sum + preference;
                     num++;
                 }
             }

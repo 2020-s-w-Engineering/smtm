@@ -17,6 +17,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class AppRunner implements ApplicationRunner {
@@ -53,14 +55,13 @@ public class AppRunner implements ApplicationRunner {
         Resource resource = resourceLoader.getResource("classpath:/images/수육국밥.jpg");
         BufferedImage bImage = ImageIO.read(resource.getFile());
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, "jpg", bos );
+        ImageIO.write(bImage, "jpg", bos);
         byte [] data = bos.toByteArray();
-        Menu menu = new Menu();
-        menu.setKorName("수육국밥");
-        menu.setEngName("kukBAB");
-        menu.setImg(data);
-        menu.setId(22L);
-        menuRepository.save(menu);
+        Optional<Menu> byId = menuRepository.findById(41L);
+        Menu menu = byId.get();
+        menu.getImg().add(data);
+        Set<Menu> menus = menuService.getDietList().get(0).getBreakfastMains().get("A").getMenus();
+        menus.add(menu);
 
         User donghun = new User("qwer", "1234", true);
         donghun.getPreferenceMap().put(1L, 1);

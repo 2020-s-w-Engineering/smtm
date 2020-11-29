@@ -49,8 +49,6 @@ Chungnam National University, 2020 S/W Engineering
 
 ### Menu REST API
 
-각각의 메뉴에 대한 사용자의 선호도 정보를 하루 식단 정보 요청시 같이 전달
-
 - 하루 식단 정보
 <br>요청 메소드: `GET`
 <br>요청 URL: `/menus/{yyyy-MM-dd}`
@@ -67,7 +65,7 @@ Chungnam National University, 2020 S/W Engineering
                     "id": 9,
                     "korName": "연근조림",
                     "engName": "Lotus Root In Soy Sauce",
-                    "img": "////",
+                    "img": "////"
                 },
                 {
                     "id": 1,
