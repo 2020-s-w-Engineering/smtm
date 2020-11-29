@@ -140,7 +140,7 @@ public class MenuService {
             diet.setDinnerMains(main);
         }
 
-//        setImage();
+        setImage();
         // debug
 //        for(Diet diet : dietList){
 //            diet.print();
@@ -157,7 +157,7 @@ public class MenuService {
             BufferedImage bImage = ImageIO.read(file);
             ImageIO.write(bImage, "jpg", bos);
             byte [] data = bos.toByteArray();
-            String menuName = file.getName().substring(0, file.getName().indexOf("."));
+            String menuName = file.getName().substring(0, file.getName().indexOf(".")-1);
             for(Diet diet : dietList){
                 Set<Menu> allMenus = diet.getAllMenus();
                 for(Menu menu : allMenus){
