@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './css/componentCss.css';
 import CalendarAPI from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
@@ -27,6 +28,19 @@ class Calendar extends React.Component{
         this.setState({
             fullDateFormat : _fulldateformat
         })
+        const api = axios.create({
+            baseURL: 'http://localhost:8080/menus'
+        })
+        var fullDateUrl='/'+_fulldateformat;
+        console.log(fullDateUrl)
+        api.get(fullDateUrl, null).then(function (response) {
+            console.log(response);
+            if (response.status === 200) {
+                console.log(response);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     render(){

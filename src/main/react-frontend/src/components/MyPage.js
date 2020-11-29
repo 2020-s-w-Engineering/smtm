@@ -10,7 +10,7 @@ class MyPage extends React.Component {
     }
 
     static getDerivedStateFromProps(nextProps, nextState) {
-        if(nextProps.userInfo[1] != true){
+        if(nextProps.userInfo[1] !== true){
         return {isKorean : "English"};
         }
     }
@@ -23,7 +23,7 @@ class MyPage extends React.Component {
                         <h2>My Page</h2> 
                     </div>
                     <div id = "user">
-                    <img src="user.png" witdh = "100px" height="100px"></img>
+                    <img alt="user img" src="user.png" witdh = "100px" height="100px"></img>
                         <h4> {this.state.userInfo[0].userId}님</h4>
                     </div>
                    
