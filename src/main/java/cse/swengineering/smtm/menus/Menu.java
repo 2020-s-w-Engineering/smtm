@@ -1,7 +1,11 @@
 package cse.swengineering.smtm.menus;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,8 +18,13 @@ public class Menu {
     private String korName;
     @Basic(optional = false)
     private String engName;
-    @Lob
-    private byte[] img;
+
+    @Transient
+    @JsonIgnore
+    private List<byte[]> img = new ArrayList<>();
+
+    @Transient
+    private int preference;
 
     public Menu() {
     }
@@ -23,6 +32,14 @@ public class Menu {
     public Menu(String korName, String engName) {
         this.korName = korName;
         this.engName = engName;
+    }
+
+    public int getPreference() {
+        return preference;
+    }
+
+    public void setPreference(int preference) {
+        this.preference = preference;
     }
 
     public Long getId() {
@@ -48,11 +65,11 @@ public class Menu {
         this.engName = engName;
     }
 
-    public byte[] getImg() {
+    public List<byte[]> getImg() {
         return img;
     }
 
-    public void setImg(byte[] img) {
+    public void setImg(List<byte[]> img) {
         this.img = img;
     }
 

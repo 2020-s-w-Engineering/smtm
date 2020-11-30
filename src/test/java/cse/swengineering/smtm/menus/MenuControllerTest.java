@@ -64,7 +64,7 @@ public class MenuControllerTest {
         Menu menu = new Menu();
         menu.setKorName("수육국밥");
         menu.setEngName("kukBAB");
-        menu.setImg(data);
+        menu.getImg().add(data);
         menu.setId(22L);
         menuRepository.save(menu);
 

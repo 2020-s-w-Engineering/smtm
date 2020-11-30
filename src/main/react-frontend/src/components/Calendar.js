@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './css/componentCss.css';
 import CalendarAPI from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
@@ -10,7 +11,9 @@ class Calendar extends React.Component{
         this.state = {
             month : "",
             day : "",
-            fullDateFormat : ""
+            fullDateFormat : "",
+            pageChangeFlag : 0,
+            responseData : ""
         };
     }
     
@@ -24,16 +27,34 @@ class Calendar extends React.Component{
         var valueArray = valueToString.split(" ")
         var _fulldateformat = valueArray[3]+"-"+this.getMonthValue(valueArray[1])+"-"+valueArray[2]
         alert(_fulldateformat)
-        this.setState({
-            fullDateFormat : _fulldateformat
+        const api = axios.create({
+            baseURL: 'http://localhost:8080/menus'
         })
+        var fullDateUrl='/'+_fulldateformat;
+        var getdate_this=this;
+        console.log(fullDateUrl)
+        api.get(fullDateUrl, null).then(function (response) {
+            if (response.status === 200) {
+                //console.log(response.data)
+                //console.log(response.data.breakfastMains);
+                //console.log(response.data.breakfastMains.A);
+                getdate_this.setState({
+                    pageChangeFlag:1,
+                    responseData:response.data
+                })
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     render(){
-        if(this.state.fullDateFormat!=="") {
+        if(this.state.pageChangeFlag===1) {
             return <Redirect to={{
                 pathname: '/clickDate',
-                state: { id: '123' }
+                state : {
+                    responseData : this.state.responseData
+                }
             }}></Redirect>
         }
         return (
@@ -46,6 +67,5 @@ class Calendar extends React.Component{
         );
     }
 }
-
 
 export default Calendar;

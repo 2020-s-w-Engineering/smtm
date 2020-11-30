@@ -33,3 +33,9 @@
 
 a:visited{color:black}
 a:link{color:black}
+
+#clickDate{
+    overflow:auto;
+    width:360px;
+    height:640px;
+}

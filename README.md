@@ -49,8 +49,6 @@ Chungnam National University, 2020 S/W Engineering
 
 ### Menu REST API
 
-각각의 메뉴에 대한 사용자의 선호도 정보를 하루 식단 정보 요청시 같이 전달
-
 - 하루 식단 정보
 <br>요청 메소드: `GET`
 <br>요청 URL: `/menus/{yyyy-MM-dd}`
@@ -64,22 +62,22 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "781kcal",
             "menus": [
                 {
-                    "id": 9,
-                    "korName": "연근조림",
-                    "engName": "Lotus Root In Soy Sauce",
-                    "img": "////",
-                },
-                {
                     "id": 1,
                     "korName": "김치",
                     "engName": "Kimchi",
-                    "img": "////"
+                    "preference": 0
                 },
                 {
-                    "id": 21,
-                    "korName": "쌀밥",
-                    "engName": "Rice",
-                    "img": "////"
+                    "id": 41,
+                    "korName": "수육국밥",
+                    "engName": "not yet",
+                    "preference": 0
+                },
+                {
+                    "id": 9,
+                    "korName": "연근조림",
+                    "engName": "Lotus Root In Soy Sauce",
+                    "preference": 0
                 }
             ]
         },
@@ -87,22 +85,22 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "709kcal",
             "menus": [
                 {
-                    "id": 10,
-                    "korName": "씨리얼",
-                    "engName": "Cereal",
-                    "img": "////"
+                    "id": 11,
+                    "korName": "식빵과 쨈",
+                    "engName": "Bread And Jam",
+                    "preference": 0
                 },
                 {
                     "id": 12,
                     "korName": "브라우니",
                     "engName": "Brownie",
-                    "img": "////"
+                    "preference": 0
                 },
                 {
-                    "id": 11,
-                    "korName": "식빵과 쨈",
-                    "engName": "Bread And Jam",
-                    "img": "////"
+                    "id": 10,
+                    "korName": "씨리얼",
+                    "engName": "Cereal",
+                    "preference": 0
                 }
             ]
         }
@@ -115,19 +113,19 @@ Chungnam National University, 2020 S/W Engineering
                     "id": 1,
                     "korName": "김치",
                     "engName": "Kimchi",
-                    "img": "////"
+                    "preference": 0
                 },
                 {
                     "id": 17,
                     "korName": "미역줄기볶음",
                     "engName": "Sauteed Seaweed",
-                    "img": "////"
+                    "preference": 0
                 },
                 {
                     "id": 21,
                     "korName": "쌀밥",
                     "engName": "Rice",
-                    "img": "////"
+                    "preference": 0
                 }
             ]
         },
@@ -141,22 +139,22 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "806kcal",
             "menus": [
                 {
-                    "id": 19,
-                    "korName": "연두부찜",
-                    "engName": "Steamed Soft Bean Curd",
-                    "img": "////"
+                    "id": 1,
+                    "korName": "김치",
+                    "engName": "Kimchi",
+                    "preference": 0
                 },
                 {
                     "id": 18,
                     "korName": "기장밥",
                     "engName": "Millet Rice",
-                    "img": "////"
+                    "preference": 0
                 },
                 {
-                    "id": 1,
-                    "korName": "김치",
-                    "engName": "Kimchi",
-                    "img": "////"
+                    "id": 19,
+                    "korName": "연두부찜",
+                    "engName": "Steamed Soft Bean Curd",
+                    "preference": 0
                 }
             ]
         },
@@ -164,73 +162,15 @@ Chungnam National University, 2020 S/W Engineering
             "calories": null,
             "menus": []
         }
-    },
-    "allMenus": [
-        {
-            "id": 10,
-            "korName": "씨리얼",
-            "engName": "Cereal",
-            "img": "////"
-        },
-        {
-            "id": 19,
-            "korName": "연두부찜",
-            "engName": "Steamed Soft Bean Curd",
-            "img": "////"
-        },
-        {
-            "id": 18,
-            "korName": "기장밥",
-            "engName": "Millet Rice",
-            "img": "////"
-        },
-        {
-            "id": 9,
-            "korName": "연근조림",
-            "engName": "Lotus Root In Soy Sauce",
-            "img": "////"
-        },
-        {
-            "id": 1,
-            "korName": "김치",
-            "engName": "Kimchi",
-            "img": "////"
-        },
-        {
-            "id": 12,
-            "korName": "브라우니",
-            "engName": "Brownie",
-            "img": "////"
-        },
-        {
-            "id": 17,
-            "korName": "미역줄기볶음",
-            "engName": "Sauteed Seaweed",
-            "img": "////"
-        },
-        {
-            "id": 21,
-            "korName": "쌀밥",
-            "engName": "Rice",
-            "img": "////"
-        },
-        {
-            "id": 11,
-            "korName": "식빵과 쨈",
-            "engName": "Bread And Jam",
-            "img": "////"
-        }
-    ]
+    }
 }
 ```
+
 - 메뉴 이미지 요청
 <br>요청 메소드: `GET`
 <br>요청 URL: `/menus/images`
 <br>요청 매개변수
 <br>`id:{메뉴아이디}`
-<br>응답 헤더
-<br>`Content-Type:"image/jpeg"`
-<br>`Content-Length:"{이미지의 크기}"`
 
 - 메뉴 이미지 업로드
 <br>요청 메소드: `POST`
