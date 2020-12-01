@@ -9,6 +9,7 @@ class LogIn extends React.Component {
         this.state = {
             username : "",
             password : "",
+            password : "",
             isLoggedIn : false
         };
     }
@@ -82,9 +83,7 @@ class LogIn extends React.Component {
                     <center>
                     <div id="underline1"></div>
                     </center>
-                        
-                      
-                        
+  
                     </div>
                     <center>
                     <button type='submit' class="button2">Log In</button>

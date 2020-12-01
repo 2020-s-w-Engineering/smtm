@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/componentCss.css';
+import './css/ClickDate.css';
 
 class ClickDate extends React.Component{
     constructor(props) {
@@ -14,37 +14,64 @@ class ClickDate extends React.Component{
     render(){
         console.log(this.state.allResponseData)
         return (
-        <div id='clickDate'>
+            <div id='scroll'>
             <div>
+            <div id="line1"></div>
+           
+           
+                <div id="date">
                 <h2>{this.state.allResponseData.date}</h2>
-                <h3>아침</h3>
-                <hr color='black' size='4'></hr>
-                <h4>Main A</h4>
+                </div>
+                <div id="headline">
+                <h2>아침</h2>
+                </div>
+                <div id="midline">
+                <div id="color1">
+                <h2>Main A</h2>
+                </div>
+                
+                
+               
                 {this.getMenus(this.state.allResponseData.breakfastMains.A)}
-                <hr></hr>
-                <h4>Main C</h4>
+                
+                <div id="color1">
+                <h2>Main C</h2>
+                </div>
                 {this.getMenus(this.state.allResponseData.breakfastMains.C)}
             </div>
+            </div>
 
-            <div>
-                <h3>점심</h3>
-                <hr color='black' size='4'></hr>
-                <h4>Main A</h4>
+            <div id="mid">
+            <div id="headline">
+                <h2>점심</h2>
+                </div>
+                <div id="midline">
+                <div id="color1">
+                <h2>Main A</h2>
+                </div>
                 {this.getMenus(this.state.allResponseData.lunchMains.A)}
-                <hr></hr>
-                <h4>Main C</h4>
+                <div id="color1">
+                <h2>Main C</h2>
+                </div>
                 {this.getMenus(this.state.allResponseData.lunchMains.C)}
             </div>
-
-            <div>
-                <h3>저녁</h3>
-                <hr color='black' size='4'></hr>
-                <h4>Main A</h4>
+           </div>
+            <div id="bt">
+            <div id="headline">
+                <h2>저녁</h2>
+                </div>
+                <div id="midline">
+                <div id="color1">
+                <h2>Main A</h2>
+                </div>
                 {this.getMenus(this.state.allResponseData.dinnerMains.A)}
-                <hr></hr>
-                <h4>Main C</h4>
+                <div id="color1">
+                <h2>Main C</h2>
+                </div>
                 {this.getMenus(this.state.allResponseData.dinnerMains.C)}
             </div>
+            <div id="line2"></div>
+        </div>
         </div>
         );
     }
@@ -58,19 +85,22 @@ class MenuList extends React.Component{
         };
     }
     render(){
+        
         var menulist=[];
         var data = this.state.main.menus;
 
         var i=0;
         while(i<data.length){
-            menulist.push(<li key={data[i].id}>
-                <a href="/">{data[i].korName}</a></li>)
+            menulist.push(<ul key={data[i].id}>
+                <a id="blank" href="/">{data[i].korName}</a></ul>)
             i=i+1;
         }
 
         return (
         <div id='MenuList'>
-            <h5>{this.state.main.calories}</h5>
+            <div id="kcal">
+            <h5>[{this.state.main.calories}]</h5>
+            </div>
             {menulist}
         </div>
         );

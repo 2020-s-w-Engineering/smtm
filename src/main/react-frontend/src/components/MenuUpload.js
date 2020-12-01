@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import './css/MenuUpload.css';
 class MenuUpload extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +29,20 @@ class MenuUpload extends React.Component {
     render() {
         return(
             <form onSubmit={this.imgUpload.bind(this)}>
-                <input type='file' required></input>
+                <center>
+                    <div id="header">
+                    <h3>업로드할 파일을 선택하세요.</h3>
+                    </div>
+                
+                <img id ="imgsize" src="album.png"></img>
+                </center>
+
+               <div> 
+               <input type='file' required></input>
+               </div>
+                
+                
+            
             </form>
         );
     }
