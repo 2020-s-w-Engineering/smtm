@@ -29,9 +29,7 @@ class ClickDate extends React.Component{
                 <div id="color1">
                 <h2>Main A</h2>
                 </div>
-                
-                
-               
+  
                 {this.getMenus(this.state.allResponseData.breakfastMains.A)}
                 
                 <div id="color1">
@@ -92,7 +90,7 @@ class MenuList extends React.Component{
         var i=0;
         while(i<data.length){
             menulist.push(<ul key={data[i].id}>
-                <a id="blank" href="/">{data[i].korName}</a></ul>)
+                <a class="blank" href="/">{data[i].korName}</a></ul>)
             i=i+1;
         }
 

@@ -11,6 +11,7 @@
 
 #home{
     text-align: center;
+    margin-top: -5%;
 }
 #home h1{
     font-size: 50px;
@@ -22,11 +23,12 @@
     height: 250px;
 }
 
-#userInButton div{
+.userInButton div{
     text-align: center;
     width: 40%;
     height: 6ex;
-    margin-right: 10px;
+    margin-top: 12%;
+    margin-left: 45%;
     border-radius: 70px;
     background-color: #F2EFEA;
 }

@@ -55,7 +55,7 @@ input[type=password]:hover {
 
 #underline1 {
 	border-bottom: 2px solid rgb(92, 167, 228);
-	border-width: 1.5px;
+	border-width: 2px;
 	margin-top: 0%;
 	margin-left: -20%;
 	width: 80%;
@@ -125,7 +125,7 @@ input[type=password]:hover {
 .button1:hover{
 	background: hsla(204, 41%, 50%, 0.863);
 	cursor: pointer;
-	box-shadow: 0 2px 4px rgba(176, 175, 177, 0.6);
+	box-shadow: 0 1px 4px rgba(231, 230, 233, 0.6);
   }
 
 

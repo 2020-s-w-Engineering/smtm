@@ -45,15 +45,20 @@ class Home extends React.Component{
 class BeforeLogIn extends React.Component{
    render(){
         return (
-        <div id="userInButton" align="right" >
+            <div>
+            <div class="userInButton" >
             <div class="button" id='login'>
             <Link style={{ textDecoration: 'none' }} to='login'><h2>LogIn</h2></Link>
             </div>
-
+        
             <div class="button" id='register'>
             <Link style={{ textDecoration: 'none' }} to='/register'><h2>Register</h2></Link>
-            </div>            
+            </div> 
+           
+                       
         </div>
+            </div>
+            
         );
     }
 }
@@ -61,7 +66,7 @@ class BeforeLogIn extends React.Component{
 class AfterLogIn extends React.Component{
     render(){
          return (
-         <div id="userInButton" align="right" >
+         <div class="userInButton"  >
              <div class="button" id='menu'>
              <Link style={{ textDecoration: 'none' }} to='/calendar'><h2>Menu</h2></Link>
              </div>

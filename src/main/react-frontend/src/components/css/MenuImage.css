@@ -21,7 +21,7 @@ text-align: center;
       margin-left: 30%;
     
   }
-.buttonMi:hover{
+  .buttonMi:hover{
 	background: hsl(216, 96%, 49%);
 	cursor: pointer;
 	box-shadow: 0 2px 4px rgba(176, 175, 177, 0.6);
