@@ -153,6 +153,7 @@ public class MenuService {
         File imageDir = resource.getFile();
         File[] files = imageDir.listFiles();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        boolean found = false;
         for(File file : files) {
             BufferedImage bImage = ImageIO.read(file);
             ImageIO.write(bImage, "jpg", bos);
@@ -161,11 +162,13 @@ public class MenuService {
             for(Diet diet : dietList){
                 Set<Menu> allMenus = diet.getAllMenus();
                 for(Menu menu : allMenus){
-                    if(menu.getKorName().contains(menuName)) {
+                    if(menuName.contains(menu.getKorName())) {
                         menu.getImg().add(data);
+                        found = true;
                         break;
                     }
                 }
+                if(found) break;
             }
         }
     }
