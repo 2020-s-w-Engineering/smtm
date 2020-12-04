@@ -1,12 +1,16 @@
 package cse.swengineering.smtm.menus;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -18,9 +22,11 @@ import java.util.concurrent.TimeUnit;
 public class MenuController {
 
     private final MenuService menuService;
+    private final ResourceLoader resourceLoader;
 
-    public MenuController(MenuService menuService) {
+    public MenuController(MenuService menuService, ResourceLoader resourceLoader) {
         this.menuService = menuService;
+        this.resourceLoader = resourceLoader;
     }
 
     @GetMapping("/test")
@@ -51,19 +57,24 @@ public class MenuController {
     }
 
     @PostMapping("/images")
-    public String uploadMenuImage(@RequestParam MultipartFile file) {
+    public String uploadMenuImage(@RequestParam MultipartFile file) throws IOException {
         String filename=file.getOriginalFilename();
-        try{
-            byte [] bytes=file.getBytes();
-            BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(
-                    new FileOutputStream("./src/main/resources/images"+"/"+filename));
-            bufferedOutputStream.write(bytes);
-            bufferedOutputStream.flush();
-            bufferedOutputStream.close();
+        Resource resource = resourceLoader.getResource("classpath:/images");
+        File imageDir = resource.getFile();
+        File[] files = imageDir.listFiles();
+        int count = 0;
+        for(File f : files) {
+            if(f.getName().contains(filename))
+                count++;
         }
-        catch(Exception e) {
-            System.out.println(e);
-        }
+        filename = filename + (count+1);
+
+        byte [] bytes=file.getBytes();
+        BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(
+                new FileOutputStream("./src/main/resources/images"+"/" + filename + ".jpg"));
+        bufferedOutputStream.write(bytes);
+        bufferedOutputStream.flush();
+        bufferedOutputStream.close();
         return "true";
     }
 
