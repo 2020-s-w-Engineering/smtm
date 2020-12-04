@@ -34,6 +34,12 @@
 a:visited{color:black}
 a:link{color:black}
 
+.react-calendar{
+    margin-top: 30px;
+    position: relative;
+    left: 5px;
+}
+
 #clickDate{
     overflow:auto;
     width:360px;
