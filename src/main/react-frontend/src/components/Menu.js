@@ -7,7 +7,8 @@ class Menu extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            imgData: ""
+            imgData: "",
+            menuData : this.props.location.state.menuElement
         }
     }
 
@@ -41,6 +42,7 @@ class Menu extends React.Component {
     }
 
     render() {
+        console.log(this.state.menuData)
         return(
             <>
             <h1>Menu Image</h1>

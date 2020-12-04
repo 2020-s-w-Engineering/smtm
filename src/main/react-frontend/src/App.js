@@ -52,9 +52,7 @@ class App extends React.Component{
                 </>
               ) : (
                 <>
-                <Route path='/menu'>
-                  <Menu/>
-                </Route>
+                <Route path='/menu' component={Menu} />
 
                 <Route path='/menuupload'>
                   <MenuUpload/>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/ClickDate.css';
+import { Link, Redirect } from 'react-router-dom';
 
 class ClickDate extends React.Component{
     constructor(props) {
@@ -12,7 +13,7 @@ class ClickDate extends React.Component{
         return <MenuList main={_mainsAorC}></MenuList>
     }
     render(){
-        console.log(this.state.allResponseData)
+        //console.log(this.state.allResponseData)
         return (
             <div id='scroll'>
             <div>
@@ -90,7 +91,14 @@ class MenuList extends React.Component{
         var i=0;
         while(i<data.length){
             menulist.push(<ul key={data[i].id}>
-                <a class="blank" href="/">{data[i].korName}</a></ul>)
+                <Link class="blank" to={{
+                    pathname : "/menu",
+                    state : {
+                        menuElement : data[i]
+                    }
+                }}
+                >{data[i].korName}
+                </Link></ul>)
             i=i+1;
         }
 

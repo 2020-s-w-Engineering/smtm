@@ -12,5 +12,4 @@ public class SmtmApplication {
         app.setWebApplicationType(WebApplicationType.SERVLET);
         app.run(args);
     }
-
 }
