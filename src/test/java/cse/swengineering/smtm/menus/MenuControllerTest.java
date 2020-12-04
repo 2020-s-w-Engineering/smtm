@@ -83,10 +83,10 @@ public class MenuControllerTest {
 
     @Test
     public void uploadMenuImage() throws Exception {
-        String filename = "donghun";
+        String filename = "한우채끝스테이크";
         String filename2 = "김치";
-        MockMultipartFile mockFile = new MockMultipartFile("file", filename, "text/plain", "hello world".getBytes());
-        MockMultipartFile mockFile2 = new MockMultipartFile("file", filename2, "image/jpeg", "hello world".getBytes());
+        MockMultipartFile mockFile = new MockMultipartFile("file", filename, "image/jpeg", getClass().getResourceAsStream("/images/김치1.jpg"));
+        MockMultipartFile mockFile2 = new MockMultipartFile("file", filename2, "image/jpeg", getClass().getResourceAsStream("/images/김치1.jpg"));
 
         // 기존에 없던 파일 추가하는 경우
         mockMvc.perform(multipart("/menus/images")
