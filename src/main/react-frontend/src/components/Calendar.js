@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import './css/componentCss.css';
+import './css/Calendar.css';
 import CalendarAPI from 'react-calendar'
-import 'react-calendar/dist/Calendar.css'
 import { Redirect } from 'react-router-dom';
 
 class Calendar extends React.Component{
@@ -61,7 +60,9 @@ class Calendar extends React.Component{
         <div id='calendar'>
             <h1>calendar</h1>
             <CalendarAPI
+            id='calendarAPI'
             onClickDay={this.getDate.bind(this)}
+            locale="en-EN"
             />
         </div>
         );
