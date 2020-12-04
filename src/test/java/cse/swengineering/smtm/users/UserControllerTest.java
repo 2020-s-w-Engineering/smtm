@@ -65,6 +65,14 @@ public class UserControllerTest {
     }
 
     @Test
+    public void logout() throws Exception{
+        mockMvc.perform(get("/users/logout"))
+                .andExpect(request().sessionAttributeDoesNotExist("user"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
     public void registerSuccess() throws Exception {
         User user = new User("testId", "password");
         mockMvc.perform(post("/users/register")

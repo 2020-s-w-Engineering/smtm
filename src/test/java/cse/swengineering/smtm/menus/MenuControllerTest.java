@@ -1,33 +1,39 @@
 package cse.swengineering.smtm.menus;
 
+import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
+import org.junit.experimental.results.ResultMatchers;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.event.annotation.AfterTestClass;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -51,6 +57,7 @@ public class MenuControllerTest {
         // 어떤 것도 테스트하고 있지 않음
         mockMvc.perform(MockMvcRequestBuilders.get("/menus/2020-11-04"))
                 .andDo(print())
+                .andExpect(jsonPath("$.date").value("2020-11-04"))
                 .andExpect(status().isOk());
     }
 
@@ -76,17 +83,31 @@ public class MenuControllerTest {
 
     @Test
     public void uploadMenuImage() throws Exception {
-        String filename = "donghun.txt";
+        String filename = "donghun";
+        String filename2 = "김치";
         MockMultipartFile mockFile = new MockMultipartFile("file", filename, "text/plain", "hello world".getBytes());
+        MockMultipartFile mockFile2 = new MockMultipartFile("file", filename2, "image/jpeg", "hello world".getBytes());
 
+        // 기존에 없던 파일 추가하는 경우
         mockMvc.perform(multipart("/menus/images")
                 .file(mockFile))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().string("true"));
+                .andExpect(MockMvcResultMatchers.content().string("true"));
 
-        File file = new File("./src/main/resources/images/" + filename);
-        assertThat(file.exists()).isTrue();
+        // 기존에 있던 파일 추가하는 경우
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/menus/images")
+                .file(mockFile2))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.content().string("true"));
+
+//        File myObj = new File("filename.txt");
+//        if (myObj.delete()) {
+//            System.out.println("Deleted the file: " + myObj.getName());
+//        } else {
+//            System.out.println("Failed to delete the file.");
+//        }
     }
 
 }

@@ -1,5 +1,5 @@
 #headline {
-    margin-top: -13%;
+    margin-top: 0%;
     margin-left: 5%;
 }
 
@@ -8,32 +8,42 @@
 }
 
 #top {
-    margin-top: 30%;
+    margin-top: 20%;
 }
 
 #mid {
-    margin-top: 30%;
+    margin-top: 20%;
 }
 
 #bt {
-    margin-top: 50%;
+    margin-top: 20%;
 }
 
 
-#blank{
+.blank{
 list-style: none;
 margin-left: -13%;
 text-decoration: none;
 }
 
+
+.blank:hover{
+	
+	cursor: pointer;
+	text-shadow: 0 1px 4px rgba(230, 189, 150, 0.979);
+  }
+
 #color1 {
-    color: rgba(250, 180, 76, 0.979);
+    color: rgba(245, 148, 58, 0.979);
 }
 
 
 #date {
     text-align: center;
-    margin-left: 50%;
+    margin-top: -3%;
+    margin-left: -45%;
+    font-size: 20px;
+    font-style: bold;
 }
 
 #scroll{
@@ -59,7 +69,7 @@ text-decoration: none;
 #kcal {
     text-align: center;
     margin-top: -15%;
-    margin-left: 60%;
+    margin-left: 50%;
     font-size: large;
 }
 
