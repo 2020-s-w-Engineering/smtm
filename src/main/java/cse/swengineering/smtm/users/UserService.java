@@ -49,6 +49,7 @@ public class UserService {
 
     public boolean setPreference(User user, Menu menu, int preference){
         user.getPreferenceMap().put(menu.getId(), preference);
+        // calcPreference(user); 선호도 변경마다 업데이트되게 해야한다
         userRepository.save(user);
         return true;
     }

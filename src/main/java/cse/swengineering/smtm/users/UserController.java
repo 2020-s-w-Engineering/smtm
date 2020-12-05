@@ -11,13 +11,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
-@SessionAttributes("user")
+//@SessionAttributes("user")
 public class UserController {
 
     private final UserService userService;
@@ -35,10 +36,12 @@ public class UserController {
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<String> processLogin(User user,
-                                               @CookieValue(value = "preference", required = false) String cookieExist) throws JsonProcessingException {
+                                               @CookieValue(value = "preference", required = false) String cookieExist,
+                                               HttpSession session) throws JsonProcessingException {
         user = userService.userAuth(user);
         if(user != null){
             ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
+            session.setAttribute("user", user);
             if(cookieExist == null) {
                 Map<LocalDate, Float> preference = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
                 String cookieValue = jsonToCookie(objectMapper.writeValueAsString(preference));
