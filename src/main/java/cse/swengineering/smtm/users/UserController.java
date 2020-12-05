@@ -18,7 +18,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
-//@SessionAttributes("user")
+@SessionAttributes("user")
 public class UserController {
 
     private final UserService userService;

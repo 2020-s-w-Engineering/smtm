@@ -158,7 +158,7 @@ public class MenuService {
             BufferedImage bImage = ImageIO.read(file);
             ImageIO.write(bImage, "jpg", bos);
             byte [] data = bos.toByteArray();
-            String menuName = file.getName().substring(0, file.getName().indexOf(".")-1);
+            String menuName = file.getName().substring(0, file.getName().indexOf("."));
             for(Diet diet : dietList){
                 Set<Menu> allMenus = diet.getAllMenus();
                 for(Menu menu : allMenus){

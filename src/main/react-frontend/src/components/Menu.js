@@ -8,26 +8,9 @@ class Menu extends React.Component {
         super(props);
         this.state = {
             imgData: "",
-            menuData : this.props.location.state.menuElement
+            menuData : this.props.location.state.menuElement,
+            flag: false,
         }
-    }
-
-    menuClick(e) {
-        e.preventDefault();
-        
-        const api = axios.create({
-            baseURL: 'http://localhost:8080/menus'
-        })
-        // get 방식을 이용해서 test할 이미지를 가져옴
-        var menu_this = this;
-        api.get('/test').then(function (res) {
-            console.log(res);
-            menu_this.setState({
-                imgData: res.data[0]
-            })
-        }).catch(function (err) {
-            console.log(err);
-        })
     }
 
     menuImg() {
@@ -41,17 +24,35 @@ class Menu extends React.Component {
         }
     }
 
+    imgload() {
+        const api = axios.create({
+            baseURL: 'http://localhost:8080/menus'
+        })
+        // get 방식을 이용해서 test할 이미지를 가져옴
+        var menu_this = this;
+        api.get('/test').then(function (res) {
+            console.log(res);
+            menu_this.setState({
+                imgData: res.data[0],
+                flag: true
+            })
+        }).catch(function (err) {
+            console.log(err);
+        })
+    }
+
     render() {
         console.log(this.state.menuData)
+        this.imgload()
         return(
             <>
             <h1>Menu Image</h1>
             <div id="input">
-                1. <input type="radio" name="score1" value="true"></input> 
-                2. <input type="radio" name="score2" value ="false"></input> 
-                3. <input type="radio" name="score3"></input> 
-                4. <input type="radio" name="score4"></input>
-                5. <input type="radio" name="score5"></input>
+                1. <input type="radio" name="score" value="1"></input> 
+                2. <input type="radio" name="score" value="2"></input> 
+                3. <input type="radio" name="score" value="3"></input> 
+                4. <input type="radio" name="score" value="4"></input>
+                5. <input type="radio" name="score" value="5"></input>
             </div>
             <div>
             <button class="buttonMi2">선호도 저장</button>
@@ -59,13 +60,9 @@ class Menu extends React.Component {
            
            <img class="imgsize" src={this.menuImg()}></img>
           
-        
             <div>
-                <button class="buttonMi" onClick={this.menuClick.bind(this)}>사진 업로드</button>
-                </div>
-                
-          
-            
+                <button class="buttonMi">사진 업로드</button>
+            </div>
             </>
         );
     }
