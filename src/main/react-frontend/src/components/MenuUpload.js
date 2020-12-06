@@ -15,11 +15,16 @@ class MenuUpload extends React.Component {
         const api = axios.create({
             baseURL: 'http://localhost:8080/menus'
         })
-        var menuUpload_this = this;
-        api.post('/login', null, { params: {
-            // parameters
-            
-        }}).then(function (response) {
+
+        var frm = new FormData();
+        var photoFile = document.getElementById("file");
+        frm.append("file", photoFile.files[0]);
+        console.log(photoFile.files);
+        api.post('/images', frm, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(function (response) {
             console.log(response);
         }).catch(function (error) {
             console.log(error);
@@ -38,11 +43,9 @@ class MenuUpload extends React.Component {
                 </center>
 
                <div> 
-               <input type='file' required></input>
+                <input type='file' name='file' id='file' required></input>
+                <input type='submit'></input>
                </div>
-                
-                
-            
             </form>
         );
     }
