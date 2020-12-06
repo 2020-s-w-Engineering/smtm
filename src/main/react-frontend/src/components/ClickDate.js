@@ -8,6 +8,8 @@ class ClickDate extends React.Component{
         super(props);
         this.state = {
             allResponseData : this.props.location.state.responseData,
+            isKorean : false,
+            //isKorean : this.props.location.state.isKorean,
             loading : true
         };
     }
@@ -18,9 +20,11 @@ class ClickDate extends React.Component{
         }, 1000);
     }
     getMenus(_mainsAorC){
-        return <MenuList main={_mainsAorC}></MenuList>
+        var menu_this = this;
+        return <MenuList main={_mainsAorC} isKorean={menu_this.state.isKorean}></MenuList>
     }
     render(){
+        console.log(this.state.isKorean);
         if(this.state.loading === true) {
             return(
                 <div>
@@ -29,7 +33,11 @@ class ClickDate extends React.Component{
             )
         }
         else{
+        var morningStr = this.state.isKorean===true? "아침":"Morning";
+        var lunchStr = this.state.isKorean===true? "점심":"Lunch";
+        var dinnerStr = this.state.isKorean===true? "저녁":"Dinner";
         return (
+            
             <div id='scroll'>
             <div>
             <div id="line1"></div>
@@ -38,7 +46,7 @@ class ClickDate extends React.Component{
                 <h2>{this.state.allResponseData.date}</h2>
                 </div>
                 <div id="headline">
-                <h2>아침</h2>
+                <h2>{morningStr}</h2>
                 </div>
                 <div id="midline">
                 <div id="color1">
@@ -56,7 +64,7 @@ class ClickDate extends React.Component{
 
             <div id="mid">
             <div id="headline">
-                <h2>점심</h2>
+                <h2>{lunchStr}</h2>
                 </div>
                 <div id="midline">
                 <div id="color1">
@@ -71,7 +79,7 @@ class ClickDate extends React.Component{
            </div>
             <div id="bt">
             <div id="headline">
-                <h2>저녁</h2>
+                <h2>{dinnerStr}</h2>
                 </div>
                 <div id="midline">
                 <div id="color1">
@@ -90,12 +98,13 @@ class ClickDate extends React.Component{
         }
     }
 }
- 
+
 class MenuList extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            main : this.props.main
+            main : this.props.main,
+            isKorean : this.props.isKorean
         };
     }
     render(){
@@ -112,7 +121,7 @@ class MenuList extends React.Component{
                         menuElement : data[i]
                     }
                 }}
-                >{data[i].korName}
+                >{this.state.isKorean === true? data[i].korName:data[i].engName}
                 </Link></ul>)
             i=i+1;
         }

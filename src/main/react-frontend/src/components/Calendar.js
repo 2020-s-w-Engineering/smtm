@@ -8,6 +8,7 @@ class Calendar extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            isKorean : this.props.userInfo[1],
             month : "",
             day : "",
             fullDateFormat : "",
@@ -48,11 +49,13 @@ class Calendar extends React.Component{
     }
 
     render(){
+        //console.log(this.state.isKorean);
         if(this.state.pageChangeFlag===1) {
             return <Redirect to={{
                 pathname: '/clickDate',
                 state : {
-                    responseData : this.state.responseData
+                    responseData : this.state.responseData,
+                    isKorean : this.state.isKorean
                 }
             }}></Redirect>
         }

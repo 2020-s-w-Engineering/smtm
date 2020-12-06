@@ -40,15 +40,17 @@ class App extends React.Component{
                   <Home userInfo={this.state.userInfo} />
                 </Route>
 
-                <Route path='/calendar' component={Calendar} />
+                <Route path='/calendar'>
+                  <Calendar userInfo={this.state.userInfo}></Calendar>
+                </Route>
+
+                <Route path='/clickDate' component={ClickDate}/>
 
                 <Route path="/myPage">
                   <MyPage userInfo={this.state.userInfo} />
                 </Route>
 
-                <Route path="/clickDate">
-                  <ClickDate/>
-                </Route>
+                
                 </>
               ) : (
                 <>
@@ -56,7 +58,10 @@ class App extends React.Component{
 
                 <Route path='/menuupload' component={MenuUpload} />
                 
-                <Route path='/calendar' component={Calendar} />
+                <Route path='/calendar'>
+                  <Calendar userInfo={this.state.userInfo}></Calendar>
+                </Route>
+                
                 <Route path='/clickDate' component={ClickDate}/>
                 {/*캘린더 테스트용, 로그인 귀찮아서*/}
                 
