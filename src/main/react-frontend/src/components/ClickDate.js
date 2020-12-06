@@ -1,24 +1,38 @@
 import React from 'react';
 import './css/ClickDate.css';
 import { Link, Redirect } from 'react-router-dom';
+import loadingGif from '../images/loading.gif';
 
 class ClickDate extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            allResponseData : this.props.location.state.responseData
+            allResponseData : this.props.location.state.responseData,
+            loading : true
         };
+    }
+    componentDidMount(){
+        var loading_this = this;
+        setTimeout(function() {
+            loading_this.setState({loading : false})
+        }, 1000);
     }
     getMenus(_mainsAorC){
         return <MenuList main={_mainsAorC}></MenuList>
     }
     render(){
-        //console.log(this.state.allResponseData)
+        if(this.state.loading === true) {
+            return(
+                <div>
+                    <img id="loadingImg" alt="cannot show you" src={loadingGif}></img>
+                </div>
+            )
+        }
+        else{
         return (
             <div id='scroll'>
             <div>
             <div id="line1"></div>
-           
            
                 <div id="date">
                 <h2>{this.state.allResponseData.date}</h2>
@@ -73,6 +87,7 @@ class ClickDate extends React.Component{
         </div>
         </div>
         );
+        }
     }
 }
  
