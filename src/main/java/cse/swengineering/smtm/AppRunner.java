@@ -52,11 +52,9 @@ public class AppRunner implements ApplicationRunner {
 
         menuService.init();
         User donghun = new User("qwer", "1234", true);
-        donghun.getPreferenceMap().put(1L, 1);
-        donghun.getPreferenceMap().put(2L, 2);
-        donghun.getPreferenceMap().put(3L, 3);
-        donghun.getPreferenceMap().put(4L, 4);
-        donghun.getPreferenceMap().put(5L, 5);
+        for(int i=1; i<=41; i++) {
+            donghun.getPreferenceMap().put(Integer.toUnsignedLong(i), i%5);
+        }
         userRepository.save(donghun);
 
     }

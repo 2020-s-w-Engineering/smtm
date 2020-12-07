@@ -29,6 +29,7 @@ public class MenuService {
     public List<Diet> getDietList() {
         return dietList;
     }
+    public void setDietList(List<Diet> dietList) {this.dietList = dietList;}
 
     public Diet getDiet(LocalDate date){
         for(Diet diet : dietList){

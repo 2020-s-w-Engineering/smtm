@@ -72,8 +72,10 @@ public class UserService {
                 }
             }
             float avg = (float)sum / num;
+            diet.setAvgOfPreference(avg);
             ret.put(diet.getDate(), avg);
         }
+        menuService.setDietList(diets);
         return ret;
     }
 

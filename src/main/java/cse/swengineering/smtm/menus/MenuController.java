@@ -1,5 +1,8 @@
 package cse.swengineering.smtm.menus;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.JSONObject;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.CacheControl;
@@ -13,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -23,10 +27,12 @@ public class MenuController {
 
     private final MenuService menuService;
     private final ResourceLoader resourceLoader;
+    private final ObjectMapper objectMapper;
 
-    public MenuController(MenuService menuService, ResourceLoader resourceLoader) {
+    public MenuController(MenuService menuService, ResourceLoader resourceLoader, ObjectMapper objectMapper) {
         this.menuService = menuService;
         this.resourceLoader = resourceLoader;
+        this.objectMapper = objectMapper;
     }
 
     @GetMapping("/test")
@@ -40,8 +46,14 @@ public class MenuController {
     }
 
     @GetMapping("/{date}")
-    public ResponseEntity<Diet> getDiet(@PathVariable LocalDate date){
+    public ResponseEntity<Diet> getDiet(@PathVariable LocalDate date,
+                                        @CookieValue(value = "preference", required = false) String cookieExist) throws JsonProcessingException {
         Diet diet = menuService.getDiet(date);
+        if(cookieExist != null) {
+            String json  = cookieToJson(cookieExist);
+            Map<String, Double> map = objectMapper.readValue(json, Map.class);
+            diet.setAvgOfPreference(Float.parseFloat(map.get(date.toString()).toString()));
+        }
         // DietService에서 dietList 가지고 있으므로 사실상 캐싱 필요없음
         return ResponseEntity.ok().cacheControl(CacheControl.maxAge(1L, TimeUnit.DAYS)).body(diet);
     }
@@ -76,6 +88,14 @@ public class MenuController {
         bufferedOutputStream.flush();
         bufferedOutputStream.close();
         return "true";
+    }
+
+    /*
+    private methods
+     */
+    private String cookieToJson(String cookie) {
+        cookie = cookie.replaceAll("\\+", "\"");
+        return cookie.replaceAll("_", ",");
     }
 
 }

@@ -1,5 +1,8 @@
 package cse.swengineering.smtm;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,14 +16,14 @@ import java.nio.file.StandardOpenOption;
 public class Test {
 
     public static void main(String[] args) throws FileNotFoundException, URISyntaxException {
-        ClassLoader classLoader = Test.class.getClassLoader();
-        URL url = classLoader.getResource("images");
-        File dir = Paths.get(url.toURI()).toFile();
-        File[] files = dir.listFiles();
-        for(File file : files){
-            System.out.println(file.getName() + " " + file.lastModified());
-//            TimeUnit.
-        }
+
+//        ClassLoader classLoader = Test.class.getClassLoader();
+//        URL url = classLoader.getResource("images");
+//        File dir = Paths.get(url.toURI()).toFile();
+//        File[] files = dir.listFiles();
+//        for(File file : files){
+//            System.out.println(file.getName() + " " + file.lastModified());
+//        }
 
 //        String [] korName = {"들깨묵국", "치즈"};
 //        String [] engName = {"Radish Soup", "Cheese"};
