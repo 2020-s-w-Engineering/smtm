@@ -8,6 +8,7 @@ class Calendar extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            isKorean : this.props.userInfo[1],
             month : "",
             day : "",
             fullDateFormat : "",
@@ -25,13 +26,13 @@ class Calendar extends React.Component{
         var valueToString = value.toString();
         var valueArray = valueToString.split(" ")
         var _fulldateformat = valueArray[3]+"-"+this.getMonthValue(valueArray[1])+"-"+valueArray[2]
-        alert(_fulldateformat)
+        //alert(_fulldateformat)
         const api = axios.create({
             baseURL: 'http://localhost:8080/menus'
         })
         var fullDateUrl='/'+_fulldateformat;
         var getdate_this=this;
-        console.log(fullDateUrl)
+        //console.log(fullDateUrl)
         api.get(fullDateUrl, null).then(function (response) {
             if (response.status === 200) {
                 //console.log(response.data)
@@ -48,11 +49,13 @@ class Calendar extends React.Component{
     }
 
     render(){
+        //console.log(this.state.isKorean);
         if(this.state.pageChangeFlag===1) {
             return <Redirect to={{
                 pathname: '/clickDate',
                 state : {
-                    responseData : this.state.responseData
+                    responseData : this.state.responseData,
+                    isKorean : this.state.isKorean
                 }
             }}></Redirect>
         }

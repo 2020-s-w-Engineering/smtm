@@ -39,7 +39,7 @@ class LogIn extends React.Component {
             userId : this.state.username,
             password : this.state.password
         }}).then(function (response) {
-            console.log(response);
+            console.log(response.data);
             if (response.status === 200) {
                 login_this.setState({isLoggedIn:true})
                 login_this.props.onSubmit(

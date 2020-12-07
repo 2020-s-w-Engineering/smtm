@@ -15,12 +15,10 @@ class Menu extends React.Component {
 
     menuImg() {
         if (this.state.imgData !== "") {
-            var base64img = 'data:image/png;base64,' +  this.state.imgData; //base64 encoding 형식의 문자열로 바꿈
-            console.log(base64img);
-            console.log(typeof base64img);
-            return <img src={base64img} alt="" />
+            var base64img = 'data:image/png;base64,' +  this.state.imgData[0]; //base64 encoding 형식의 문자열로 바꿈
+            return <img class="imgsize" src={base64img} alt="" />
         } else {
-            return <img src={default_photo} alt="" />
+            return <img class="imgsize" src={default_photo} alt="" />
         }
     }
 
@@ -30,10 +28,13 @@ class Menu extends React.Component {
         })
         // get 방식을 이용해서 test할 이미지를 가져옴
         var menu_this = this;
-        api.get('/test').then(function (res) {
+        api.get('/images', { params : {
+            id: menu_this.state.menuData["id"]
+        }})
+        .then(function (res) {
             console.log(res);
             menu_this.setState({
-                imgData: res.data[0],
+                imgData: res.data,
                 flag: true
             })
         }).catch(function (err) {
@@ -43,7 +44,9 @@ class Menu extends React.Component {
 
     render() {
         console.log(this.state.menuData)
-        this.imgload()
+        if(this.state.flag === false) {
+            this.imgload()
+        }
         return(
             <>
             <h1>Menu Image</h1>
@@ -58,7 +61,7 @@ class Menu extends React.Component {
             <button class="buttonMi2">선호도 저장</button>
             </div>
            
-           <img class="imgsize" src={this.menuImg()}></img>
+            {this.menuImg()}
           
             <div>
                 <button class="buttonMi">사진 업로드</button>
