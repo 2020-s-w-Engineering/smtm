@@ -80,4 +80,18 @@ public class Menu {
                 ", engName='" + engName + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Menu menu = (Menu) o;
+        return  Objects.equals(korName, menu.korName) &&
+                Objects.equals(engName, menu.engName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(korName, engName);
+    }
 }

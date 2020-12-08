@@ -31,7 +31,7 @@ Chungnam National University, 2020 S/W Engineering
 <br>요청 메소드: `POST`
 <br>요청 URL: `/users/preference`
 <br>요청 매개변수
-<br>`korName:"메뉴 한글 이름"`
+<br>`id:"메뉴 db id"`
 <br>`preference:"선호도(1~5)"`
 <br>응답: `true` 또는 `false` (단순 문자열)
 

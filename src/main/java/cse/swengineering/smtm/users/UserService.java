@@ -48,8 +48,9 @@ public class UserService {
     }
 
     public boolean setPreference(User user, Menu menu, int preference){
+        user = userRepository.findById(user.getId()).get();
         user.getPreferenceMap().put(menu.getId(), preference);
-        // calcPreference(user); 선호도 변경마다 업데이트되게 해야한다
+        calcPreference(user);
         userRepository.save(user);
         return true;
     }
@@ -61,7 +62,7 @@ public class UserService {
             int sum = 0;
             int num = 0;
             Set<Menu> menus = diet.getAllMenus();
-            Map<Long, Integer> preferenceMap = user.getPreferenceMap();
+            Map<Long, Integer> preferenceMap = userRepository.findById(user.getId()).get().getPreferenceMap();
             Menu[] menuArr = menus.toArray(new Menu[0]);
             for(Menu menu : menuArr){
                 if(preferenceMap.containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우

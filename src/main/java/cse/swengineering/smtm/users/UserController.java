@@ -82,10 +82,16 @@ public class UserController {
     
     // 선호도 기입
     @PostMapping("/preference")
-    public String setPreference(User user,
+    public ResponseEntity<String> setPreference(User user,
                                 @RequestParam("id") Menu menu,
-                                @RequestParam int preference){
-        return userService.setPreference(user, menu, preference) ? "true" : "false";
+                                @RequestParam int preference) throws JsonProcessingException {
+        userService.setPreference(user, menu, preference);
+        ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
+        Map<LocalDate, Float> preferenceMap = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
+        String cookieValue = jsonToCookie(objectMapper.writeValueAsString(preferenceMap));
+        ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
+        builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
+        return builder.body("true");
     }
 
     /*
