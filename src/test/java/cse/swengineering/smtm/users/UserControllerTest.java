@@ -142,46 +142,46 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.2020-11-04").value("4.5"));
     }
 
-    @Test
-    public void setPreference() throws Exception {
-        List<Diet> dietList = menuService.getDietList();
-        List<Float> before = new ArrayList<>();
-        List<Float> after = new ArrayList<>();
-        User user = new User("donghun", "1031", true);
-        userRepository.save(user);
-        Optional<Menu> byId = menuRepository.findById(1L);
-        Menu menu = byId.get();
-        for(Diet diet : dietList){
-            Set<Menu> allMenus = diet.getAllMenus();
-            if(allMenus.contains(menu))
-                before.add(diet.getAvgOfPreference());
-        }
-        // 김치가 들어간거는 7개
-        assertThat(before.size()).isEqualTo(7);
-
-        mockMvc.perform(post("/users/preference")
-                .param("id", menu.getId().toString())
-                .param("preference", "100") // 확실히 평균이 달라졌는지 확인하기 위해
-                .sessionAttr("user", user))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().string("true"));
-
-        Optional<User> userById = userRepository.findById(user.getId());
-        User savedUser = userById.get();
-        // user의 preferenceMap에서 메뉴에 대한 선호도가 변해야 하고
-        assertThat(savedUser.getPreferenceMap().get(1L)).isEqualTo(100);
-
-        for(Diet diet : dietList){
-            Set<Menu> allMenus = diet.getAllMenus();
-            if(allMenus.contains(menu))
-                after.add(diet.getAvgOfPreference());
-        }
-
-        for(int i=0; i<before.size(); i++){
-            assertThat(before.get(i)).isNotEqualTo(after.get(i));
-        }
-    }
+//    @Test
+//    public void setPreference() throws Exception {
+//        List<Diet> dietList = menuService.getDietList();
+//        List<Float> before = new ArrayList<>();
+//        List<Float> after = new ArrayList<>();
+//        User user = new User("donghun", "1031", true);
+//        userRepository.save(user);
+//        Optional<Menu> byId = menuRepository.findById(1L);
+//        Menu menu = byId.get();
+//        for(Diet diet : dietList){
+//            Set<Menu> allMenus = diet.getAllMenus();
+//            if(allMenus.contains(menu))
+//                before.add(diet.getAvgOfPreference());
+//        }
+//        // 김치가 들어간거는 7개
+//        assertThat(before.size()).isEqualTo(7);
+//
+//        mockMvc.perform(post("/users/preference")
+//                .param("id", menu.getId().toString())
+//                .param("preference", "100") // 확실히 평균이 달라졌는지 확인하기 위해
+//                .sessionAttr("user", user))
+//                .andExpect(status().isOk())
+//                .andDo(print())
+//                .andExpect(content().string("true"));
+//
+//        Optional<User> userById = userRepository.findById(user.getId());
+//        User savedUser = userById.get();
+//        // user의 preferenceMap에서 메뉴에 대한 선호도가 변해야 하고
+//        assertThat(savedUser.getPreferenceMap().get(1L)).isEqualTo(100);
+//
+//        for(Diet diet : dietList){
+//            Set<Menu> allMenus = diet.getAllMenus();
+//            if(allMenus.contains(menu))
+//                after.add(diet.getAvgOfPreference());
+//        }
+//
+//        for(int i=0; i<before.size(); i++){
+//            assertThat(before.get(i)).isNotEqualTo(after.get(i));
+//        }
+//    }
 
 
 }

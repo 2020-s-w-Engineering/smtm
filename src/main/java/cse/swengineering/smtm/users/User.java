@@ -1,6 +1,7 @@
 package cse.swengineering.smtm.users;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -20,6 +21,9 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private Map<Long, Integer> preferenceMap = new HashMap<>();
 
+    @Transient
+    private Map<LocalDate, Float> monthAvgPreference = new HashMap<>();
+
     public User() {
     }
 
@@ -31,6 +35,14 @@ public class User {
 
     public User(String userId, String password) {
         this(userId, password, false);
+    }
+
+    public Map<LocalDate, Float> getMonthAvgPreference() {
+        return monthAvgPreference;
+    }
+
+    public void setMonthAvgPreference(Map<LocalDate, Float> monthAvgPreference) {
+        this.monthAvgPreference = monthAvgPreference;
     }
 
     public Map<Long, Integer> getPreferenceMap() {

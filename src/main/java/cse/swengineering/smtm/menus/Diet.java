@@ -9,18 +9,9 @@ import java.util.*;
 public class Diet {
 
     private LocalDate date;
-    private float avgOfPreference;
     private Map<String, Main> breakfastMains = new HashMap<>();
     private Map<String, Main> lunchMains = new HashMap<>();
     private Map<String, Main> dinnerMains = new HashMap<>();
-
-    public float getAvgOfPreference() {
-        return avgOfPreference;
-    }
-
-    public void setAvgOfPreference(float avgOfPreference) {
-        this.avgOfPreference = avgOfPreference;
-    }
 
     public Map<String, Main> getBreakfastMains() {
         return breakfastMains;

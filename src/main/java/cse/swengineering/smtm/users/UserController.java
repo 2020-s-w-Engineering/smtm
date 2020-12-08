@@ -41,13 +41,13 @@ public class UserController {
         user = userService.userAuth(user);
         if(user != null){
             ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
-            session.setAttribute("user", user);
             if(cookieExist == null) {
-                Map<LocalDate, Float> preference = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
-                String cookieValue = jsonToCookie(objectMapper.writeValueAsString(preference));
+                user = userService.calcPreference(user);// 쿠키에 선호도 정보 저장
+                String cookieValue = jsonToCookie(objectMapper.writeValueAsString(user.getMonthAvgPreference()));
                 ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
                 builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
             }
+            session.setAttribute("user", user);
             return builder.body(String.valueOf(user.isKorean()));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -74,21 +74,36 @@ public class UserController {
         return userService.updateUserInfo(user) ? "true" : "false";
     }
 
-    // 사용자의 선호도 정보
+    // 하루 식단 평균 선호도 한달 치
     @GetMapping("/preference")
     public String getPreference(@CookieValue(value = "preference", required = false) String cookieValue){
         return cookieValue == null ? "false" : cookieToJson(cookieValue);
+    }
+//    @GetMapping("/preference")
+//    public Map<LocalDate, Float> getPreference(User user){
+//        return user.getMonthAvgPreference();
+//    }
+
+    // 개별 메뉴에 대한 사용자의 선호도 정보
+    @GetMapping("/preference/{id}")
+    public String getPreference(User user,
+                                @PathVariable("id") Menu menu){
+        if(user.getPreferenceMap().containsKey(menu.getId()))
+            return user.getPreferenceMap().get(menu.getId()).toString();
+        return "0";
     }
     
     // 선호도 기입
     @PostMapping("/preference")
     public ResponseEntity<String> setPreference(User user,
-                                @RequestParam("id") Menu menu,
-                                @RequestParam int preference) throws JsonProcessingException {
+                                                @RequestParam("id") Menu menu,
+                                                @RequestParam int preference,
+                                                HttpSession session) throws JsonProcessingException {
         userService.setPreference(user, menu, preference);
         ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
-        Map<LocalDate, Float> preferenceMap = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
-        String cookieValue = jsonToCookie(objectMapper.writeValueAsString(preferenceMap));
+        user = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
+        session.setAttribute("user", user);
+        String cookieValue = jsonToCookie(objectMapper.writeValueAsString(user.getMonthAvgPreference()));
         ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
         builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
         return builder.body("true");

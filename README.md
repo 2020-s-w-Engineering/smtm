@@ -47,6 +47,12 @@ Chungnam National University, 2020 S/W Engineering
 }
 ```
 
+- 개별 메뉴에 대한 사용자의 선호도 요청
+<br>요청 메소드: `GET`
+<br>요청 URL: `/users/preference/{menuId}`
+<br>응답: 선호도(선호도 기입 안되어 있으면 0)
+
+
 ### Menu REST API
 
 - 하루 식단 정보
@@ -56,7 +62,6 @@ Chungnam National University, 2020 S/W Engineering
 ```json
 {
     "date": "2020-11-04",
-    "avgOfPreference": 0.0,
     "breakfastMains": {
         "A": {
             "calories": "781kcal",

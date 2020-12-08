@@ -52,7 +52,6 @@ public class MenuController {
         if(cookieExist != null) {
             String json  = cookieToJson(cookieExist);
             Map<String, Double> map = objectMapper.readValue(json, Map.class);
-            diet.setAvgOfPreference(Float.parseFloat(map.get(date.toString()).toString()));
         }
         // DietService에서 dietList 가지고 있으므로 사실상 캐싱 필요없음
         return ResponseEntity.ok().cacheControl(CacheControl.maxAge(1L, TimeUnit.DAYS)).body(diet);

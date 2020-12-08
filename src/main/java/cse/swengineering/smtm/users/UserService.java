@@ -55,7 +55,7 @@ public class UserService {
         return true;
     }
 
-    public Map<LocalDate, Float> calcPreference(User user) {
+    public User calcPreference(User user) {
         Map<LocalDate, Float> ret = new HashMap<>();
         List<Diet> diets = menuService.getDiets();
         for(Diet diet : diets){
@@ -73,11 +73,9 @@ public class UserService {
                 }
             }
             float avg = (float)sum / num;
-            diet.setAvgOfPreference(avg);
-            ret.put(diet.getDate(), avg);
+            user.getMonthAvgPreference().put(diet.getDate(), avg);
         }
-        menuService.setDietList(diets);
-        return ret;
+        return user;
     }
 
 }
