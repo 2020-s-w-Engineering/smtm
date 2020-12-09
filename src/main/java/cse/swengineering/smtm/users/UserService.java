@@ -67,7 +67,6 @@ public class UserService {
             for(Menu menu : menuArr){
                 if(preferenceMap.containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우
                     int preference = preferenceMap.get(menu.getId());
-                    menu.setPreference(preference);
                     sum = sum + preference;
                     num++;
                 }

@@ -142,6 +142,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.2020-11-04").value("4.5"));
     }
 
+    // 만들어라****************
 //    @Test
 //    public void setPreference() throws Exception {
 //        List<Diet> dietList = menuService.getDietList();
