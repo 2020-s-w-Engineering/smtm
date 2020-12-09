@@ -23,23 +23,12 @@ public class Menu {
     @JsonIgnore
     private List<byte[]> img = new ArrayList<>();
 
-    @Transient
-    private int preference;
-
     public Menu() {
     }
 
     public Menu(String korName, String engName) {
         this.korName = korName;
         this.engName = engName;
-    }
-
-    public int getPreference() {
-        return preference;
-    }
-
-    public void setPreference(int preference) {
-        this.preference = preference;
     }
 
     public Long getId() {

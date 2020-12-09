@@ -61,7 +61,7 @@ Chungnam National University, 2020 S/W Engineering
 <br>응답:
 ```json
 {
-    "date": "2020-11-04",
+    "date": "2020-11-08",
     "breakfastMains": {
         "A": {
             "calories": "781kcal",
@@ -69,20 +69,17 @@ Chungnam National University, 2020 S/W Engineering
                 {
                     "id": 1,
                     "korName": "김치",
-                    "engName": "Kimchi",
-                    "preference": 0
+                    "engName": "Kimchi"
                 },
                 {
-                    "id": 41,
-                    "korName": "수육국밥",
-                    "engName": "not yet",
-                    "preference": 0
+                    "id": 2,
+                    "korName": "우유",
+                    "engName": "Milk"
                 },
                 {
-                    "id": 9,
-                    "korName": "연근조림",
-                    "engName": "Lotus Root In Soy Sauce",
-                    "preference": 0
+                    "id": 21,
+                    "korName": "쌀밥",
+                    "engName": "Rice"
                 }
             ]
         },
@@ -90,47 +87,56 @@ Chungnam National University, 2020 S/W Engineering
             "calories": "709kcal",
             "menus": [
                 {
-                    "id": 11,
-                    "korName": "식빵과 쨈",
-                    "engName": "Bread And Jam",
-                    "preference": 0
-                },
-                {
-                    "id": 12,
-                    "korName": "브라우니",
-                    "engName": "Brownie",
-                    "preference": 0
-                },
-                {
                     "id": 10,
                     "korName": "씨리얼",
-                    "engName": "Cereal",
-                    "preference": 0
+                    "engName": "Cereal"
+                },
+                {
+                    "id": 11,
+                    "korName": "식빵과 쨈",
+                    "engName": "Bread And Jam"
+                },
+                {
+                    "id": 2,
+                    "korName": "우유",
+                    "engName": "Milk"
                 }
             ]
         }
     },
     "lunchMains": {
         "A": {
-            "calories": "806kcal",
+            "calories": "798kcal",
             "menus": [
+                {
+                    "id": 32,
+                    "korName": "열무나물",
+                    "engName": "Seasoned Young Summer Radish with Soybean Paste"
+                },
                 {
                     "id": 1,
                     "korName": "김치",
-                    "engName": "Kimchi",
-                    "preference": 0
+                    "engName": "Kimchi"
                 },
                 {
-                    "id": 17,
-                    "korName": "미역줄기볶음",
-                    "engName": "Sauteed Seaweed",
-                    "preference": 0
+                    "id": 29,
+                    "korName": "버섯영양밥",
+                    "engName": "Rice with Mushroom"
                 },
                 {
-                    "id": 21,
-                    "korName": "쌀밥",
-                    "engName": "Rice",
-                    "preference": 0
+                    "id": 31,
+                    "korName": "치킨너겟",
+                    "engName": "Chicken Nugget"
+                },
+                {
+                    "id": 33,
+                    "korName": "고추지",
+                    "engName": "Seasoned Red Pepper"
+                },
+                {
+                    "id": 30,
+                    "korName": "사골국",
+                    "engName": "Beef Bon Soup"
                 }
             ]
         },
@@ -141,25 +147,37 @@ Chungnam National University, 2020 S/W Engineering
     },
     "dinnerMains": {
         "A": {
-            "calories": "806kcal",
+            "calories": "790kcal",
             "menus": [
                 {
                     "id": 1,
                     "korName": "김치",
-                    "engName": "Kimchi",
-                    "preference": 0
+                    "engName": "Kimchi"
                 },
                 {
-                    "id": 18,
-                    "korName": "기장밥",
-                    "engName": "Millet Rice",
-                    "preference": 0
+                    "id": 27,
+                    "korName": "순대볶음",
+                    "engName": "Stir-fried Korean Sausage"
                 },
                 {
                     "id": 19,
                     "korName": "연두부찜",
-                    "engName": "Steamed Soft Bean Curd",
-                    "preference": 0
+                    "engName": "Steamed Soft Bean Curd"
+                },
+                {
+                    "id": 21,
+                    "korName": "쌀밥",
+                    "engName": "Rice"
+                },
+                {
+                    "id": 26,
+                    "korName": "시래기된장국",
+                    "engName": "Soybean Paste Soup with Dried Radish Leaves"
+                },
+                {
+                    "id": 28,
+                    "korName": "오이부추무침",
+                    "engName": "Seasoned Cucumber and Chives"
                 }
             ]
         },
