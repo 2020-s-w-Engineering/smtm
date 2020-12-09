@@ -9,7 +9,8 @@ class Home extends React.Component{
         this.state = {
             userInfo : this.props.userInfo,
             button1:this.props.button1,
-            button2:this.props.button2
+            button2:this.props.button2,
+            isKorean : true
         };
     }
 
@@ -53,10 +54,8 @@ class BeforeLogIn extends React.Component{
         
             <div class="button" id='register'>
             <Link style={{ textDecoration: 'none' }} to='/register'><h2>Register</h2></Link>
-            </div> 
-           
-                       
-        </div>
+            </div>    
+            </div>
             </div>
             
         );
@@ -73,7 +72,7 @@ class AfterLogIn extends React.Component{
  
              <div class="button" id='myPage'>
              <Link style={{ textDecoration: 'none' }} to='/myPage'><h2>My Page</h2></Link>
-             </div>            
+             </div>           
          </div>
          );
      }

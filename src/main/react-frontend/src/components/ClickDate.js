@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/ClickDate.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import loadingGif from '../images/loading.gif';
 
 class ClickDate extends React.Component{
@@ -8,7 +8,7 @@ class ClickDate extends React.Component{
         super(props);
         this.state = {
             allResponseData : this.props.location.state.responseData,
-            isKorean : false,
+            isKorean : this.props.location.state.isKorean,
             //isKorean : this.props.location.state.isKorean,
             loading : true
         };
