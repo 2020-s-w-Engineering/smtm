@@ -35,6 +35,19 @@ class Register extends React.Component {
         console.log(this.state.password);
         console.log(this.state.language);
 
+        const app = axios.create({
+            baseURL: 'http://localhost:8080/users'
+        })
+        app.post('/login', null, { params: {
+            userId : this.state.username,
+            password : this.state.password
+        }}).then(function (response) {
+            console.log(response.data);
+            window.alert("이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.");
+        }).catch(function (error) {
+            {}
+        });
+
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
@@ -51,8 +64,10 @@ class Register extends React.Component {
                     false, null
                 );
             }
+            window.alert("회원가입 되었습니다.");
         }).catch(function (error) {
             console.log(error);
+            window.alert("이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.");
         });
     }
 
@@ -95,8 +110,8 @@ class Register extends React.Component {
                         
                         <div id="input">
 
-                        <input type='radio' name='language' value='true' onChange={this.infoChange.bind(this)} />Korean
-                        <input type='radio' name='language' value='false' onChange={this.infoChange.bind(this)} />English
+                        <input type='radio' name='language' value='true' onChange={this.infoChange.bind(this)} required/>Korean
+                        <input type='radio' name='language' value='false' onChange={this.infoChange.bind(this)} required/>English
                         </div>
                         </div>
                         
