@@ -52,10 +52,8 @@ class MyPage extends React.Component {
                 </div>
            
                 <div id="a" id = "Language">Language : {this.state.isKorean}</div>
-                <div  id = "button1">수정</div>
-                <div id = "Language">Language : {this.state.isKorean}</div>
                 <div id = "button1" onClick={this.changeLanguage.bind(this)}>수정</div>
-                
+  
                 <center>
                     <a href='/'><div id = "button2">Logout</div></a>
                 </center>
