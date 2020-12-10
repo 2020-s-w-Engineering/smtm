@@ -20,8 +20,7 @@ public class User {
     private boolean isKorean; // rest api로 날라갈 때는 korean으로 날라간다
     @ElementCollection(fetch = FetchType.EAGER)
     private Map<Long, Integer> preferenceMap = new HashMap<>();
-
-    @Transient
+    @ElementCollection(fetch = FetchType.EAGER)
     private Map<LocalDate, Float> monthAvgPreference = new HashMap<>();
 
     public User() {
