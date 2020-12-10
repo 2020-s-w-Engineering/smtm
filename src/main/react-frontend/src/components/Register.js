@@ -116,7 +116,7 @@ class Register extends React.Component {
                         </div>
                         
                     <center>
-                    <button type='submit' class="button1">Register</button>
+                    <button type='submit' className="button1">Register</button>
                     </center>
                     
                     </form>

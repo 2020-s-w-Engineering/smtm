@@ -115,6 +115,7 @@ class MenuList extends React.Component{
         var i=0;
         while(i<data.length){
             menulist.push(<ul key={data[i].id}>
+<<<<<<< Updated upstream
                 <Link class="blank" to={{
                     pathname : "/menu",
                     state : {
@@ -123,6 +124,9 @@ class MenuList extends React.Component{
                 }}
                 >{this.state.isKorean === true? data[i].korName:data[i].engName}
                 </Link></ul>)
+=======
+                <a className="blank" href="/">{data[i].korName}</a></ul>)
+>>>>>>> Stashed changes
             i=i+1;
         }
 

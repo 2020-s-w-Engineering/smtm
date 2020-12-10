@@ -89,7 +89,7 @@ class LogIn extends React.Component {
   
                     </div>
                     <center>
-                    <button type='submit' class="button2">Log In</button>
+                    <button type='submit' className="button2">Log In</button>
                     </center>
                    
                 </form>

@@ -98,9 +98,13 @@ class Menu extends React.Component {
             this.imgload()
         }
         return(
-            <>
+            <div>
+            <div id="head">
             <h1>Menu Image</h1>
+            </div>
+            
             <div id="input">
+<<<<<<< Updated upstream
                 1. <input id="prefer_1" type="radio" name="score" value="1" onChange={this.handleRadio.bind(this)}></input> 
                 2. <input id="prefer_2" type="radio" name="score" value="2" onChange={this.handleRadio.bind(this)}></input> 
                 3. <input id="prefer_3" type="radio" name="score" value="3" onChange={this.handleRadio.bind(this)}></input> 
@@ -117,6 +121,29 @@ class Menu extends React.Component {
                 <button class="buttonMi">사진 업로드</button>
             </div>
             </>
+=======
+                1. <input type="radio" name="score1"></input> 
+                2. <input type="radio" name="score2"></input> 
+                3. <input type="radio" name="score3"></input> 
+                4. <input type="radio" name="score4"></input>
+                5. <input type="radio" name="score5"></input>
+            </div>
+            <div>
+            <button className="buttonMi2">선호도 저장</button>
+            </div>
+           <img id="left" src="left.png"></img>
+           <img className="imgsize" src={this.menuImg()}></img>
+            <img id ="right" src="right.png"></img>
+
+        
+            <div>
+                <button className="buttonMi" onClick={this.menuClick.bind(this)}>사진 업로드</button>
+                </div>
+                
+          
+
+            </div>
+>>>>>>> Stashed changes
         );
     }
 }

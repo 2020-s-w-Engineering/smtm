@@ -39,7 +39,7 @@ class MenuUpload extends React.Component {
                     <h3>업로드할 파일을 선택하세요.</h3>
                     </div>
                 
-                <img id ="imgsize" src="album.png"></img>
+                <img className ="imgsize" src="album.png"></img>
                 </center>
 
                <div> 
