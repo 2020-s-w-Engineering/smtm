@@ -115,9 +115,17 @@ class MenuList extends React.Component{
         var i=0;
         while(i<data.length){
             menulist.push(<ul key={data[i].id}>
-                <a className="blank" href="/">{data[i].korName}</a></ul>)
+                <Link class="blank" to={{
+                    pathname : "/menu",
+                    state : {
+                        menuElement : data[i]
+                    }
+                }}
+                >{this.state.isKorean === true? data[i].korName:data[i].engName}
+                </Link></ul>)
             i=i+1;
         }
+
 
         return (
         <div id='MenuList'>

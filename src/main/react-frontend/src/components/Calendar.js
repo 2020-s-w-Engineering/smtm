@@ -18,6 +18,20 @@ class Calendar extends React.Component{
             responseData : ""
         };
     }
+
+    getPreference(){
+        const api = axios.create({
+            baseURL: 'http://localhost:8080/users'
+        })
+        var getPreference_this=this;
+        api.get('/preference',null).then(function (response) {
+            if (response.status === 200) {
+                console.log(response.data)
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
     
     getMonthValue(stringMonth){
         var monthValue = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -51,7 +65,7 @@ class Calendar extends React.Component{
     }
 
     render(){
-        //console.log(this.state.isKorean);
+        {this.getPreference()}
         if(this.state.pageChangeFlag===1) {
             return <Redirect to={{
                 pathname: '/clickDate',
@@ -85,14 +99,6 @@ class ColorChart extends React.Component{
     render(){
         return (
         <div id='colorChart'>
-            {/*
-            <label>{this.state.isKorean===true? '낮음' : "Low"}</label>
-            <div id="lowColor"></div>
-            <label>{this.state.isKorean===true? '중간' : 'Middle'}</label>
-            <div id="midColor"></div>
-            <label>{this.state.isKorean===true? '높음' : 'High'}</label>
-            <div id="highColor"></div>
-             */}
             <img id="colorChart" alt="cannot show you" src={colorChart}></img>
         </div>
         );
