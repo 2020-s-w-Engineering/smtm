@@ -27,7 +27,7 @@ class ClickDate extends React.Component{
         console.log(this.state.isKorean);
         if(this.state.loading === true) {
             return(
-                <div>
+                <div id="loading">
                     <img id="loadingImg" alt="cannot show you" src={loadingGif}></img>
                 </div>
             )
