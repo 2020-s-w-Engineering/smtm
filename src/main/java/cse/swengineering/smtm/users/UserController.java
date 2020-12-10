@@ -69,7 +69,10 @@ public class UserController {
 
     // 회원정보변경
     @PostMapping("/update")
-    public String processUpdateInfo(User user) {
+    public String processUpdateInfo(HttpSession session,
+                                    @RequestParam("korean") boolean isKorean) {
+        User user = (User) session.getAttribute("user");
+        user.setKorean(isKorean);
         return userService.updateUserInfo(user) ? "true" : "false";
     }
 
