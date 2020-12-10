@@ -52,7 +52,7 @@ class MyPage extends React.Component {
                     <img alt="user img" src="user.png" witdh = "100px" height="100px"></img>
                         <h4> {this.state.userInfo[0].userId}님</h4>
                 </div>
-           
+
                 <div id="a" id = "Language">Language : {this.state.isKorean}</div>
                 <div id = "button1" onClick={this.changeLanguage.bind(this)}>수정</div>
   
