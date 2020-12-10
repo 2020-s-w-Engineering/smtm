@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/componentCss.css';
+import './css/Home.css';
 import homeImg from '../images/mix_home.png';
 import { Link } from 'react-router-dom';
 
@@ -47,17 +48,17 @@ class BeforeLogIn extends React.Component{
    render(){
         return (
             <div>
-            <div className="userInButton" >
+            <div className="userInButton">
             <div className="button" id='login'>
             <Link style={{ textDecoration: 'none' }} to='login'><h2>LogIn</h2></Link>
             </div>
-        
+            
             <div className="button" id='register'>
             <Link style={{ textDecoration: 'none' }} to='/register'><h2>Register</h2></Link>
-            </div>    
+            </div> 
             </div>
-            </div>
-            
+               
+            </div>            
         );
     }
 }
