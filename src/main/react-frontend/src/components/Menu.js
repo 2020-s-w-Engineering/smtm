@@ -103,11 +103,22 @@ class Menu extends React.Component {
             <>
             <h1>Menu Image</h1>
             <div id="input">
+                <div id="radio1">
                 1. <input id="prefer_1" type="radio" name="score" value="1" ></input>
-                2. <input id="prefer_2" type="radio" name="score" value="2" ></input> 
-                3. <input id="prefer_3" type="radio" name="score" value="3" ></input> 
-                4. <input id="prefer_4" type="radio" name="score" value="4" ></input>
+                </div>
+               <div id="radio2">
+               2. <input id="prefer_2" type="radio" name="score" value="2" ></input> 
+               </div> 
+               <div id="radio3">
+               3. <input id="prefer_3" type="radio" name="score" value="3" ></input> 
+               </div>
+               <div id="radio4">
+               4. <input id="prefer_4" type="radio" name="score" value="4" ></input>
+               </div>
+                <div id="radio5"> 
                 5. <input id="prefer_5" type="radio" name="score" value="5" ></input>
+                </div>
+                
             </div>
             <div>
             <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>선호도 저장</button>
