@@ -18,9 +18,9 @@ class Menu extends React.Component {
     menuImg() {
         if (this.state.imgData !== "") {
             var base64img = 'data:image/png;base64,' +  this.state.imgData[0]; //base64 encoding 형식의 문자열로 바꿈
-            return <img class="imgsize" src={base64img} alt="" />
+            return <img className="imgsize" src={base64img} alt="" />
         } else {
-            return <img class="imgsize" src={default_photo} alt="" />
+            return <img className="imgsize" src={default_photo} alt="" />
         }
     }
 
@@ -98,13 +98,9 @@ class Menu extends React.Component {
             this.imgload()
         }
         return(
-            <div>
-            <div id="head">
+            <>
             <h1>Menu Image</h1>
-            </div>
-            
             <div id="input">
-<<<<<<< Updated upstream
                 1. <input id="prefer_1" type="radio" name="score" value="1" onChange={this.handleRadio.bind(this)}></input> 
                 2. <input id="prefer_2" type="radio" name="score" value="2" onChange={this.handleRadio.bind(this)}></input> 
                 3. <input id="prefer_3" type="radio" name="score" value="3" onChange={this.handleRadio.bind(this)}></input> 
@@ -112,38 +108,15 @@ class Menu extends React.Component {
                 5. <input id="prefer_5" type="radio" name="score" value="5" onChange={this.handleRadio.bind(this)}></input>
             </div>
             <div>
-            <button class="buttonMi2" onClick={this.upgradePreference.bind(this)}>선호도 저장</button>
+            <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>선호도 저장</button>
             </div>
            
             {this.menuImg()}
           
             <div>
-                <button class="buttonMi">사진 업로드</button>
+                <button className="buttonMi">사진 업로드</button>
             </div>
             </>
-=======
-                1. <input type="radio" name="score1"></input> 
-                2. <input type="radio" name="score2"></input> 
-                3. <input type="radio" name="score3"></input> 
-                4. <input type="radio" name="score4"></input>
-                5. <input type="radio" name="score5"></input>
-            </div>
-            <div>
-            <button className="buttonMi2">선호도 저장</button>
-            </div>
-           <img id="left" src="left.png"></img>
-           <img className="imgsize" src={this.menuImg()}></img>
-            <img id ="right" src="right.png"></img>
-
-        
-            <div>
-                <button className="buttonMi" onClick={this.menuClick.bind(this)}>사진 업로드</button>
-                </div>
-                
-          
-
-            </div>
->>>>>>> Stashed changes
         );
     }
 }
