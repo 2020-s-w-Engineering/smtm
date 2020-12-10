@@ -10,6 +10,8 @@ class Calendar extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            userId: this.props.userInfo[0].userId,
+            password: this.props.userInfo[0].password,
             isKorean : this.props.userInfo[1],
             month : "",
             day : "",
@@ -23,10 +25,12 @@ class Calendar extends React.Component{
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
-        var getPreference_this=this;
-        api.get('/preference',null).then(function (response) {
+        api.get('/preference', { params:{
+            userId : this.state.userId,
+            password : this.state.password
+        }}).then(function (response) {
             if (response.status === 200) {
-                console.log(response.data)
+                console.log(response)
             }
         }).catch(function (error) {
             console.log(error);
@@ -63,8 +67,13 @@ class Calendar extends React.Component{
             console.log(error);
         });
     }
-
     render(){
+        var abbr_list = document.getElementsByTagName('abbr');
+        console.log(abbr_list)
+        console.log(abbr_list[0])
+        for (let index = 0; index < abbr_list.length; index++) {
+            console.log(abbr_list[index]);
+        }
         {this.getPreference()}
         if(this.state.pageChangeFlag===1) {
             return <Redirect to={{
@@ -77,11 +86,14 @@ class Calendar extends React.Component{
         }
         return (
         <div id='calendar'>
-            <h1>calendar</h1>
+            <div id="calendarHead">
+                <h1>Calendar</h1>
+            </div>
             <CalendarAPI
             id='calendarAPI'
             onClickDay={this.getDate.bind(this)}
             locale="en-EN"
+            activeStartDate={new Date(2020,10,1)}
             />
             <ColorChart isKorean={this.state.isKorean}></ColorChart>
         </div>

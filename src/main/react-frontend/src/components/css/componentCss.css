@@ -38,7 +38,13 @@
 a:visited{color:black}
 a:link{color:black}
 
+#calendarHead {
+	text-align: center;
+	margin-top: 10%;
+	margin-left: -50%;
+	font-weight: 100%;
 
+}
 .react-calendar{
     margin-top: 30px;
     position: relative;

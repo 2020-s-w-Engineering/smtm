@@ -75,10 +75,18 @@ class Menu extends React.Component {
         })
         // get 방식을 이용해서 test할 이미지를 가져옴
         var preference_this = this;
+<<<<<<< HEAD
         api.get('/preference/' + preference_this.state.menuData["id"])
         .then(function (res) {
             console.log("선호도 가져오기");
             console.log()
+=======
+        api.get('/preference/' + preference_this.state.menuData["id"], {params : {
+            userId : 'qwer',
+            password : '1234'
+        }}).then(function (res) {
+            console.log(res);
+>>>>>>> 189aaa6ddb4e75c2cc648804be51dabeba69e972
             preference_this.setState({
                 preference: res.data,
             })
