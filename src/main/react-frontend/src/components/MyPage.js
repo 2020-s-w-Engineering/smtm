@@ -26,12 +26,14 @@ class MyPage extends React.Component {
         var changeInfo = [this.state.userInfo[0], !this.state.userInfo[1]]
 
         api.post('/update', null, { params: {
+            id: language_this.state.userInfo[0][0],
+            password: language_this.state.userInfo[0][1],
             korean: !language_this.state.userInfo[1]
         }}).then(function (response) {
             if (response.status === 200) {
-                language_this.setState({
-                    userInfo: changeInfo        
-                })
+                language_this.props.onSubmit(
+                    changeInfo
+                );
                 window.alert("언어 설정이 바뀌었습니다.");
             }
         }).catch(function (error) {

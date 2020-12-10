@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import default_photo from '../images/default_photo.png';
 import './css/MenuImage.css';
 
@@ -17,8 +20,28 @@ class Menu extends React.Component {
 
     menuImg() {
         if (this.state.imgData !== "") {
-            var base64img = 'data:image/png;base64,' +  this.state.imgData[0]; //base64 encoding 형식의 문자열로 바꿈
-            return <img className="imgsize" src={base64img} alt="" />
+            // var base64img = 'data:image/png;base64,' +  this.state.imgData[0]; //base64 encoding 형식의 문자열로 바꿈
+            // return <img className="imgsize" src={base64img} alt="" />
+            const images = [];
+            for (var i = 0; i < this.state.imgData.length; i++) {
+                var base64img = 'data:image/png;base64,' +  this.state.imgData[i];
+                images.push(<img src={base64img}></img>)
+            }
+            const settings = {
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            };
+
+            return (
+                <div>
+                    <Slider {...settings} id="test">
+                        {images}
+                    </Slider>
+                </div>
+            )
         } else {
             return <img className="imgsize" src={default_photo} alt="" />
         }
@@ -54,7 +77,8 @@ class Menu extends React.Component {
         var preference_this = this;
         api.get('/preference/' + preference_this.state.menuData["id"])
         .then(function (res) {
-            console.log(res);
+            console.log("선호도 가져오기");
+            console.log()
             preference_this.setState({
                 preference: res.data,
             })
@@ -116,7 +140,7 @@ class Menu extends React.Component {
             {this.menuImg()}
           
             <div>
-                <button className="buttonMi">사진 업로드</button>
+                <a href='/menuupload'><button className="buttonMi">사진 업로드</button></a>
             </div>
             </>
         );

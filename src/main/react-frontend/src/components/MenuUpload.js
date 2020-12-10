@@ -31,21 +31,24 @@ class MenuUpload extends React.Component {
         });
     }
 
+    clickImg(e) {
+        e.preventDefault();
+        document.getElementById('file').click();
+    }
+    
     render() {
         return(
             <form onSubmit={this.imgUpload.bind(this)}>
                 <center>
                     <div id="header">
-                    <h3>업로드할 파일을 선택하세요.</h3>
+                        <h3>업로드할 파일을 선택하세요.</h3>
                     </div>
-                
-                <img className ="imgsize" src="album.png"></img>
+                    <div>
+                        <input type='file' name='file' id='file' required></input>
+                        <img className ="imgsize" src="album.png" onClick={this.clickImg.bind(this)}></img>
+                        <input type='submit'>확인</input>
+                    </div>
                 </center>
-
-               <div> 
-                <input type='file' name='file' id='file' required></input>
-                <input type='submit'></input>
-               </div>
             </form>
         );
     }

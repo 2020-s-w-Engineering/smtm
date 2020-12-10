@@ -17,7 +17,6 @@ import ClickDate from './components/ClickDate';
 import Menu from './components/Menu'; // Test 성복
 import MenuUpload from './components/MenuUpload';
 
-
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -48,7 +47,12 @@ class App extends React.Component{
                 <Route path='/clickDate' component={ClickDate}/>
 
                 <Route path="/myPage">
-                  <MyPage userInfo={this.state.userInfo} />
+                  <MyPage userInfo={this.state.userInfo} onSubmit={
+                    function(userInfo){
+                      this.setState({
+                        userInfo: userInfo
+                      })
+                  }.bind(this)}/>
                 </Route>
 
                 
