@@ -31,25 +31,34 @@ public class UserService {
         return null;
     }
 
+    public boolean register(User user){
+        List<User> users = userRepository.findAll();
+        for (User dbUser : users) {
+            if (dbUser.getUserId().equals(user.getUserId())) // 중복되는 아이디인 경우 false
+                return false;
+        }
+        userRepository.save(user);
+        return true;
+    }
+
     public boolean updateUserInfo(User user){
-        if(user.getId() == null) { // save
-            List<User> users = userRepository.findAll();
-            for (User dbUser : users) {
-                if (dbUser.getUserId().equals(user.getUserId())) // 중복되는 아이디인 경우 false
-                    return false;
+        List<User> users = userRepository.findAll();
+        for (User dbUser : users) {
+            if (dbUser.getUserId().equals(user.getUserId())) {
+                dbUser.setPassword(user.getPassword());
+                dbUser.setKorean(user.isKorean());
+                userRepository.save(dbUser);
+                return true;
             }
         }
-        // user의 id가 있는 경우(update)
-        // 중복되는 id가 없는 경우(save)
-        userRepository.save(user); // 위의 두 경우 모두 처리
-        return true;
+        return false;
     }
 
     public boolean setPreference(User user, Menu menu, int preference){
         user = userRepository.findById(user.getId()).get();
         user.getPreferenceMap().put(menu.getId(), preference);
         calcPreference(user);
-        userRepository.save(user);
+//        userRepository.save(user);
         return true;
     }
 
@@ -59,11 +68,11 @@ public class UserService {
             int sum = 0;
             int num = 0;
             Set<Menu> menus = diet.getAllMenus();
-            Map<Long, Integer> preferenceMap = userRepository.findById(user.getId()).get().getPreferenceMap();
+//            Map<Long, Integer> preferenceMap = userRepository.findById(user.getId()).get().getPreferenceMap();
             Menu[] menuArr = menus.toArray(new Menu[0]);
             for(Menu menu : menuArr){
-                if(preferenceMap.containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우
-                    int preference = preferenceMap.get(menu.getId());
+                if(user.getPreferenceMap().containsKey(menu.getId())) { // 선호도 표기한 메뉴인 경우
+                    int preference = user.getPreferenceMap().get(menu.getId());
                     sum = sum + preference;
                     num++;
                 }
@@ -71,6 +80,7 @@ public class UserService {
             float avg = (float)sum / num;
             user.getMonthAvgPreference().put(diet.getDate(), avg);
         }
+        userRepository.save(user);
         return user;
     }
 
