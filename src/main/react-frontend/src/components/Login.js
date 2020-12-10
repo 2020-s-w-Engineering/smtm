@@ -46,8 +46,11 @@ class LogIn extends React.Component {
                     true, [response.config.params, response.data]
                 );
             }
+            var id = response.config.params.userId;
+            window.alert("로그인 되었습니다. 반갑습니다 " +  id+"님");
         }).catch(function (error) {
             console.log(error);
+            window.alert("아이디와 비밀번호를 확인해주세요.")
         });
 
     }
@@ -86,9 +89,8 @@ class LogIn extends React.Component {
   
                     </div>
                     <center>
-                    <button type='submit' class="button2">Log In</button>
+                    <button type='submit' className="button2">Log In</button>
                     </center>
-                    
                    
                 </form>
             </div>

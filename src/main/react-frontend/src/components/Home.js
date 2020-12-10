@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/componentCss.css';
+import './css/Home.css';
 import homeImg from '../images/mix_home.png';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +10,8 @@ class Home extends React.Component{
         this.state = {
             userInfo : this.props.userInfo,
             button1:this.props.button1,
-            button2:this.props.button2
+            button2:this.props.button2,
+            isKorean : true
         };
     }
 
@@ -46,19 +48,17 @@ class BeforeLogIn extends React.Component{
    render(){
         return (
             <div>
-            <div class="userInButton" >
-            <div class="button" id='login'>
+            <div className="userInButton">
+            <div className="button" id='login'>
             <Link style={{ textDecoration: 'none' }} to='login'><h2>LogIn</h2></Link>
             </div>
-        
-            <div class="button" id='register'>
+            
+            <div className="button" id='register'>
             <Link style={{ textDecoration: 'none' }} to='/register'><h2>Register</h2></Link>
             </div> 
-           
-                       
-        </div>
             </div>
-            
+               
+            </div>            
         );
     }
 }
@@ -66,14 +66,14 @@ class BeforeLogIn extends React.Component{
 class AfterLogIn extends React.Component{
     render(){
          return (
-         <div class="userInButton"  >
-             <div class="button" id='menu'>
+         <div className="userInButton"  >
+             <div className="button" id='menu'>
              <Link style={{ textDecoration: 'none' }} to='/calendar'><h2>Menu</h2></Link>
              </div>
  
-             <div class="button" id='myPage'>
+             <div className="button" id='myPage'>
              <Link style={{ textDecoration: 'none' }} to='/myPage'><h2>My Page</h2></Link>
-             </div>            
+             </div>           
          </div>
          );
      }
