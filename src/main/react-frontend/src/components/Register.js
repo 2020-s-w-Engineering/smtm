@@ -61,7 +61,7 @@ class Register extends React.Component {
             return <Redirect to='/'></Redirect>
         }
         return(
-            <div>
+            <div >
                 <div id="homeline2">
                 <h1>Register</h1>
                 </div>

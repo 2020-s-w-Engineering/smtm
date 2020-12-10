@@ -61,11 +61,12 @@ class LogIn extends React.Component {
             return <Redirect to='/'></Redirect>
         }
         return(
-            <div>         
+            <div>          
                 <div id="homeline1">
-                <h1>Log In</h1>
+                <h1>Login</h1>
                 </div>
            
+
                 <form onSubmit={this.logInClick.bind(this)}>
                 <div id="homeUsername">
                         <h5>Username</h5>

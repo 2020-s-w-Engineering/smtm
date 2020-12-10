@@ -41,7 +41,6 @@ class ClickDate extends React.Component{
             <div id='scroll'>
             <div>
             <div id="line1"></div>
-           
                 <div id="date">
                 <h2>{this.state.allResponseData.date}</h2>
                 </div>
@@ -52,13 +51,18 @@ class ClickDate extends React.Component{
                 <div id="color1">
                 <h2>Main A</h2>
                 </div>
-  
+                <div id="font">
                 {this.getMenus(this.state.allResponseData.breakfastMains.A)}
+                </div>
+                
                 
                 <div id="color1">
                 <h2>Main C</h2>
                 </div>
+                <div id = "font">
                 {this.getMenus(this.state.allResponseData.breakfastMains.C)}
+                </div>
+                
             </div>
             </div>
 
@@ -70,11 +74,17 @@ class ClickDate extends React.Component{
                 <div id="color1">
                 <h2>Main A</h2>
                 </div>
+                <div id = "font">
                 {this.getMenus(this.state.allResponseData.lunchMains.A)}
+                </div>
+               
                 <div id="color1">
                 <h2>Main C</h2>
                 </div>
+                <div id = "font">
                 {this.getMenus(this.state.allResponseData.lunchMains.C)}
+                </div>
+                
             </div>
            </div>
             <div id="bt">
@@ -85,11 +95,15 @@ class ClickDate extends React.Component{
                 <div id="color1">
                 <h2>Main A</h2>
                 </div>
+                <div id = "font">
                 {this.getMenus(this.state.allResponseData.dinnerMains.A)}
+                </div>    
                 <div id="color1">
                 <h2>Main C</h2>
                 </div>
+                <div id = "font">
                 {this.getMenus(this.state.allResponseData.dinnerMains.C)}
+                </div>
             </div>
             <div id="line2"></div>
         </div>
