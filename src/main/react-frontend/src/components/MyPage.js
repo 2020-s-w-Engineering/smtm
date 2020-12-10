@@ -50,14 +50,11 @@ class MyPage extends React.Component {
                     <img alt="user img" src="user.png" witdh = "100px" height="100px"></img>
                         <h4> {this.state.userInfo[0].userId}님</h4>
                 </div>
-            
-<<<<<<< HEAD
+           
                 <div id="a" id = "Language">Language : {this.state.isKorean}</div>
                 <div  id = "button1">수정</div>
-=======
                 <div id = "Language">Language : {this.state.isKorean}</div>
                 <div id = "button1" onClick={this.changeLanguage.bind(this)}>수정</div>
->>>>>>> 44e3ca284af3ba8003aa5442d4fd55ac954265d5
                 
                 <center>
                     <a href='/'><div id = "button2">Logout</div></a>
