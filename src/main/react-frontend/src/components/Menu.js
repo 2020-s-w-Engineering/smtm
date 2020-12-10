@@ -34,12 +34,14 @@ class Menu extends React.Component {
             id: menu_this.state.menuData["id"]
         }})
         .then(function (res) {
+            console.log("이미지 로딩 성공");
             console.log(res);
             menu_this.setState({
                 imgData: res.data,
                 flag: true
             })
         }).catch(function (err) {
+            window.alert("이미지 로딩 실패");
             console.log(err);
         })
     }
@@ -56,8 +58,7 @@ class Menu extends React.Component {
             preference_this.setState({
                 preference: res.data,
             })
-            var test_prefer = 1;
-            var strPrefer = test_prefer.toString();
+            var strPrefer = res.data.toString();
             document.getElementById("prefer_" + strPrefer).checked = true;
         }).catch(function (err) {
             console.log(err);
@@ -69,29 +70,30 @@ class Menu extends React.Component {
             baseURL: 'http://localhost:8080/users'
         })
         // post 방식을 이용해서 선호도를 업데이트함
+        var checked_val;
+        for(var i = 0; i < 5; i++) {
+            if (document.getElementById("prefer_" + (i + 1).toString()).checked === true) {
+                checked_val = i + 1;
+            }
+        }
+
         var preference_this = this;
         api.post('/preference', null, {
-            // github readme에 메뉴 db id로 쓰여있어서 12월10에 다시 물어볼꺼임 (성복)
+            params: {
+                id: preference_this.state.menuData["id"],
+                preference: checked_val
+            }
         })
         .then(function (res) {
-            console.log(res);
             preference_this.setState({
-                preference: res.data,
+                preference: checked_val
             })
-            var test_prefer = 1;
-            var strPrefer = test_prefer.toString();
-            document.getElementById("prefer_" + strPrefer).checked = true;
+            window.alert("선호도가 반영되었습니다.");
         }).catch(function (err) {
             console.log(err);
         })
     }
 
-    handleRadio(e) {
-        e.preventDefault();
-        this.setState({
-            preference: e.target.value
-        });
-    }
     render() {
         console.log(this.state.menuData)
         if(this.state.flag === false) {
@@ -101,11 +103,11 @@ class Menu extends React.Component {
             <>
             <h1>Menu Image</h1>
             <div id="input">
-                1. <input id="prefer_1" type="radio" name="score" value="1" onChange={this.handleRadio.bind(this)}></input> 
-                2. <input id="prefer_2" type="radio" name="score" value="2" onChange={this.handleRadio.bind(this)}></input> 
-                3. <input id="prefer_3" type="radio" name="score" value="3" onChange={this.handleRadio.bind(this)}></input> 
-                4. <input id="prefer_4" type="radio" name="score" value="4" onChange={this.handleRadio.bind(this)}></input>
-                5. <input id="prefer_5" type="radio" name="score" value="5" onChange={this.handleRadio.bind(this)}></input>
+                1. <input id="prefer_1" type="radio" name="score" value="1" ></input>
+                2. <input id="prefer_2" type="radio" name="score" value="2" ></input> 
+                3. <input id="prefer_3" type="radio" name="score" value="3" ></input> 
+                4. <input id="prefer_4" type="radio" name="score" value="4" ></input>
+                5. <input id="prefer_5" type="radio" name="score" value="5" ></input>
             </div>
             <div>
             <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>선호도 저장</button>

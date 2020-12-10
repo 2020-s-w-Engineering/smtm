@@ -43,12 +43,11 @@ public class MenuController {
 //        return null;
 //    }
 
-    @GetMapping(value = "/test", produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] test(){
+    public List<byte[]> test(){
         Set<Menu> menus = menuService.getDietList().get(0).getAllMenus();
         for (Menu menu : menus) {
             if(menu.getKorName().equals("수육국밥"))
-                return menu.getImg().get(0);
+                return menu.getImg();
         }
         return null;
     }
