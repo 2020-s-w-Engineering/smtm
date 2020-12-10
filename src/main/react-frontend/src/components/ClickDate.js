@@ -115,7 +115,7 @@ class MenuList extends React.Component{
         var i=0;
         while(i<data.length){
             menulist.push(<ul key={data[i].id}>
-                <a class="blank" href="/">{data[i].korName}</a></ul>)
+                <a className="blank" href="/">{data[i].korName}</a></ul>)
             i=i+1;
         }
 
