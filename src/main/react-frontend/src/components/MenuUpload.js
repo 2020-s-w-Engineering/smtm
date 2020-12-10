@@ -46,7 +46,7 @@ class MenuUpload extends React.Component {
                     <div>
                         <input type='file' name='file' id='file' required></input>
                         <img className ="imgsize" src="album.png" onClick={this.clickImg.bind(this)}></img>
-                        <input type='submit'>확인</input>
+                        <input type='submit' value="확인"></input>
                     </div>
                 </center>
             </form>
