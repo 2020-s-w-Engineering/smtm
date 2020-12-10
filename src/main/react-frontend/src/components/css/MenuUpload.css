@@ -3,36 +3,38 @@
 }
 
 #header {
-    margin-top: 30%;
+    margin-top: 25%;
 }
 
 .imgsize{
     text-align: center;
     width: 30%;
     height: 30%;
-    margin-top: 1%;
+	margin-top: 10%;
 
 }
 
 #file {display:none;}
 
-.button2 {
-	width:220px;
-	  height: 40px;
-	  color:rgb(255, 255, 255);
-	  background: hsl(204, 59%, 58%);
-	  font-size: 25px;
-	  font-weight: bold;
-	  border: 2px solid hsl(204, 80%, 44%);
-	  border-radius: 30px;
-	  box-shadow: 0 4px 16px #ffffff;
-	  text-align: center;
-	  margin-top: 40%;
+input[type='submit'] {
+	width:90px;
+	height: 40px;
+	color:rgb(255, 255, 255);
+	background: hsl(234, 84%, 62%);
+	font-size: 25px;
+	font-weight: bold;
+	border: 2px solid hsl(0, 0%, 97%);
+	border-radius: 30px;
+	box-shadow: 0 4px 16px #ffffff;
+	text-align: center;
+	margin-top: 25%;
+	font-size: large;
+  }
+
+  input[type='submit']:hover {
+	background: hsl(234, 79%, 68%);
+	text-align: center;
+	margin-top: 25%;
+	font-size: large;
+  }
  
-  }
-  
-.button2:hover{
-	  background: hsla(204, 41%, 50%, 0.863);
-	  cursor: pointer;
-	  box-shadow: 0 2px 4px rgba(176, 175, 177, 0.6);
-  }
