@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/ClickDate.css';
-import { Link} from 'react-router-dom';
+import { Redirect, Link} from 'react-router-dom';
 import loadingGif from '../images/loading.gif';
 
 class ClickDate extends React.Component{
@@ -115,7 +115,7 @@ class MenuList extends React.Component{
         var i=0;
         while(i<data.length){
             menulist.push(<ul key={data[i].id}>
-                <Link class="blank" to={{
+                <Link className="blank" to={{
                     pathname : "/menu",
                     state : {
                         menuElement : data[i]

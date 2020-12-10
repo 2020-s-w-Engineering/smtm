@@ -10,6 +10,7 @@ class Calendar extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            userInfo : this.props.userInfo,
             isKorean : this.props.userInfo[1],
             month : "",
             day : "",
@@ -23,10 +24,9 @@ class Calendar extends React.Component{
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
-        var getPreference_this=this;
-        api.get('/preference',null).then(function (response) {
+        api.get('/preference').then(function (response) {
             if (response.status === 200) {
-                console.log(response.data)
+                console.log(response)
             }
         }).catch(function (error) {
             console.log(error);
@@ -63,9 +63,14 @@ class Calendar extends React.Component{
             console.log(error);
         });
     }
-
     render(){
-        {this.getPreference()}
+        var abbr_list = document.getElementsByTagName('abbr');
+        console.log(abbr_list)
+        console.log(abbr_list[0])
+        for (let index = 0; index < abbr_list.length; index++) {
+            console.log(abbr_list[index]);
+        }
+        //{this.getPreference()}
         if(this.state.pageChangeFlag===1) {
             return <Redirect to={{
                 pathname: '/clickDate',
@@ -77,7 +82,9 @@ class Calendar extends React.Component{
         }
         return (
         <div id='calendar'>
-            <h1>calendar</h1>
+            <div id="calendarHead">
+                <h1>Calendar</h1>
+            </div>
             <CalendarAPI
             id='calendarAPI'
             onClickDay={this.getDate.bind(this)}
