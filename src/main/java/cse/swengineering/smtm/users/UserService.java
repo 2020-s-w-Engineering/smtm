@@ -6,8 +6,6 @@ import cse.swengineering.smtm.menus.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,7 +54,6 @@ public class UserService {
     }
 
     public User calcPreference(User user) {
-        Map<LocalDate, Float> ret = new HashMap<>();
         List<Diet> diets = menuService.getDiets();
         for(Diet diet : diets){
             int sum = 0;

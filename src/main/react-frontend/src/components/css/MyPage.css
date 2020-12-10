@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Bowlby+One&family=Langar&family=Nanum+Gothic+Coding&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@500;900&family=Racing+Sans+One&family=Tajawal:wght@900&display=swap');
+
 #home1{
 	text-align: center;
 	font-weight: bold;
 	margin-top: 20%;
-	margin-left: -50%;
+	margin-left: -40%;
 }
 
 #user{
@@ -16,24 +18,23 @@
 	text-align: center;
     margin-top: 13%;
 	margin-left: -27%;
-	
+
 }
 
 #button1 {
-	width: 60px;
-	  height: 32px;
-	  color:rgb(63, 63, 63);
+	text-align: center;
+	width: 58px;
+	  height: 30px;
+	  color:rgb(22, 22, 22);
 	  background: hsl(347, 83%, 77%);
 	  font-size: 20px;
 	  font-weight: bold;
 	  border-radius: 30px;
 	  border: 2px solid hsl(347, 59%, 58%);
 	  box-shadow: 0 4px 16px #ffffff;
-      text-align: center;
 	  margin-top: -8%;
       margin-left: 70%;
-
-      
+	  font-size: medium;
   }
 
 #button1:hover{
@@ -46,7 +47,7 @@
 #button2 {
 	width:180px;
 	  height: 40px;
-	  color:rgb(63, 63, 63);
+	  color:rgb(34, 34, 34);
 	  background: hsl(347, 83%, 77%);
 	  font-size: 25px;
 	  font-weight: bold;

@@ -31,22 +31,6 @@ class Register extends React.Component {
     registerClick(e) {
         // Register
         e.preventDefault();
-        console.log(this.state.username);
-        console.log(this.state.password);
-        console.log(this.state.language);
-
-        const app = axios.create({
-            baseURL: 'http://localhost:8080/users'
-        })
-        app.post('/login', null, { params: {
-            userId : this.state.username,
-            password : this.state.password
-        }}).then(function (response) {
-            console.log(response.data);
-            window.alert("이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.");
-        }).catch(function (error) {
-            {}
-        });
 
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
@@ -77,7 +61,7 @@ class Register extends React.Component {
             return <Redirect to='/'></Redirect>
         }
         return(
-            <div>
+            <div >
                 <div id="homeline2">
                 <h1>Register</h1>
                 </div>

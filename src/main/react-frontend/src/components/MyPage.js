@@ -1,5 +1,7 @@
 import React from 'react';
-import './css/MyPage.css'
+import axios from 'axios';
+import './css/MyPage.css';
+
 class MyPage extends React.Component {
     constructor(props) {
         super(props);
@@ -15,20 +17,46 @@ class MyPage extends React.Component {
         }
     }
 
+    changeLanguage(e) {
+        e.preventDefault();
+        const api = axios.create({
+            baseURL: 'http://localhost:8080/users'
+        })
+        var language_this = this;
+        var changeInfo = [this.state.userInfo[0], !this.state.userInfo[1]]
+
+        api.post('/update', null, { params: {
+            korean: !language_this.state.userInfo[1]
+        }}).then(function (response) {
+            if (response.status === 200) {
+                language_this.setState({
+                    userInfo: changeInfo        
+                })
+                window.alert("언어 설정이 바뀌었습니다.");
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
     render() {
         console.log(this.state.userInfo);
         return(
             <div>              
                 <div id = "home1">
-                    <h2>My Page</h2> 
+                    <h1>My Page</h1> 
                 </div>
                 <div id = "user">
                     <img alt="user img" src="user.png" witdh = "100px" height="100px"></img>
                         <h4> {this.state.userInfo[0].userId}님</h4>
                 </div>
             
+                <div id="a" id = "Language">Language : {this.state.isKorean}</div>
+                <div  id = "button1">수정</div>
+
                 <div id = "Language">Language : {this.state.isKorean}</div>
-                <div id = "button1">수정</div>
+                <div id = "button1" onClick={this.changeLanguage.bind(this)}>수정</div>
+
                 
                 <center>
                     <a href='/'><div id = "button2">Logout</div></a>

@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
-@SessionAttributes("user")
+//@SessionAttributes("user")
 public class UserController {
 
     private final UserService userService;
@@ -47,6 +45,7 @@ public class UserController {
                 ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
                 builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
             }
+            // SessionAttributes 때문에 여기서 집어넣어도 마지막에 매개변수로 받은 userId와 password뿐인 user가 session에 저장되나본데?
             session.setAttribute("user", user);
             return builder.body(String.valueOf(user.isKorean()));
         }
@@ -70,7 +69,10 @@ public class UserController {
 
     // 회원정보변경
     @PostMapping("/update")
-    public String processUpdateInfo(User user) {
+    public String processUpdateInfo(HttpSession session,
+                                    @RequestParam("korean") boolean isKorean) {
+        User user = (User) session.getAttribute("user");
+        user.setKorean(isKorean);
         return userService.updateUserInfo(user) ? "true" : "false";
     }
 
@@ -86,8 +88,10 @@ public class UserController {
 
     // 개별 메뉴에 대한 사용자의 선호도 정보
     @GetMapping("/preference/{id}")
-    public String getPreference(User user,
+    public String getPreference(HttpSession session,
                                 @PathVariable("id") Menu menu){
+        // 매개변수에서 그냥 User user로 받으면 DomainCalssConverter가 작동해서 새로운 User를 만들어버리나본데?
+        User user = (User) session.getAttribute("user");
         if(user.getPreferenceMap().containsKey(menu.getId()))
             return user.getPreferenceMap().get(menu.getId()).toString();
         return "0";
@@ -99,14 +103,17 @@ public class UserController {
                                                 @RequestParam("id") Menu menu,
                                                 @RequestParam int preference,
                                                 HttpSession session) throws JsonProcessingException {
-        userService.setPreference(user, menu, preference);
-        ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
-        user = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
-        session.setAttribute("user", user);
-        String cookieValue = jsonToCookie(objectMapper.writeValueAsString(user.getMonthAvgPreference()));
-        ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
-        builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
-        return builder.body("true");
+        if(userService.setPreference(user, menu, preference)) {
+            ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
+            user = userService.calcPreference(user); // 쿠키에 선호도 정보 저장
+            session.setAttribute("user", user);
+            String cookieValue = jsonToCookie(objectMapper.writeValueAsString(user.getMonthAvgPreference()));
+            ResponseCookie cookie = ResponseCookie.from("preference", cookieValue).path("/").build();
+            builder = builder.header(HttpHeaders.SET_COOKIE, cookie.toString());
+            return builder.body("true");
+        }
+        else // 적절한 예외처리(여유 있으면)
+            return null;
     }
 
     /*

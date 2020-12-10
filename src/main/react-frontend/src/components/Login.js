@@ -9,7 +9,6 @@ class LogIn extends React.Component {
         this.state = {
             username : "",
             password : "",
-            password : "",
             isLoggedIn : false
         };
     }
@@ -47,7 +46,7 @@ class LogIn extends React.Component {
                 );
             }
             var id = response.config.params.userId;
-            window.alert("로그인 되었습니다. 반갑습니다 " +  id+"님");
+            window.alert("반갑습니다 " +  id+"님");
         }).catch(function (error) {
             console.log(error);
             window.alert("아이디와 비밀번호를 확인해주세요.")
@@ -61,11 +60,12 @@ class LogIn extends React.Component {
             return <Redirect to='/'></Redirect>
         }
         return(
-            <div>         
+            <div>          
                 <div id="homeline1">
-                <h1>Log In</h1>
+                <h1>Login</h1>
                 </div>
            
+
                 <form onSubmit={this.logInClick.bind(this)}>
                 <div id="homeUsername">
                         <h5>Username</h5>
