@@ -52,8 +52,10 @@ class Menu extends React.Component {
         })
         // get 방식을 이용해서 test할 이미지를 가져옴
         var preference_this = this;
-        api.get('/preference/' + preference_this.state.menuData["id"])
-        .then(function (res) {
+        api.get('/preference/' + preference_this.state.menuData["id"], {params : {
+            userId : 'qwer',
+            password : '1234'
+        }}).then(function (res) {
             console.log(res);
             preference_this.setState({
                 preference: res.data,
