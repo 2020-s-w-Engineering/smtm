@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import './css/MenuUpload.css';
+
 class MenuUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           isSetImg: false,
-           isKorean: this.props.location.state.isKorean,
+           isSetImg: false
         };
     }
 
@@ -20,6 +21,7 @@ class MenuUpload extends React.Component {
         var photoFile = document.getElementById("file");
         frm.append("file", photoFile.files[0]);
         console.log(photoFile.files);
+
         api.post('/images', frm, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -71,9 +73,7 @@ class MenuUpload extends React.Component {
             <form onSubmit={this.imgUpload.bind(this)}>
                 <center>
                     <div id="header">
-                        <h3>
-                            {this.state.isKorean === true ? "업로드할 파일을 선택하세요." : "Choice Image"}
-                        </h3>
+                        <h3>Choice Image</h3>
                     </div>
                     <div>
                         <input type='file' name='file' id='file' onChange={this.watchingImg.bind(this)} required></input>
@@ -82,7 +82,7 @@ class MenuUpload extends React.Component {
                         {this.selectImg()}
                         <div id="image_container"></div>
                         <center>
-                        {this.state.isKorean === true ? <input type='submit' value="확인"></input> : <input type='submit' value="upload"></input>}
+                        <input type='submit' value="Submit"></input>
                         </center>
                     </div>
                 </center>
