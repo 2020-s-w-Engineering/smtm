@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import './css/MenuUpload.css';
+
 class MenuUpload extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +22,7 @@ class MenuUpload extends React.Component {
         var photoFile = document.getElementById("file");
         frm.append("file", photoFile.files[0]);
         console.log(photoFile.files);
+
         api.post('/images', frm, {
             headers: {
                 'Content-Type': 'multipart/form-data'
