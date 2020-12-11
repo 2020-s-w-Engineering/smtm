@@ -11,7 +11,7 @@ text-align: center;
 }
 
 .buttonMi {
-	width:130px;
+	width:120px;
 	  height: 40px;
 	  color:rgb(255, 255, 255);
 	  background: hsl(212, 88%, 52%);
@@ -22,7 +22,7 @@ text-align: center;
 	  box-shadow: 0 4px 16px #ffffff;
 	  text-align: center;
       margin-top: 20%;
-      margin-left: 32%;
+      margin-left: 45%;
     
   }
   .buttonMi:hover{
@@ -32,7 +32,7 @@ text-align: center;
   }
 
   .buttonMi2 {
-	width:130px;
+	width:120px;
 	  height: 40px;
 	  color:rgb(255, 255, 255);
 	  background: hsl(212, 88%, 52%);
@@ -43,7 +43,7 @@ text-align: center;
 	  box-shadow: 0 4px 16px #ffffff;
 	  text-align: center;
       margin-top: 5%;
-      margin-left: 60%;
+      margin-left: 62%;
   }
 
 .buttonMi2:hover{
