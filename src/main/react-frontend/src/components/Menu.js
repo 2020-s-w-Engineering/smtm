@@ -148,7 +148,7 @@ class Menu extends React.Component {
                 
             </div>
             <div>
-            <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>{this.state.isKorean === true ? "Update" : "Update"}</button>
+            <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>{this.state.isKorean === true ? "선호도 저장" : "Update"}</button>
             
             </div>
            
@@ -163,7 +163,7 @@ class Menu extends React.Component {
                     }
                 }}
                 ><button className="buttonMi">
-                    {this.state.isKorean === true ? "Upload" : "Image Upload"}
+                    {this.state.isKorean === true ? "사진 업로드" : "Image Upload"}
                 </button>
                 </Link>
             </div>
