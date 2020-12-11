@@ -5,13 +5,12 @@ class MenuUpload extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           
+           isSetImg: false
         };
     }
 
     imgUpload(e) {
         e.preventDefault();
-        
         const api = axios.create({
             baseURL: 'http://localhost:8080/menus'
         })
@@ -36,6 +35,36 @@ class MenuUpload extends React.Component {
         document.getElementById('file').click();
     }
     
+    watchingImg(e) {
+        this.setState({
+            isSetImg: true
+        })
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            var img = document.createElement("img");
+            img.setAttribute("src", e.target.result);
+            img.setAttribute("width", "200");
+            img.setAttribute("height", "200");
+            document.querySelector("div#image_container").appendChild(img);
+        };
+
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+    selectImg() {
+        if(this.state.isSetImg === false) {
+            return(
+                <img className ="imgsize" src="album.png" onClick={this.clickImg.bind(this)}></img>
+            );
+        }
+        // } else {
+        //     return (
+        //         <h3>선택된 이미지</h3>
+        //     );
+        // }
+    }
+
     render() {
         return(
             <form onSubmit={this.imgUpload.bind(this)}>
@@ -44,9 +73,11 @@ class MenuUpload extends React.Component {
                         <h3>업로드할 파일을 선택하세요.</h3>
                     </div>
                     <div>
-                        <input type='file' name='file' id='file' required></input>
-                        <img className ="imgsize" src="album.png" onClick={this.clickImg.bind(this)}></img>
-
+                        <input type='file' name='file' id='file' onChange={this.watchingImg.bind(this)} required></input>
+                        {/* <img className ="imgsize" src="album.png" onClick={this.clickImg.bind(this)}></img>
+                        <div id="image_container"></div> */}
+                        {this.selectImg()}
+                        <div id="image_container"></div>
                         <center>
                         <input type='submit' value="확인"></input>
                         </center>
