@@ -42,16 +42,17 @@ class Register extends React.Component {
             korean : this.state.language
         }}).then(function (response) {
             console.log(response);
-            if (response.status === 200) {
+            if (response.status === 200 && response.data !== "fail") {
                 register_this.setState({isLoggedIn:true})
                 register_this.props.onSubmit(
                     false, null
                 );
+                window.alert("회원가입 되었습니다.");
+            } else {
+                window.alert("이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.");
             }
-            window.alert("회원가입 되었습니다.");
         }).catch(function (error) {
             console.log(error);
-            window.alert("이미 사용중인 아이디입니다. 다른 아이디를 사용해주세요.");
         });
     }
 

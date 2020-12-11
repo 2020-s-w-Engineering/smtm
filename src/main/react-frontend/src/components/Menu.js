@@ -147,6 +147,7 @@ class Menu extends React.Component {
             </div>
             <div>
             <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>선호도 저장</button>
+            
             </div>
            
             {this.menuImg()}
