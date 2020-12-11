@@ -36,7 +36,7 @@ class Menu extends React.Component {
             };
 
             return (
-                <div>
+                <div id="interval"> 
                     <Slider {...settings} id="test">
                         {images}
                     </Slider>
