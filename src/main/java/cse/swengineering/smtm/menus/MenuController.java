@@ -1,6 +1,5 @@
 package cse.swengineering.smtm.menus;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.CacheControl;
@@ -25,12 +24,10 @@ public class MenuController {
 
     private final MenuService menuService;
     private final ResourceLoader resourceLoader;
-    private final ObjectMapper objectMapper;
 
-    public MenuController(MenuService menuService, ResourceLoader resourceLoader, ObjectMapper objectMapper) {
+    public MenuController(MenuService menuService, ResourceLoader resourceLoader) {
         this.menuService = menuService;
         this.resourceLoader = resourceLoader;
-        this.objectMapper = objectMapper;
     }
 
 //    @GetMapping("/test")
