@@ -17,11 +17,18 @@ class Calendar extends React.Component{
             day : "",
             fullDateFormat : "",
             pageChangeFlag : 0,
-            responseData : ""
+            responseData : "",
+            loading : false
         };
     }
-
+    componentDidMount(){
+        var loading_this = this;
+        setTimeout(function() {
+            loading_this.setState({loading : true})
+        }, 1000);
+    }
     getPreference(){
+        var pre_list;
         const api = axios.create({
             baseURL: 'http://localhost:8080/users'
         })
@@ -30,7 +37,32 @@ class Calendar extends React.Component{
             password : this.state.password
         }}).then(function (response) {
             if (response.status === 200) {
-                console.log(response)
+                console.log(response.data)
+                var abbr_list = document.getElementsByTagName('abbr');
+                for(var i=0;i<abbr_list.length;i++){
+                        if(abbr_list[i].innerHTML==='4'){
+                            abbr_list[i].parentElement.style.backgroundColor='red';
+                        }
+                        else if(abbr_list[i].innerHTML==='5'){
+                            abbr_list[i].parentElement.style.backgroundColor='yellow';
+                        }
+                        else if(abbr_list[i].innerHTML==='6'){
+                            abbr_list[i].parentElement.style.backgroundColor='red';
+                        }
+                        else if(abbr_list[i].innerHTML==='7'){
+                            abbr_list[i].parentElement.style.backgroundColor='blue';
+                        }
+                        else if(abbr_list[i].innerHTML==='8'){
+                            abbr_list[i].parentElement.style.backgroundColor='yellow';
+                        }
+                        else if(abbr_list[i].innerHTML==='9'){
+                            abbr_list[i].parentElement.style.backgroundColor='blue';
+                        }
+                        else if(abbr_list[i].innerHTML==='10'){
+                            abbr_list[i].parentElement.style.backgroundColor='blue';
+                        }
+                    if(i===30) break;
+                }
             }
         }).catch(function (error) {
             console.log(error);
@@ -46,18 +78,19 @@ class Calendar extends React.Component{
         var valueToString = value.toString();
         var valueArray = valueToString.split(" ")
         var _fulldateformat = valueArray[3]+"-"+this.getMonthValue(valueArray[1])+"-"+valueArray[2]
-        //alert(_fulldateformat)
+        var date = Number(valueArray[2])
+        if(date<4 || date>10) {
+            alert("데이터가 존재하지 않습니다.\n다른 날짜를 눌러주세요.")
+            return;
+        }
         const api = axios.create({
             baseURL: 'http://localhost:8080/menus'
         })
         var fullDateUrl='/'+_fulldateformat;
         var getdate_this=this;
-        //console.log(fullDateUrl)
         api.get(fullDateUrl, null).then(function (response) {
             if (response.status === 200) {
                 console.log(response.data)
-                //console.log(response.data.breakfastMains);
-                //console.log(response.data.breakfastMains.A);
                 getdate_this.setState({
                     pageChangeFlag:1,
                     responseData:response.data
@@ -68,13 +101,9 @@ class Calendar extends React.Component{
         });
     }
     render(){
-        var abbr_list = document.getElementsByTagName('abbr');
-        console.log(abbr_list)
-        console.log(abbr_list[0])
-        for (let index = 0; index < abbr_list.length; index++) {
-            console.log(abbr_list[index]);
+        if(this.state.loading === true) {
+            {this.getPreference()}
         }
-        {this.getPreference()}
         if(this.state.pageChangeFlag===1) {
             return <Redirect to={{
                 pathname: '/clickDate',
