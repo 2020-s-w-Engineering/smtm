@@ -146,14 +146,14 @@ class Menu extends React.Component {
                 
             </div>
             <div>
-            <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>선호도 저장</button>
+            <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>Update</button>
             
             </div>
            
             {this.menuImg()}
           
             <div>
-                <a href='/menuupload'><button className="buttonMi">사진 업로드</button></a>
+                <a href='/menuupload'><button className="buttonMi">Upload</button></a>
             </div>
             </>
         );

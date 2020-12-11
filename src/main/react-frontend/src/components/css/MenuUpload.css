@@ -17,24 +17,23 @@
 #file {display:none;}
 
 input[type='submit'] {
-	width:90px;
-	height: 40px;
-	color:rgb(255, 255, 255);
-	background: hsl(234, 84%, 62%);
-	font-size: 25px;
-	font-weight: bold;
-	border: 2px solid hsl(0, 0%, 97%);
-	border-radius: 30px;
-	box-shadow: 0 4px 16px #ffffff;
-	text-align: center;
-	margin-top: 25%;
-	font-size: large;
+	width:120px;
+	  height: 40px;
+	  color:rgb(255, 255, 255);
+	  background: hsl(212, 88%, 52%);
+	  font-size: 20px;
+	  font-weight: bold;
+	  border: 2px solid hsl(204, 80%, 44%);
+	  border-radius: 30px;
+	  box-shadow: 0 4px 16px #ffffff;
+	  text-align: center;
+      margin-top: 20%;
+    
   }
 
   input[type='submit']:hover {
-	background: hsl(234, 79%, 68%);
-	text-align: center;
-	margin-top: 25%;
-	font-size: large;
+	background: hsl(216, 96%, 49%);
+	cursor: pointer;
+	box-shadow: 0 2px 4px rgba(176, 175, 177, 0.6);
   }
  
