@@ -21,7 +21,7 @@ text-align: center;
 	  border-radius: 30px;
 	  box-shadow: 0 4px 16px #ffffff;
 	  text-align: center;
-      margin-top: 40%;
+      margin-top: 20%;
       margin-left: 30%;
     
   }
@@ -89,4 +89,8 @@ text-align: center;
 #radio5 {
 	margin-top: -6.5%;
 	margin-left: 83%;
+}
+
+#interval {
+	margin-top: 10%;
 }
