@@ -35,6 +35,9 @@ class MyPage extends React.Component {
                 language_this.setState({
                     userInfo: changeInfo        
                 })
+                language_this.props.onSubmit(
+                    changeInfo
+                );
                 window.alert("언어 설정이 바뀌었습니다.");
             }
         }).catch(function (error) {

@@ -3,6 +3,8 @@ package cse.swengineering.smtm.users;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cse.swengineering.smtm.menus.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -27,13 +29,13 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String processLogin(User user) {
+    public ResponseEntity<String> processLogin(User user) {
         user = userService.userAuth(user);
         if(user != null) {
             user = userService.calcPreference(user);// 쿠키에 선호도 정보 저장
-            return String.valueOf(user.isKorean());
+            return ResponseEntity.ok().body(String.valueOf(user.isKorean()));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("fail");
     }
 
     @GetMapping("/logout")
@@ -41,11 +43,11 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/register")
-    public String processRegister(User user) {
+    public ResponseEntity<String> processRegister(User user) {
         if(userService.register(user)){
-            return "true";
+            return ResponseEntity.ok().body("success");
         }
-        return "false";
+        return ResponseEntity.status(HttpStatus.IM_USED).body("fail");
     }
 
     // 회원정보변경
@@ -56,11 +58,6 @@ public class UserController {
         return userService.updateUserInfo(user) ? "true" : "false";
     }
 
-    // 하루 식단 평균 선호도 한달 치
-//    @GetMapping("/preference")
-//    public String getPreference(@CookieValue(value = "preference", required = false) String cookieValue){
-//        return cookieValue == null ? "false" : cookieToJson(cookieValue);
-//    }
     @GetMapping("/preference")
     public Map<LocalDate, Float> getPreference(User user){
         user = userService.userAuth(user);
@@ -88,19 +85,6 @@ public class UserController {
         }
         else // 적절한 예외처리(여유 있으면)
             return "false";
-    }
-
-    /*
-    private methods
-     */
-    private String cookieToJson(String cookie) {
-        cookie = cookie.replaceAll("\\+", "\"");
-        return cookie.replaceAll("_", ",");
-    }
-
-    private String jsonToCookie(String json) {
-        json = json.replaceAll("\"", "+");
-        return json.replaceAll(",", "_");
     }
 
 }
