@@ -146,6 +146,35 @@ public class MenuService {
 
     }
 
+    public void addImage(String filename) throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:/images");
+        File imageDir = resource.getFile();
+        File[] files = imageDir.listFiles();
+        boolean found = false;
+        for(File file : files) {
+            if(file.getName().contains(filename)) {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                BufferedImage bImage = ImageIO.read(file);
+                ImageIO.write(bImage, "jpg", bos);
+                byte[] data = bos.toByteArray();
+                String menuName = file.getName().substring(0, file.getName().indexOf("."));
+                for (Diet diet : dietList) {
+                    Set<Menu> allMenus = diet.getAllMenus();
+                    for (Menu menu : allMenus) {
+                        if (menuName.contains(menu.getKorName())) {
+                            menu.getImg().add(data);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) break;
+                }
+                bos.reset();
+                break;
+            }
+        }
+    }
+
     private void setImage() throws IOException {
         Resource resource = resourceLoader.getResource("classpath:/images");
         File imageDir = resource.getFile();

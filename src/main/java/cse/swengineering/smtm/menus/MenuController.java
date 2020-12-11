@@ -81,7 +81,7 @@ public class MenuController {
 
     @PostMapping("/images")
     public String uploadMenuImage(@RequestParam MultipartFile file) throws IOException {
-        String filename=file.getOriginalFilename();
+        String filename=file.getOriginalFilename().substring(0, file.getOriginalFilename().indexOf("."));
         Resource resource = resourceLoader.getResource("classpath:/images");
         File imageDir = resource.getFile();
         File[] files = imageDir.listFiles();
@@ -94,10 +94,17 @@ public class MenuController {
 
         byte [] bytes=file.getBytes();
         BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(
+                new FileOutputStream("./target/classes/images"+"/" + filename + ".jpg"));
+        bufferedOutputStream.write(bytes);
+        bufferedOutputStream.flush();
+        bufferedOutputStream.close();
+        bufferedOutputStream=new BufferedOutputStream(
                 new FileOutputStream("./src/main/resources/images"+"/" + filename + ".jpg"));
         bufferedOutputStream.write(bytes);
         bufferedOutputStream.flush();
         bufferedOutputStream.close();
+
+        menuService.addImage(filename);
         return "true";
     }
 
