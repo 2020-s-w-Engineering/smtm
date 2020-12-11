@@ -132,7 +132,8 @@ class MenuList extends React.Component{
                 <Link className="blank" to={{
                     pathname : "/menu",
                     state : {
-                        menuElement : data[i]
+                        menuElement : data[i],
+                        isKorean: this.state.isKorean
                     }
                 }}
                 >{this.state.isKorean === true? data[i].korName:data[i].engName}

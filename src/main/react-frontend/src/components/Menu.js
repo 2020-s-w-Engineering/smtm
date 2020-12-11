@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import default_photo from '../images/default_photo.png';
+import { Link } from 'react-router-dom';
 import './css/MenuImage.css';
 
 class Menu extends React.Component {
@@ -12,6 +13,7 @@ class Menu extends React.Component {
         this.state = {
             imgData: "",
             menuData : this.props.location.state.menuElement,
+            isKorean: this.props.location.state.isKorean,
             flag: false,
             preference: 0,
         }
@@ -146,14 +148,24 @@ class Menu extends React.Component {
                 
             </div>
             <div>
-            <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>선호도 저장</button>
+            <button className="buttonMi2" onClick={this.upgradePreference.bind(this)}>{this.state.isKorean === true ? "선호도 저장" : "Update"}</button>
             
             </div>
            
             {this.menuImg()}
           
             <div>
-                <a href='/menuupload'><button className="buttonMi">사진 업로드</button></a>
+                {/* <a href='/menuupload'><button className="buttonMi">{this.state.isKorean === true ? "사진 업로드" : "Image Upload"}</button></a> */}
+                <Link className="blank" to={{
+                    pathname : "/menuupload",
+                    state : {
+                        isKorean: this.state.isKorean
+                    }
+                }}
+                ><button className="buttonMi">
+                    {this.state.isKorean === true ? "사진 업로드" : "Image Upload"}
+                </button>
+                </Link>
             </div>
             </>
         );
