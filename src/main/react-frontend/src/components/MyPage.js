@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import './css/MyPage.css';
 
 class MyPage extends React.Component {
@@ -7,7 +8,8 @@ class MyPage extends React.Component {
         super(props);
         this.state = {
            isKorean: "Korean",
-           userInfo: this.props.userInfo
+           userInfo: this.props.userInfo,
+           isChange: false
         };
     }
 
@@ -33,7 +35,8 @@ class MyPage extends React.Component {
             if (response.status === 200) {
                 console.log(response.data)
                 language_this.setState({
-                    userInfo: changeInfo        
+                    userInfo: changeInfo,
+                    isChange: true        
                 })
                 language_this.props.onSubmit(
                     changeInfo
@@ -47,6 +50,9 @@ class MyPage extends React.Component {
 
     render() {
         console.log(this.state.userInfo);
+        if(this.state.isChange === true){
+            return <Redirect to='/'></Redirect>
+        }
         return(
             <div>              
                 <div id = "home1">
